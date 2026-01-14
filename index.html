@@ -114,6 +114,7 @@
     }
 
     .card{
+      position:relative;
       background: linear-gradient(180deg, rgba(12,20,36,.95), rgba(10,17,32,.92));
       border:1px solid var(--line);
       border-radius: var(--radius);
@@ -183,6 +184,55 @@
     section{scroll-margin-top: 76px;}
 
     .footer{padding:28px 0 40px;border-top:1px solid var(--line);color:var(--muted)}
+    /* Pricing: Most Popular ribbon */
+    .popular{
+      outline:2px solid rgba(22,179,184,.35);
+      box-shadow: 0 28px 70px rgba(0,0,0,.55);
+    }
+    .ribbon{
+      position:absolute;
+      top:14px;
+      right:-46px;
+      transform: rotate(12deg);
+      width:160px;
+      text-align:center;
+      pointer-events:none;
+    }
+    .ribbon span{
+      display:block;
+      padding:8px 10px;
+      font-size:12px;
+      letter-spacing:.9px;
+      font-weight:800;
+      color:#07111a;
+      background: linear-gradient(135deg, rgba(240,180,41,.98), rgba(22,179,184,.95));
+      border:1px solid rgba(255,255,255,.18);
+      border-radius:12px;
+      box-shadow: 0 14px 30px rgba(0,0,0,.35);
+      position:relative;
+      overflow:hidden;
+      animation: ribbonFloat 2.6s ease-in-out infinite;
+    }
+    .ribbon span::after{
+      content:"";
+      position:absolute;
+      top:-40%;
+      left:-60%;
+      width:60%;
+      height:180%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent);
+      transform: rotate(22deg);
+      animation: ribbonShine 2.8s ease-in-out infinite;
+    }
+    @keyframes ribbonFloat{
+      0%,100%{ transform: translateY(0); }
+      50%{ transform: translateY(-3px); }
+    }
+    @keyframes ribbonShine{
+      0%{ left:-70%; }
+      55%{ left:120%; }
+      100%{ left:120%; }
+    }
 
     /* Responsive */
     @media (max-width: 900px){
@@ -225,7 +275,7 @@
     <div class="container">
       <div class="grid">
         <div class="card">
-          <span class="pill">⚙️Designed by an experienced Mechanical Design Engineer</span>
+          <span class="pill">Designed by an experienced Mechanical Design Engineer</span>
           <h1>ENGINEERING AUTOMATION THAT SAVES DESIGN HOURS</h1>
           <p>
             MetaMech Solution builds high-performance SolidWorks tools and custom macros to cut repetitive work,
@@ -320,6 +370,36 @@
   </section>
 
   <!-- ROI -->
+  <!-- TRUSTED -->
+  <section id="trusted" class="section">
+    <div class="container">
+      <h2>TRUSTED BY ENGINEERS</h2>
+      <p class="lead">Built for real-world SolidWorks workflows where speed, standards, and consistency matter.</p>
+
+      <div class="cards3">
+        <div class="card">
+          <h3 style="margin:0 0 8px 0;">BUILT FOR LARGE ASSEMBLIES</h3>
+          <p>Designed to perform on complex TLAs and deep sub-assembly structures without breaking your workflow.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin:0 0 8px 0;">CONSISTENT OUTPUTS</h3>
+          <p>Standardised BOM/PDF/STEP results so every engineer exports the same format, every time.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin:0 0 8px 0;">ENGINEER-LED DELIVERY</h3>
+          <p>We work closely with your design team initially to understand real challenges and deliver custom-fit solutions.</p>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:12px;">
+        <p style="margin:0;color:var(--muted);">
+          “The automation paid for itself quickly — fewer manual steps, fewer mistakes, and faster releases.”
+        </p>
+        <p class="note" style="margin:8px 0 0 0;">— Typical feedback from engineering teams (examples)</p>
+      </div>
+    </div>
+  </section>
+
   <section id="roi" class="section">
     <div class="container">
       <h2>ROI CALCULATOR</h2>
@@ -396,8 +476,9 @@
         </div>
 
         <!-- PREMIUM -->
-        <div class="card" style="outline:2px solid rgba(22,179,184,.35);">
-          <span class="pill">MOST POPULAR</span>
+        <div class="card popular">
+          <div class="ribbon" aria-label="Most Popular"><span>MOST POPULAR</span></div>
+          <span class="pill">PREMIUM PACK</span>
           <h3 style="margin:10px 0 4px 0;">€1,299</h3>
           <p class="note"><del>€1,440</del> &nbsp; 10% launch discount</p>
           <ul class="list">
@@ -431,6 +512,58 @@
   </section>
 
   <!-- SERVICES -->
+    <!-- FAQ -->
+  <section id="faq" class="section">
+    <div class="container">
+      <h2>FAQ</h2>
+      <p class="lead">Quick answers about licensing, updates, and SolidWorks compatibility.</p>
+
+      <div class="two">
+        <div class="card">
+          <details open>
+            <summary style="cursor:pointer; font-weight:700;">How does licensing work?</summary>
+            <p class="note" style="margin-top:10px;">
+              One-time license per company/team. Activation is linked to your environment and can be moved if you change machines.
+            </p>
+          </details>
+          <hr style="border:none;border-top:1px solid var(--line);margin:12px 0;" />
+
+          <details>
+            <summary style="cursor:pointer; font-weight:700;">Is this compatible with my SolidWorks version?</summary>
+            <p class="note" style="margin-top:10px;">Designed for SolidWorks 2022–2025 workflows. If you have an older version, we can advise the best approach.</p>
+          </details>
+          <hr style="border:none;border-top:1px solid var(--line);margin:12px 0;" />
+
+          <details>
+            <summary style="cursor:pointer; font-weight:700;">What is included in the setup?</summary>
+            <p class="note" style="margin-top:10px;">Initial alignment with your folder structure, naming rules, templates, and required BOM/PDF formats.</p>
+          </details>
+        </div>
+
+        <div class="card">
+          <details open>
+            <summary style="cursor:pointer; font-weight:700;">Do you provide updates?</summary>
+            <p class="note" style="margin-top:10px;">Yes. Minor improvements and bug fixes are provided as we refine features and compatibility.</p>
+          </details>
+          <hr style="border:none;border-top:1px solid var(--line);margin:12px 0;" />
+
+          <details>
+            <summary style="cursor:pointer; font-weight:700;">Can you customise outputs for our standards?</summary>
+            <p class="note" style="margin-top:10px;">Absolutely. We can tailor custom properties, templates, naming rules, and sheet formats so your outputs look premium and consistent.</p>
+          </details>
+          <hr style="border:none;border-top:1px solid var(--line);margin:12px 0;" />
+
+          <details>
+            <summary style="cursor:pointer; font-weight:700;">How does the 3-day trial work?</summary>
+            <p class="note" style="margin-top:10px;">Trial starts on first run and expires after 72 hours. It’s ideal for validating workflow fit before purchase.</p>
+          </details>
+        </div>
+      </div>
+
+      <p class="note" style="margin-top:14px;">Still have questions? Email us at <a href="mailto:hi@metamechsolutions.com" style="text-decoration:underline;">hi@metamechsolutions.com</a>.</p>
+    </div>
+  </section>
+
   <section id="services" class="section">
     <div class="container">
       <h2>SERVICES</h2>
@@ -622,5 +755,3 @@
   </script>
 </body>
 </html>
-
-
