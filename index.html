@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MetaMech Solution | SolidWorks Automation & Engineering ROI</title>
+
+  <meta name="description"
+        content="MetaMech Solution delivers custom SolidWorks automation tools that reduce engineering time, eliminate repetitive work, and provide measurable ROI." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/logo/logo-icon-dark.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/logo/logo-icon-dark.png">
+
+  <style>
+    :root {
+      --bg:#0F1A33;
+      --card:#0B2C44;
+      --text:#EAF0FF;
+      --muted:#B9C3E6;
+      --accent:#F5A623;
+      --accent2:#2AA8E0;
+      --line:rgba(255,255,255,.12);
+      --radius:18px;
+      --max:1100px;
+      --shadow:0 12px 30px rgba(0,0,0,.35);
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+    }
+
+    * { box-sizing:border-box }
+    body {
+      margin:0;
+      font-family:var(--font);
+      background:var(--bg);
+      color:var(--text);
+    }
+
+    a { color:inherit; text-decoration:none }
+    .wrap { max-width:var(--max); margin:auto; padding:24px }
+
+    header {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:14px 18px;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:rgba(11,44,68,.7);
+      backdrop-filter:blur(10px);
+      position:sticky;
+      top:14px;
+      z-index:10;
+    }
+
+    nav a {
+      margin-left:18px;
+      font-size:14px;
+      color:var(--muted);
+    }
+    nav a:hover { color:var(--text) }
+
+    section {
+      margin-top:28px;
+      padding:26px;
+      border-radius:var(--radius);
+      background:var(--card);
+      border:1px solid var(--line);
+      box-shadow:var(--shadow);
+    }
+
+    h1, h2, h3 { margin-top:0 }
+    p { color:var(--muted); line-height:1.7 }
+
+    .hero h1 {
+      font-size:42px;
+      line-height:1.1;
+    }
+
+    .btn {
+      display:inline-block;
+      padding:12px 18px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      margin-right:12px;
+      font-weight:600;
+    }
+
+    .btn.primary {
+      background:linear-gradient(135deg, rgba(42,168,224,.35), rgba(245,166,35,.25));
+    }
+
+    ul { margin-top:12px }
+    li { margin-bottom:6px; color:var(--muted) }
+
+    footer {
+      margin:30px 0 10px;
+      padding-top:14px;
+      border-top:1px solid var(--line);
+      font-size:13px;
+      color:var(--muted);
+      display:flex;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+
+    @media (max-width:800px){
+      .hero h1 { font-size:34px }
+      nav { display:none }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <!-- HEADER -->
+    <header>
+      <img src="assets/logo/logo-full.png"
+           alt="MetaMech Solution"
+           style="height:105px;width:auto" />
+      <nav>
+        <a href="#services">Services</a>
+        <a href="#roi">ROI</a>
+        <a href="#custom">Custom Tools</a>
+        <a href="#libraries">Libraries</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <h1>Smarter SolidWorks.<br>Faster Engineering. Measurable ROI.</h1>
+      <p>
+        MetaMech Solution builds custom SolidWorks automation tools that eliminate repetitive
+        design work, reduce errors, and save hundreds of engineering hours every year.
+      </p>
+      <a class="btn primary" href="#contact">Request ROI Estimate</a>
+      <a class="btn" href="#services">View Services</a>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services">
+      <h2>What We Do</h2>
+      <p>
+        We specialise in production-ready SolidWorks automation designed around real engineering workflows.
+      </p>
+      <ul>
+        <li>BOM automation to Excel (multi-level, large assemblies)</li>
+        <li>DXF flat-pattern automation for sheet-metal parts</li>
+        <li>Drawing PDF batch export & combined PDF generation</li>
+        <li>Renumbering, Pack-and-Go & data validation tools</li>
+        <li>Property templates and workflow standardisation</li>
+      </ul>
+    </section>
+
+    <!-- ROI -->
+    <section id="roi">
+      <h2>Return on Investment</h2>
+      <p>
+        MetaMech Solution tools are designed to deliver immediate and measurable ROI.
+        Typical automation saves <strong>5–15 engineering hours per week</strong> per engineer.
+      </p>
+
+      <p>
+        <strong>Example:</strong><br>
+        Engineer cost: €50 / hour<br>
+        Time saved: 8 hours / week<br>
+        <strong>Annual saving: €19,200 per engineer</strong>
+      </p>
+
+      <p>
+        Most automation projects pay for themselves in <strong>weeks, not months</strong>.
+      </p>
+    </section>
+
+    <!-- CUSTOM -->
+    <section id="custom">
+      <h2>Custom Tools Built Around Your Business</h2>
+      <p>
+        We do not sell generic, one-size-fits-all software.
+        Every tool is customised to match how your business actually works.
+      </p>
+
+      <ul>
+        <li>Your file naming and numbering rules</li>
+        <li>Your BOM structure and Excel format</li>
+        <li>Your custom properties and templates</li>
+        <li>Your folder structure and release process</li>
+        <li>Your assembly size and complexity</li>
+      </ul>
+
+      <p>
+        Tools can be modified, extended, or enhanced as your workflow evolves.
+      </p>
+    </section>
+
+    <!-- LIBRARIES -->
+    <section id="libraries">
+      <h2>Standard Design Libraries & Vendor Profiles</h2>
+      <p>
+        We support and integrate standard design libraries commonly used in real production environments.
+      </p>
+
+      <ul>
+        <li>ITEM aluminium profile systems</li>
+        <li>Standard fasteners and hardware</li>
+        <li>Pneumatics and purchased components</li>
+        <li>Company-specific standard parts</li>
+        <li>Reusable sub-assemblies and templates</li>
+      </ul>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>
+        Tell us where your SolidWorks workflow is losing time.
+        We’ll show you exactly how much automation can save.
+      </p>
+
+      <p>
+        📧 Email: <strong>hello@metamechsolution.com</strong><br>
+        🌍 Ireland-based • Remote delivery across EU & UK
+      </p>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div>© <span id="y"></span> MetaMech Solution</div>
+      <div>Engineering Automation • SolidWorks Workflow Optimisation</div>
+    </footer>
+
+  </div>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
