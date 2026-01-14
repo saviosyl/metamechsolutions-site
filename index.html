@@ -615,7 +615,7 @@
           <button class="btn btn-primary" id="trialEmailBtn">SEND ME TRIAL DETAILS</button>
 
           <div style="margin-top:10px" class="note" id="trialMsg">
-            Note: GitHub Pages is static. This button is a placeholder unless you connect a form service.
+            Enter your email and click <b>SEND ME TRIAL DETAILS</b> — it will open your email app with a pre-filled message.
           </div>
         </div>
 
@@ -722,29 +722,15 @@
 
       const subject = encodeURIComponent("MetaMech 3-Day Trial Request");
       const body = encodeURIComponent(
-        "Hi MetaMech Solution,
-
-" +
-        "I would like to request the 3-day trial.
-
-" +
-        "My email: " + email + "
-
-" +
-        "Thanks"
+        "Hi MetaMech Solution,\n\n" +
+        "I would like to request the 3-day trial.\n\n" +
+        "My email: " + email + "\n\n" +
+        "Thanks" 
       );
 
+      // Open user's email client with a pre-filled request
       window.location.href = `mailto:hi@metamechsolutions.com?subject=${subject}&body=${body}`;
-
       msg.textContent = "Your email client has been opened to send the trial request.";
-    });
-      const msg = document.getElementById('trialMsg');
-
-      if(!email){
-        msg.textContent = "Please enter an email (optional) or just download the trial.";
-        return;
-      }
-      msg.textContent = "Placeholder saved locally. To collect emails on GitHub Pages, connect Formspree / Google Form / Mailchimp.";
     });
 
     // Slim header + auto-hide on scroll down, show on scroll up
