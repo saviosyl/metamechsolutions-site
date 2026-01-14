@@ -710,9 +710,34 @@
     // Footer year
     document.getElementById('yrNow').textContent = new Date().getFullYear();
 
-    // Trial email placeholder (static site)
+    // Trial email handling (GitHub Pages safe)
     document.getElementById('trialEmailBtn').addEventListener('click', function(){
       const email = (document.getElementById('trialEmail').value || "").trim();
+      const msg = document.getElementById('trialMsg');
+
+      if(!email){
+        msg.textContent = "Please enter an email (optional) or just download the trial.";
+        return;
+      }
+
+      const subject = encodeURIComponent("MetaMech 3-Day Trial Request");
+      const body = encodeURIComponent(
+        "Hi MetaMech Solution,
+
+" +
+        "I would like to request the 3-day trial.
+
+" +
+        "My email: " + email + "
+
+" +
+        "Thanks"
+      );
+
+      window.location.href = `mailto:hi@metamechsolutions.com?subject=${subject}&body=${body}`;
+
+      msg.textContent = "Your email client has been opened to send the trial request.";
+    });
       const msg = document.getElementById('trialMsg');
 
       if(!email){
