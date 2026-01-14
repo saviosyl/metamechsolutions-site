@@ -2,238 +2,567 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MetaMech Solution | SolidWorks Automation & Engineering ROI</title>
-
-  <meta name="description"
-        content="MetaMech Solution delivers custom SolidWorks automation tools that reduce engineering time, eliminate repetitive work, and provide measurable ROI." />
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/logo/logo-icon-dark.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/logo/logo-icon-dark.png">
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MetaMech Solution | Engineering Automation</title>
+  <meta name="description" content="Engineering automation tools and SolidWorks macros that save design hours and reduce costs." />
 
   <style>
-    :root {
-      --bg:#0F1A33;
-      --card:#0B2C44;
-      --text:#EAF0FF;
-      --muted:#B9C3E6;
-      --accent:#F5A623;
-      --accent2:#2AA8E0;
-      --line:rgba(255,255,255,.12);
+    :root{
+      /* BRAND-LED PREMIUM PALETTE (derived from logo feel: teal + amber on deep navy) */
+      --bg:#070b14;            /* deep navy */
+      --panel:#0c1424;         /* cards/nav base */
+      --panel2:#0a1120;        /* secondary panels */
+      --text:#f3f6ff;          /* crisp light text */
+      --muted:#b6c2da;         /* calmer secondary text */
+      --line:rgba(255,255,255,.08);
+
+      /* accents (premium, not neon) */
+      --accent:#16b3b8;        /* teal (brand primary) */
+      --accent2:#f0b429;       /* amber (brand secondary) */
+
+      --shadow:0 24px 60px rgba(0,0,0,.48);
       --radius:18px;
-      --max:1100px;
-      --shadow:0 12px 30px rgba(0,0,0,.35);
-      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
     }
 
-    * { box-sizing:border-box }
-    body {
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
       margin:0;
-      font-family:var(--font);
-      background:var(--bg);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", Helvetica;
       color:var(--text);
+      background:
+        radial-gradient(1100px 650px at 18% 8%, rgba(22,179,184,.22), transparent 60%),
+        radial-gradient(950px 620px at 82% 0%, rgba(240,180,41,.14), transparent 58%),
+        var(--bg);
     }
 
-    a { color:inherit; text-decoration:none }
-    .wrap { max-width:var(--max); margin:auto; padding:24px }
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1100px;margin:0 auto;padding:0 18px}
 
-    header {
+    /* NAV */
+    .nav{
+      position:sticky;top:0;z-index:50;
+      background: linear-gradient(180deg, rgba(7,11,20,.90), rgba(7,11,20,.62));
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--line);
+      transition: transform .25s ease, background .25s ease;
+    }
+    .nav.nav--hidden{transform: translateY(-110%);}
+
+    .nav-inner{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      padding:14px 18px;
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      background:rgba(11,44,68,.7);
-      backdrop-filter:blur(10px);
-      position:sticky;
-      top:14px;
-      z-index:10;
+      padding:8px 0;
+      gap:12px;
     }
 
-    nav a {
-      margin-left:18px;
-      font-size:14px;
+    /* Logo-only brand (NO highlight box) */
+    .brand{display:flex;align-items:center;}
+    .logo-img{
+      width:110px;
+      height:auto;
+      display:block;
+      object-fit:contain;
+      filter: drop-shadow(0 4px 10px rgba(0,0,0,.35));
+    }
+
+    .menu{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:flex-end}
+    .menu a{
+      padding:10px 12px;border-radius:12px;
       color:var(--muted);
+      border:1px solid transparent;
     }
-    nav a:hover { color:var(--text) }
+    .menu a:hover{
+      border-color:rgba(22,179,184,.35);
+      color:var(--text);
+      background:rgba(22,179,184,.08);
+    }
 
-    section {
-      margin-top:28px;
-      padding:26px;
-      border-radius:var(--radius);
-      background:var(--card);
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      padding:12px 14px;border-radius:14px;
       border:1px solid var(--line);
-      box-shadow:var(--shadow);
+      background: rgba(255,255,255,.03);
+      color:var(--text);
+      cursor:pointer;
+      white-space:nowrap;
+    }
+    .btn-primary{
+      background: linear-gradient(135deg, rgba(22,179,184,.98), rgba(22,179,184,.62));
+      border-color: rgba(22,179,184,.55);
+      box-shadow: 0 18px 42px rgba(22,179,184,.18);
+    }
+    .btn-primary:hover{filter:brightness(1.05)}
+    .btn-green{
+      background: linear-gradient(135deg, rgba(240,180,41,.98), rgba(240,180,41,.60));
+      border-color: rgba(240,180,41,.55);
+      box-shadow: 0 18px 42px rgba(240,180,41,.16);
     }
 
-    h1, h2, h3 { margin-top:0 }
-    p { color:var(--muted); line-height:1.7 }
+    /* Mobile CTA */
+    .mobile-cta{display:none}
 
-    .hero h1 {
-      font-size:42px;
-      line-height:1.1;
+    /* HERO */
+    .hero{padding:64px 0 38px}
+    .grid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:20px;
+      align-items:stretch;
     }
 
-    .btn {
-      display:inline-block;
-      padding:12px 18px;
+    .card{
+      background: linear-gradient(180deg, rgba(12,20,36,.95), rgba(10,17,32,.92));
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:18px;
+    }
+
+    h1{
+      font-size:44px;line-height:1.08;margin:0 0 12px 0;
+      letter-spacing:-.8px;
+    }
+
+    p{margin:0 0 12px 0;color:var(--muted);line-height:1.65}
+
+    .hero-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+
+    .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+    .kpi{
+      border:1px solid var(--line);
       border-radius:14px;
+      padding:12px;
+      background: rgba(255,255,255,.02);
+    }
+    .kpi strong{font-size:18px;display:block}
+    .kpi span{color:var(--muted);font-size:13px}
+
+    /* Sections */
+    .section{padding:46px 0}
+    .section h2{margin:0 0 10px 0;font-size:28px;letter-spacing:-.3px}
+    .section .lead{max-width:760px}
+
+    .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+
+    .pill{
+      display:inline-flex;align-items:center;gap:8px;
+      font-size:12px;color:var(--muted);
+      border:1px solid rgba(22,179,184,.22);
+      padding:6px 10px;border-radius:999px;
+      background: rgba(22,179,184,.06);
+    }
+
+    .list{margin:10px 0 0 0;padding:0 0 0 18px;color:var(--muted)}
+    .list li{margin:7px 0}
+
+    .two{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+
+    .field{display:flex;flex-direction:column;gap:6px}
+    .field label{color:var(--muted);font-size:13px}
+    .field input{
+      padding:12px 12px;border-radius:12px;border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color:var(--text);
+      outline:none;
+    }
+    .field input:focus{border-color: rgba(47,125,246,.6)}
+
+    .result{
       border:1px solid var(--line);
-      margin-right:12px;
-      font-weight:600;
+      border-radius:14px;
+      padding:12px;
+      background: rgba(255,255,255,.02);
     }
 
-    .btn.primary {
-      background:linear-gradient(135deg, rgba(42,168,224,.35), rgba(245,166,35,.25));
-    }
+    .note{font-size:12px;color:var(--muted);opacity:.9;line-height:1.5}
 
-    ul { margin-top:12px }
-    li { margin-bottom:6px; color:var(--muted) }
+    /* Anchor offset for sticky header */
+    section{scroll-margin-top: 76px;}
 
-    footer {
-      margin:30px 0 10px;
-      padding-top:14px;
-      border-top:1px solid var(--line);
-      font-size:13px;
-      color:var(--muted);
-      display:flex;
-      justify-content:space-between;
-      flex-wrap:wrap;
-    }
+    .footer{padding:28px 0 40px;border-top:1px solid var(--line);color:var(--muted)}
 
-    @media (max-width:800px){
-      .hero h1 { font-size:34px }
-      nav { display:none }
+    /* Responsive */
+    @media (max-width: 900px){
+      .grid{grid-template-columns:1fr}
+      .cards3{grid-template-columns:1fr}
+      .two{grid-template-columns:1fr}
+      .kpis{grid-template-columns:1fr}
+      .menu{display:none}
+      .mobile-cta{display:inline-flex}
     }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
+  <!-- NAV -->
+  <div class="nav">
+    <div class="container">
+      <div class="nav-inner">
+        <!-- LOGO ONLY (110px). Update filename if needed -->
+        <div class="brand">
+          <img src="assets/logo/metamech-logo.png" alt="MetaMech Solution Logo" class="logo-img" />
+        </div>
 
-    <!-- HEADER -->
-    <header>
-      <img src="assets/logo/logo-full.png"
-           alt="MetaMech Solution"
-           style="height:105px;width:auto" />
-      <nav>
-        <a href="#services">Services</a>
-        <a href="#roi">ROI</a>
-        <a href="#custom">Custom Tools</a>
-        <a href="#libraries">Libraries</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </header>
+        <div class="menu">
+          <a href="#tools">TOOLS</a>
+          <a href="#roi">ROI CALCULATOR</a>
+          <a href="#services">SERVICES</a>
+          <a href="#trial">3-DAY TRIAL</a>
+          <a href="#contact">CONTACT</a>
+          <a class="btn btn-primary" href="#contact">REQUEST A DEMO</a>
+        </div>
 
-    <!-- HERO -->
-    <section class="hero">
-      <h1>Smarter SolidWorks.<br>Faster Engineering. Measurable ROI.</h1>
-      <p>
-        MetaMech Solution builds custom SolidWorks automation tools that eliminate repetitive
-        design work, reduce errors, and save hundreds of engineering hours every year.
-      </p>
-      <a class="btn primary" href="#contact">Request ROI Estimate</a>
-      <a class="btn" href="#services">View Services</a>
-    </section>
+        <a class="btn btn-primary mobile-cta" href="#contact">REQUEST A DEMO</a>
+      </div>
+    </div>
+  </div>
 
-    <!-- SERVICES -->
-    <section id="services">
-      <h2>What We Do</h2>
-      <p>
-        We specialise in production-ready SolidWorks automation designed around real engineering workflows.
-      </p>
-      <ul>
-        <li>BOM automation to Excel (multi-level, large assemblies)</li>
-        <li>DXF flat-pattern automation for sheet-metal parts</li>
-        <li>Drawing PDF batch export & combined PDF generation</li>
-        <li>Renumbering, Pack-and-Go & data validation tools</li>
-        <li>Property templates and workflow standardisation</li>
-      </ul>
-    </section>
+  <!-- HERO -->
+  <header class="hero">
+    <div class="container">
+      <div class="grid">
+        <div class="card">
+          <span class="pill">⚙️ SolidWorks Automation • BOM • PDF • STEP • DXF • Renumbering</span>
+          <h1>ENGINEERING AUTOMATION THAT SAVES DESIGN HOURS</h1>
+          <p>
+            MetaMech Solution builds high-performance SolidWorks tools and custom macros to cut repetitive work,
+            reduce human errors, and standardise outputs across your projects.
+          </p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#tools">EXPLORE TOOLS</a>
+            <a class="btn" href="#roi">CALCULATE ROI</a>
+            <a class="btn btn-green" href="#trial">DOWNLOAD 3-DAY TRIAL</a>
+          </div>
 
-    <!-- ROI -->
-    <section id="roi">
-      <h2>Return on Investment</h2>
-      <p>
-        MetaMech Solution tools are designed to deliver immediate and measurable ROI.
-        Typical automation saves <strong>5–15 engineering hours per week</strong> per engineer.
-      </p>
+          <div class="kpis">
+            <div class="kpi">
+              <strong>1-CLICK OUTPUTS</strong>
+              <span>BOM, PDF merge, STEP, DXF exports</span>
+            </div>
+            <div class="kpi">
+              <strong>WORKFLOW FIT</strong>
+              <span>Customised to your standards & folders</span>
+            </div>
+            <div class="kpi">
+              <strong>ROI FOCUSED</strong>
+              <span>Save hours every week per engineer</span>
+            </div>
+          </div>
+        </div>
 
-      <p>
-        <strong>Example:</strong><br>
-        Engineer cost: €50 / hour<br>
-        Time saved: 8 hours / week<br>
-        <strong>Annual saving: €19,200 per engineer</strong>
-      </p>
+        <div class="card">
+          <h2 style="margin:0 0 10px 0;">WHAT WE AUTOMATE</h2>
+          <ul class="list">
+            <li><b>Master BOM</b> + split by TYPE, highlight missing properties</li>
+            <li><b>PDF merge</b> with index, page numbers, hierarchical order</li>
+            <li><b>STEP export</b> for unique parts + subassemblies</li>
+            <li><b>Renumbering</b> (DOC logic, VendorPN rules, naming standards)</li>
+            <li><b>Template + Properties</b> across large assemblies</li>
+          </ul>
 
-      <p>
-        Most automation projects pay for themselves in <strong>weeks, not months</strong>.
-      </p>
-    </section>
+          <h3 style="margin:16px 0 8px 0; font-size:16px; letter-spacing:.2px;">WHY TEAMS CHOOSE METAMECH</h3>
+          <ul class="list">
+            <li><b>Human-error reduction</b> — automated outputs with repeatable logic</li>
+            <li><b>Company standards</b> — every engineer exports BOMs in the same format</li>
+            <li><b>Close collaboration</b> — we work with your design team to understand real pain points and deliver custom solutions</li>
+            <li><b>Premium outputs</b> — custom properties and templates set up for clean, professional deliverables</li>
+          </ul>
 
-    <!-- CUSTOM -->
-    <section id="custom">
-      <h2>Custom Tools Built Around Your Business</h2>
-      <p>
-        We do not sell generic, one-size-fits-all software.
-        Every tool is customised to match how your business actually works.
-      </p>
+          <div style="margin-top:14px;" class="note">
+            Built for real production assemblies (including large TLA structures) with consistent logs and outputs.
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
 
-      <ul>
-        <li>Your file naming and numbering rules</li>
-        <li>Your BOM structure and Excel format</li>
-        <li>Your custom properties and templates</li>
-        <li>Your folder structure and release process</li>
-        <li>Your assembly size and complexity</li>
-      </ul>
-
-      <p>
-        Tools can be modified, extended, or enhanced as your workflow evolves.
-      </p>
-    </section>
-
-    <!-- LIBRARIES -->
-    <section id="libraries">
-      <h2>Standard Design Libraries & Vendor Profiles</h2>
-      <p>
-        We support and integrate standard design libraries commonly used in real production environments.
-      </p>
-
-      <ul>
-        <li>ITEM aluminium profile systems</li>
-        <li>Standard fasteners and hardware</li>
-        <li>Pneumatics and purchased components</li>
-        <li>Company-specific standard parts</li>
-        <li>Reusable sub-assemblies and templates</li>
-      </ul>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="contact">
-      <h2>Contact</h2>
-      <p>
-        Tell us where your SolidWorks workflow is losing time.
-        We’ll show you exactly how much automation can save.
+  <!-- TOOLS -->
+  <section id="tools" class="section">
+    <div class="container">
+      <h2>AUTOMATION TOOLS</h2>
+      <p class="lead">
+        Practical engineering tools that remove repetitive tasks and standardise your deliverables.
+        Built for SolidWorks 2022–2025 workflows.
       </p>
 
-      <p>
-        📧 Email: <strong>hello@metamechsolution.com</strong><br>
-        🌍 Ireland-based • Remote delivery across EU & UK
+      <div class="cards3">
+        <div class="card">
+          <h3 style="margin:0 0 8px 0;">BOM AUTOMATION</h3>
+          <p>Master BOM + sheets by TYPE, missing property highlighting, consistent formatting.</p>
+          <ul class="list">
+            <li>All levels (TLA → subassemblies → parts)</li>
+            <li>Fast and reliable outputs</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 style="margin:0 0 8px 0;">PDF MERGE + INDEX</h3>
+          <p>Exports drawings and merges into one PDF arranged hierarchically with an index page.</p>
+          <ul class="list">
+            <li>Order driven by BOM Master</li>
+            <li>Logs missing drawings</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 style="margin:0 0 8px 0;">STEP / DXF EXPORT</h3>
+          <p>Auto export unique STEP files and sheet metal flat DXF profiles with naming rules.</p>
+          <ul class="list">
+            <li>Material + thickness + qty naming</li>
+            <li>Skips duplicates & logs issues</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROI -->
+  <section id="roi" class="section">
+    <div class="container">
+      <h2>ROI CALCULATOR</h2>
+      <p class="lead">Estimate weekly, monthly, and annual savings in € based on hours saved per engineer.</p>
+
+      <div class="two">
+        <div class="card">
+          <div class="field">
+            <label>Engineers using the tool</label>
+            <input id="eng" type="number" value="2" min="1" />
+          </div>
+
+          <div class="field">
+            <label>Hours saved per week (per engineer)</label>
+            <input id="hrs" type="number" value="2" step="0.5" min="0" />
+          </div>
+
+          <div class="field">
+            <label>Hourly cost (€)</label>
+            <input id="rate" type="number" value="45" min="0" />
+          </div>
+
+          <div class="field">
+            <label>Weeks per year</label>
+            <input id="weeks" type="number" value="48" min="1" />
+          </div>
+
+          <div class="field">
+            <label>Tool cost (optional €)</label>
+            <input id="cost" type="number" value="0" min="0" />
+          </div>
+
+          <div style="margin-top:12px" class="note">
+            Tip: use your real internal cost rate (salary + overhead) for accurate ROI.
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="result"><b>Weekly Savings:</b> €<span id="wk">0</span></div>
+          <div style="height:10px"></div>
+          <div class="result"><b>Monthly Savings:</b> €<span id="mo">0</span></div>
+          <div style="height:10px"></div>
+          <div class="result"><b>Annual Savings:</b> €<span id="yr">0</span></div>
+          <div style="height:10px"></div>
+          <div class="result"><b>Break-even:</b> <span id="be">—</span></div>
+
+          <div style="margin-top:12px" class="note">
+            Break-even is calculated only if you enter a Tool Cost.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="section">
+    <div class="container">
+      <h2>SERVICES</h2>
+      <p class="lead">Engineering support plus automation — one partner for both build and delivery.</p>
+
+      <div class="cards3">
+        <div class="card">
+          <h3 style="margin:0 0 8px 0;">CUSTOM AUTOMATION</h3>
+          <p>We build tools around your folder structure, naming rules, templates, and approval process.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin:0 0 8px 0;">MECHANICAL DESIGN</h3>
+          <p>3D modelling, assemblies, sheet metal design, drafting, and manufacturing packs.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin:0 0 8px 0;">STANDARD LIBRARIES</h3>
+          <p>Item profiles, standard parts, property standards, and reusable engineering content.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRIAL -->
+  <section id="trial" class="section">
+    <div class="container">
+      <h2>DOWNLOAD 3-DAY TRIAL</h2>
+      <p class="lead">
+        Try the automation on a sample workflow. The trial expires automatically after 3 days.
       </p>
-    </section>
 
-    <!-- FOOTER -->
-    <footer>
-      <div>© <span id="y"></span> MetaMech Solution</div>
-      <div>Engineering Automation • SolidWorks Workflow Optimisation</div>
-    </footer>
+      <div class="two">
+        <div class="card">
+          <h3 style="margin:0 0 8px 0;">TRIAL DOWNLOAD</h3>
+          <p>Click to download the trial EXE (Windows). You can optionally enter your email to receive trial details.<hi@metamechsolutions.com>
 
+          <!-- Update this file path to where you host the EXE inside your repo -->
+          <a class="btn btn-green" id="downloadBtn" href="downloads/MetaMechTrial.exe" download>
+            ⬇ DOWNLOAD 3-DAY TRIAL
+          </a>
+
+          <div style="height:12px"></div>
+
+          <div class="field">
+            <label>Email (optional)</label>
+            <input id="trialEmail" type="email" placeholder="you@company.com" />
+          </div>
+
+          <div style="height:10px"></div>
+          <button class="btn btn-primary" id="trialEmailBtn">SEND ME TRIAL DETAILS</button>
+
+          <div style="margin-top:10px" class="note" id="trialMsg">
+            Note: GitHub Pages is static. This button is a placeholder unless you connect a form service.
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 style="margin:0 0 8px 0;">HOW THE TRIAL WORKS</h3>
+          <ul class="list">
+            <li>Install & run the EXE</li>
+            <li>Trial period begins on first run</li>
+            <li>Expires after 72 hours (3 days)</li>
+            <li>Contact us to activate full license</li>
+          </ul>
+          <div style="margin-top:12px" class="note">
+            Want stronger protection? We can upgrade to online key activation (recommended for a “big brand” product).
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section">
+    <div class="container">
+      <h2>CONTACT</h2>
+      <p class="lead">Tell us your workflow pain points. We’ll suggest the best automation approach.</p>
+
+      <div class="two">
+        <div class="card">
+          <h3 style="margin:0 0 8px 0;">REQUEST A DEMO</h3>
+          <p class="note">Since GitHub Pages is static, this uses an email link (or you can connect Formspree / Google Form).</p>
+          <a class="btn btn-primary" href="mailto:metamechsolution@gmail.com?subject=MetaMech%20Demo%20Request&body=Hi%20MetaMech%20Solution%2C%0A%0ACompany%3A%0AWorkflow%20to%20automate%3A%0ASolidWorks%20version%3A%0A%0AThanks%2C">
+            ✉ EMAIL US
+          </a>
+        </div>
+
+        <div class="card">
+          <h3 style="margin:0 0 8px 0;">WHAT TO SEND US</h3>
+          <ul class="list">
+            <li>SolidWorks version (2022–2025)</li>
+            <li>Example assembly structure (TLA + subs)</li>
+            <li>Required naming rules</li>
+            <li>Outputs needed (BOM/PDF/STEP/DXF)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer">
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+        <div>© <span id="yrNow"></span> MetaMech Solution</div>
+        <div class="note">Built for engineering teams • Galway, Ireland</div>
+      </div>
+    </div>
   </div>
 
   <script>
-    document.getElementById("y").textContent = new Date().getFullYear();
+    // ROI calculator
+    function fmt(n){ return Math.round(n).toLocaleString('en-IE'); }
+
+    function calcROI(){
+      const eng = +document.getElementById('eng').value || 0;
+      const hrs = +document.getElementById('hrs').value || 0;
+      const rate = +document.getElementById('rate').value || 0;
+      const weeks = +document.getElementById('weeks').value || 0;
+      const cost = +document.getElementById('cost').value || 0;
+
+      const weekly = eng * hrs * rate;
+      const monthly = weekly * 4.33;
+      const annual = weekly * weeks;
+
+      document.getElementById('wk').textContent = fmt(weekly);
+      document.getElementById('mo').textContent = fmt(monthly);
+      document.getElementById('yr').textContent = fmt(annual);
+
+      if(cost > 0 && weekly > 0){
+        const weeksToBE = cost / weekly;
+        const daysToBE = weeksToBE * 7;
+        document.getElementById('be').textContent = (daysToBE < 7)
+          ? `${Math.ceil(daysToBE)} days`
+          : `${weeksToBE.toFixed(1)} weeks`;
+      } else {
+        document.getElementById('be').textContent = "—";
+      }
+    }
+
+    ["eng","hrs","rate","weeks","cost"].forEach(id => {
+      document.getElementById(id).addEventListener('input', calcROI);
+    });
+    calcROI();
+
+    // Footer year
+    document.getElementById('yrNow').textContent = new Date().getFullYear();
+
+    // Trial email placeholder (static site)
+    document.getElementById('trialEmailBtn').addEventListener('click', function(){
+      const email = (document.getElementById('trialEmail').value || "").trim();
+      const msg = document.getElementById('trialMsg');
+
+      if(!email){
+        msg.textContent = "Please enter an email (optional) or just download the trial.";
+        return;
+      }
+      msg.textContent = "Placeholder saved locally. To collect emails on GitHub Pages, connect Formspree / Google Form / Mailchimp.";
+    });
+
+    // Slim header + auto-hide on scroll down, show on scroll up
+    (function(){
+      const nav = document.querySelector('.nav');
+      let lastY = window.scrollY;
+      let ticking = false;
+
+      function onScroll(){
+        const y = window.scrollY;
+        const down = y > lastY;
+        const delta = Math.abs(y - lastY);
+
+        // Only react after small movement to avoid flicker
+        if(delta > 10){
+          if(down && y > 120){
+            nav.classList.add('nav--hidden');
+          } else {
+            nav.classList.remove('nav--hidden');
+          }
+          lastY = y;
+        }
+        ticking = false;
+      }
+
+      window.addEventListener('scroll', () => {
+        if(!ticking){
+          window.requestAnimationFrame(onScroll);
+          ticking = true;
+        }
+      });
+    })();
   </script>
 </body>
 </html>
