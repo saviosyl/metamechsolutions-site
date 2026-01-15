@@ -8,19 +8,19 @@
 
   <style>
     :root{
-      /* BRAND-LED PREMIUM PALETTE (derived from logo feel: teal + amber on deep navy) */
-      --bg:#070b14;            /* deep navy */
-      --panel:#0c1424;         /* cards/nav base */
-      --panel2:#0a1120;        /* secondary panels */
-      --text:#f3f6ff;          /* crisp light text */
-      --muted:#b6c2da;         /* calmer secondary text */
-      --line:rgba(255,255,255,.08);
+      /* BRAND-LED PREMIUM PALETTE (brighter + higher contrast) */
+      --bg:#0b1222;            /* deep navy (slightly brighter) */
+      --panel:#101c33;         /* cards/nav base (brighter) */
+      --panel2:#0d1730;        /* secondary panels */
+      --text:#fbfdff;          /* crisp light text */
+      --muted:#d3dcf3;         /* brighter secondary text */
+      --line:rgba(255,255,255,.14);
 
-      /* accents (premium, not neon) */
+      /* accents */
       --accent:#16b3b8;        /* teal (brand primary) */
       --accent2:#f0b429;       /* amber (brand secondary) */
 
-      --shadow:0 24px 60px rgba(0,0,0,.48);
+      --shadow:0 24px 60px rgba(0,0,0,.40);
       --radius:18px;
     }
 
@@ -32,8 +32,9 @@
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", Helvetica;
       color:var(--text);
       background:
-        radial-gradient(1100px 650px at 18% 8%, rgba(22,179,184,.22), transparent 60%),
-        radial-gradient(950px 620px at 82% 0%, rgba(240,180,41,.14), transparent 58%),
+        radial-gradient(1100px 650px at 18% 8%, rgba(22,179,184,.30), transparent 62%),
+        radial-gradient(950px 620px at 82% 0%, rgba(240,180,41,.20), transparent 60%),
+        radial-gradient(900px 700px at 50% 120%, rgba(255,255,255,.06), transparent 62%),
         var(--bg);
     }
 
@@ -43,7 +44,7 @@
     /* NAV */
     .nav{
       position:sticky;top:0;z-index:50;
-      background: linear-gradient(180deg, rgba(7,11,20,.90), rgba(7,11,20,.62));
+      background: linear-gradient(180deg, rgba(11,18,34,.92), rgba(11,18,34,.70));
       backdrop-filter: blur(10px);
       border-bottom:1px solid var(--line);
       transition: transform .25s ease, background .25s ease;
@@ -71,8 +72,19 @@
     .menu{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:flex-end}
     .menu a{
       padding:10px 12px;border-radius:12px;
-      color:var(--muted);
+      color:rgba(251,253,255,.86);
       border:1px solid transparent;
+      letter-spacing:.2px;
+    }
+    .menu a:hover{
+      border-color:rgba(22,179,184,.45);
+      color:var(--text);
+      background:rgba(22,179,184,.12);
+    }
+    .menu a.active{
+      border-color: rgba(22,179,184,.65);
+      background: rgba(22,179,184,.18);
+      box-shadow: 0 6px 20px rgba(22,179,184,.25);
     }
     .menu a:hover{
       border-color:rgba(22,179,184,.35);
@@ -115,7 +127,7 @@
 
     .card{
       position:relative;
-      background: linear-gradient(180deg, rgba(12,20,36,.95), rgba(10,17,32,.92));
+      background: linear-gradient(180deg, rgba(16,28,51,.96), rgba(13,23,48,.94));
       border:1px solid var(--line);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
@@ -125,9 +137,11 @@
     h1{
       font-size:44px;line-height:1.08;margin:0 0 12px 0;
       letter-spacing:-.8px;
+      color:var(--text);
+      text-shadow: 0 10px 30px rgba(0,0,0,.35);
     }
 
-    p{margin:0 0 12px 0;color:var(--muted);line-height:1.65}
+    p{margin:0 0 12px 0;color:rgba(211,220,243,.92);line-height:1.65}
 
     .hero-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
 
@@ -315,6 +329,7 @@
         <div class="card">
           <span class="pill">Designed by an experienced Mechanical Design Engineer</span>
           <h1>ENGINEERING AUTOMATION THAT SAVES DESIGN HOURS</h1>
+          <p style="font-size:15px;color:#eaf6ff;margin-top:-6px;">Fast, reliable SolidWorks automation built for real production teams</p>
           <p>
             MetaMech Solution builds high-performance SolidWorks tools and custom macros to cut repetitive work,
             reduce human errors, and standardise outputs across your projects.
