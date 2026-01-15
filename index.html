@@ -143,10 +143,29 @@
     .industries-strip{padding:18px 0 6px}
     .strip-card{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:14px 16px;border-radius:16px;border:1px solid var(--line);background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));box-shadow: 0 18px 42px rgba(0,0,0,.22)}
     .chips{display:flex;flex-wrap:wrap;gap:8px}
-    .chip{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background: rgba(255,255,255,.03);color:rgba(251,253,255,.92);font-size:12px}
+    .chip{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 10px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.03);
+      color:rgba(251,253,255,.92);
+      font-size:12px;
+      opacity:0;
+      transform: translateY(8px) scale(.96);
+      transition: transform .35s cubic-bezier(.2,.8,.2,1), opacity .35s ease, box-shadow .35s ease, background .35s ease;
+    }
     .chip b{font-weight:800}
     .chip .mini{width:16px;height:16px;flex:0 0 16px}
     .chip .mini svg{width:16px;height:16px;display:block}
+    .chip:hover{
+      transform: translateY(-2px) scale(1.03);
+      background: linear-gradient(135deg, rgba(22,179,184,.18), rgba(240,180,41,.14));
+      box-shadow: 0 10px 26px rgba(22,179,184,.35);
+    }
+    .chip.is-in{
+      opacity:1;
+      transform: translateY(0) scale(1);
+    }
 
     /* Services icons + enquiry buttons */
     .svc-head{display:flex;align-items:center;gap:10px;margin:0 0 8px 0}
@@ -1176,6 +1195,28 @@ Thanks`
           }
         }
       }catch(e){}
+    })();
+
+    // ==============================
+    // CHIP STAGGER ANIMATION (Industries)
+    // ==============================
+    (function(){
+      const chips = document.querySelectorAll('.chip');
+      if(!chips.length) return;
+
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting){
+            const list = entry.target.querySelectorAll('.chip');
+            list.forEach((chip, i) => {
+              setTimeout(() => chip.classList.add('is-in'), i * 90);
+            });
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+
+      document.querySelectorAll('.chips').forEach(el => io.observe(el));
     })();
 
     // ==============================
