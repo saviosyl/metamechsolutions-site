@@ -597,6 +597,37 @@
     </div>
   </section>
 
+    <!-- ADMIN (hidden) -->
+  <section id="admin" class="section" style="display:none">
+    <div class="container">
+      <h2>ADMIN</h2>
+      <p class="lead">Set Formspree endpoint once. Saved in this browser only.</p>
+
+      <div class="two">
+        <div class="card">
+          <h3 style="margin:0 0 8px 0;">FORMSPREE ENDPOINT</h3>
+          <p class="note">Paste your endpoint from Formspree (example: https://formspree.io/f/abcdwxyz).</p>
+          <div class="field">
+            <label>Endpoint</label>
+            <input id="adminEndpoint" placeholder="https://formspree.io/f/abcdwxyz" />
+          </div>
+          <div style="height:10px"></div>
+          <button class="btn btn-primary" id="adminSave">SAVE ENDPOINT</button>
+          <div class="status" id="adminStatus">Status: not set.</div>
+        </div>
+        <div class="card">
+          <h3 style="margin:0 0 8px 0;">HOW TO USE</h3>
+          <ul class="list">
+            <li>Open your website with <b>?admin=1</b> (example: yoursite.com/?admin=1)</li>
+            <li>Paste endpoint → Save</li>
+            <li>Refresh the page</li>
+            <li>All forms will start saving into your Formspree Inbox</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <div class="footer">
     <div class="container">
       <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;">
@@ -612,7 +643,18 @@
     // ==============================
     // 1) Create a Formspree form
     // 2) Paste your endpoint below (looks like: https://formspree.io/f/xxxxxx)
-    const FORMSPREE_ENDPOINT = "PASTE_YOUR_FORMSPREE_ENDPOINT_HERE";
+    // Formspree endpoint can be set WITHOUT editing code:
+    // - Open the site with ?admin=1
+    // - Paste endpoint once (stored in your browser localStorage)
+    // Example: https://formspree.io/f/abcdwxyz
+    const FORMSPREE_ENDPOINT_DEFAULT = "PASTE_YOUR_FORMSPREE_ENDPOINT_HERE";
+    function getFormspreeEndpoint(){
+      try{
+        const saved = localStorage.getItem('mm_formspree_endpoint');
+        if(saved && /^https:\/\/formspree\.io\/f\//.test(saved)) return saved;
+      }catch(e){}
+      return FORMSPREE_ENDPOINT_DEFAULT;
+    }
 
     // ==============================
     // REVEAL ANIMATIONS
@@ -779,7 +821,9 @@
     // FORMSPREE SUBMIT (AJAX)
     // ==============================
     async function postToFormspree(formEl, statusEl){
-      if(FORMSPREE_ENDPOINT.includes('PASTE_YOUR_')){
+      const FORMSPREE_ENDPOINT = getFormspreeEndpoint();
+
+      if(FORMSPREE_ENDPOINT.includes('PASTE_YOUR_') ){
         if(statusEl){
           statusEl.className = 'status err';
           statusEl.textContent = 'Status: Formspree endpoint not set. Paste your endpoint in FORMSPREE_ENDPOINT.';
@@ -959,6 +1003,45 @@ Thanks`
       window.addEventListener('scroll', () => {
         if(!ticking){ window.requestAnimationFrame(onScroll); ticking = true; }
       });
+    })();
+
+    // ==============================
+    // ADMIN PANEL (toggle via ?admin=1)
+    // ==============================
+    (function(){
+      try{
+        const params = new URLSearchParams(location.search);
+        const adminOn = params.get('admin') === '1';
+        const adminSec = document.getElementById('admin');
+        if(adminSec) adminSec.style.display = adminOn ? 'block' : 'none';
+
+        if(adminOn){
+          const inp = document.getElementById('adminEndpoint');
+          const btn = document.getElementById('adminSave');
+          const st  = document.getElementById('adminStatus');
+          const current = getFormspreeEndpoint();
+
+          if(inp && current && !current.includes('PASTE_YOUR_')) inp.value = current;
+          if(st){
+            st.className = (current && !current.includes('PASTE_YOUR_')) ? 'status ok' : 'status err';
+            st.textContent = (current && !current.includes('PASTE_YOUR_'))
+              ? 'Status: endpoint set. Forms will save to Formspree.'
+              : 'Status: endpoint not set yet.';
+          }
+
+          if(btn){
+            btn.addEventListener('click', () => {
+              const v = (inp && inp.value || '').trim();
+              if(!/^https:\/\/formspree\.io\/f\//.test(v)){
+                if(st){ st.className = 'status err'; st.textContent = 'Status: invalid endpoint. It must start with https://formspree.io/f/'; }
+                return;
+              }
+              try{ localStorage.setItem('mm_formspree_endpoint', v); }catch(e){}
+              if(st){ st.className = 'status ok'; st.textContent = 'Status: saved. Refresh the page to use it.'; }
+            });
+          }
+        }
+      }catch(e){}
     })();
 
     // Init
