@@ -9,16 +9,16 @@
   <style>
     :root{
       /* BRAND-LED PREMIUM PALETTE (brighter + higher contrast) */
-      --bg:#0b1222;            /* deep navy */
-      --panel:#101c33;         /* cards/nav base */
+      --bg:#0b1222;            /* deep navy (slightly brighter) */
+      --panel:#101c33;         /* cards/nav base (brighter) */
       --panel2:#0d1730;        /* secondary panels */
       --text:#fbfdff;          /* crisp light text */
       --muted:#d3dcf3;         /* brighter secondary text */
       --line:rgba(255,255,255,.14);
 
-      /* accents (logo-aligned) */
-      --accent:#16b3b8;        /* teal */
-      --accent2:#f0b429;       /* amber */
+      /* accents */
+      --accent:#16b3b8;        /* teal (brand primary) */
+      --accent2:#f0b429;       /* amber (brand secondary) */
 
       --shadow:0 24px 60px rgba(0,0,0,.40);
       --radius:18px;
@@ -59,7 +59,7 @@
       gap:12px;
     }
 
-    /* Logo-only brand */
+    /* Logo-only brand (NO highlight box) */
     .brand{display:flex;align-items:center;}
     .logo-img{
       width:110px;
@@ -82,9 +82,14 @@
       background:rgba(22,179,184,.12);
     }
     .menu a.active{
-      border-color: rgba(22,_toggle62b3b8,.65);
+      border-color: rgba(22,179,184,.65);
       background: rgba(22,179,184,.18);
       box-shadow: 0 6px 20px rgba(22,179,184,.25);
+    }
+    .menu a:hover{
+      border-color:rgba(22,179,184,.35);
+      color:var(--text);
+      background:rgba(22,179,184,.08);
     }
 
     .btn{
@@ -108,6 +113,7 @@
       box-shadow: 0 18px 42px rgba(240,180,41,.16);
     }
 
+    /* Mobile CTA */
     .mobile-cta{display:none}
 
     /* HERO */
@@ -129,64 +135,38 @@
     }
 
     /* ===== HERO EMPHASIS (logo-aligned) ===== */
-    .card.hero-primary{
-      overflow:hidden;
-      padding-left:22px; /* room for accent line */
-    }
+    .card.hero-primary{overflow:hidden;padding-left:22px;}
 
-    /* subtle animated accent line */
+    /* Soft animated accent line */
     .card.hero-primary::before{
       content:"";
-      position:absolute;
-      left:0; top:0; bottom:0;
-      width:4px;
-      border-radius:4px;
-      background: linear-gradient(
-        180deg,
-        rgba(22,179,184,.95),
-        rgba(22,179,184,.45),
-        rgba(240,180,41,.55)
-      );
-      box-shadow: 0 0 22px rgba(22,179,184,.45);
+      position:absolute;left:0;top:0;bottom:0;
+      width:4px;border-radius:4px;
+      background: linear-gradient(180deg, rgba(22,179,184,.95), rgba(22,179,184,.40), rgba(240,180,41,.55));
+      box-shadow: 0 0 20px rgba(22,179,184,.45);
       animation: accentBreath 3.2s ease-in-out infinite;
     }
-
-    /* very subtle shimmer that moves down */
     .card.hero-primary::after{
       content:"";
-      position:absolute;
-      left:0; top:-30%;
-      width:4px; height:60%;
-      border-radius:4px;
-      background: linear-gradient(
-        180deg,
-        transparent,
-        rgba(255,255,255,.40),
-        transparent
-      );
+      position:absolute;left:0;top:-35%;
+      width:4px;height:60%;border-radius:4px;
+      background: linear-gradient(180deg, transparent, rgba(255,255,255,.38), transparent);
       opacity:.35;
       animation: accentShimmer 2.8s ease-in-out infinite;
       pointer-events:none;
     }
-
     @keyframes accentBreath{
-      0%,100%{
-        filter: brightness(1);
-        box-shadow: 0 0 18px rgba(22,179,184,.40);
-      }
-      50%{
-        filter: brightness(1.12);
-        box-shadow: 0 0 26px rgba(22,179,184,.55);
-      }
+      0%,100%{filter:brightness(1); box-shadow:0 0 18px rgba(22,179,184,.40)}
+      50%{filter:brightness(1.12); box-shadow:0 0 26px rgba(22,179,184,.55)}
     }
     @keyframes accentShimmer{
-      0%{ top:-35%; opacity:.0; }
-      20%{ opacity:.25; }
-      55%{ opacity:.35; }
-      100%{ top:110%; opacity:.0; }
+      0%{top:-35%; opacity:0}
+      20%{opacity:.22}
+      55%{opacity:.35}
+      100%{top:110%; opacity:0}
     }
 
-    /* Gradient emphasis for 1 word only */
+    /* Gradient emphasis for one keyword */
     .accent-word{
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       -webkit-background-clip:text;
@@ -194,10 +174,16 @@
       color:transparent;
     }
 
+    /* Lift hero text contrast */
+    .hero-primary h1{color:#ffffff}
+    .hero-primary p{color:#f4f7ff}
+    .hero-primary .kpi strong{color:#ffffff}
+    .hero-primary .kpi span{color:#f0f4ff}
+
     h1{
       font-size:46px;line-height:1.06;margin:0 0 14px 0;
       letter-spacing:-.9px;
-      color:#ffffff;
+      color:#ffffff; /* FULL BRIGHT WHITE */
       text-shadow:
         0 2px 0 rgba(0,0,0,.25),
         0 14px 36px rgba(0,0,0,.55);
@@ -214,8 +200,8 @@
       padding:12px;
       background: rgba(255,255,255,.02);
     }
-    .kpi strong{font-size:18px;display:block;color:#ffffff}
-    .kpi span{color:#f0f4ff;font-size:13px}
+    .kpi strong{font-size:18px;display:block}
+    .kpi span{color:#eef3ff;font-size:13px}
 
     /* Subtle animated background glow */
     @keyframes floatGlow{
@@ -223,9 +209,12 @@
       50%{ transform: translate3d(0,-10px,0) scale(1.03); opacity:.75; }
     }
 
-    /* Scroll-reveal */
+    /* Scroll-reveal animations */
     .reveal{opacity:0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease;}
     .reveal.reveal--in{opacity:1; transform: translateY(0);}
+
+    /* IMPORTANT: Hero should NEVER look dim (skip reveal fade at top) */
+    header.hero .reveal{opacity:1 !important; transform:none !important;}
 
     /* Premium micro-interactions */
     .card{transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;}
@@ -233,7 +222,7 @@
     .btn{transition: transform .18s ease, filter .18s ease;}
     .btn:hover{transform: translateY(-1px); filter:brightness(1.03)}
 
-    /* Preview styling */
+    /* Image / preview styling */
     .preview-grid{display:grid; grid-template-columns: 1.2fr .8fr; gap:12px; margin-top:14px;}
     .preview-main, .preview-side{border-radius: var(--radius); border:1px solid var(--line); background: rgba(255,255,255,.02); overflow:hidden;}
     .preview-main img, .preview-side img{width:100%; height:100%; object-fit:cover; display:block;}
@@ -255,7 +244,7 @@
     .pill{
       display:inline-flex;align-items:center;gap:8px;
       font-size:12px;
-      color:#ffffff;
+      color:#ffffff; /* brighter text */
       border:1px solid rgba(22,179,184,.45);
       padding:6px 10px;border-radius:999px;
       background: linear-gradient(135deg, rgba(22,179,184,.28), rgba(22,179,184,.12));
@@ -294,9 +283,10 @@
 
     .note{font-size:12px;color:var(--muted);opacity:.9;line-height:1.5}
 
+    /* Anchor offset for sticky header */
     section{scroll-margin-top: 76px;}
-    .footer{padding:28px 0 40px;border-top:1px solid var(--line);color:var(--muted)}
 
+    .footer{padding:28px 0 40px;border-top:1px solid var(--line);color:var(--muted)}
     /* Pricing: Most Popular ribbon */
     .popular{
       outline:2px solid rgba(22,179,184,.35);
@@ -364,6 +354,7 @@
   <div class="nav">
     <div class="container">
       <div class="nav-inner">
+        <!-- LOGO ONLY (110px). Update filename if needed -->
         <div class="brand">
           <img src="assets/logo/metamech-logo.png" alt="MetaMech Solution Logo" class="logo-img" />
         </div>
@@ -396,7 +387,6 @@
             MetaMech Solution builds high-performance SolidWorks tools and custom macros to cut repetitive work,
             reduce human errors, and standardise outputs across your projects.
           </p>
-
           <div class="hero-cta">
             <a class="btn btn-primary" href="#tools">EXPLORE TOOLS</a>
             <a class="btn" href="#roi">CALCULATE ROI</a>
@@ -445,7 +435,7 @@
     </div>
   </header>
 
-  <!-- PRODUCT PREVIEW -->
+  <!-- PRODUCT PREVIEW (Screenshots / Photos) -->
   <section id="preview" class="section">
     <div class="container">
       <h2 class="reveal">PRODUCT PREVIEW</h2>
@@ -485,6 +475,7 @@
       </p>
 
       <div class="cards3">
+        <!-- Note: cards are revealed on scroll -->
         <div class="card">
           <h3 style="margin:0 0 8px 0;">BOM AUTOMATION</h3>
           <p>Master BOM + sheets by TYPE, missing property highlighting, consistent formatting.</p>
@@ -515,6 +506,7 @@
     </div>
   </section>
 
+  <!-- ROI -->
   <!-- TRUSTED -->
   <section id="trusted" class="section">
     <div class="container">
@@ -545,7 +537,6 @@
     </div>
   </section>
 
-  <!-- ROI -->
   <section id="roi" class="section">
     <div class="container">
       <h2>ROI CALCULATOR</h2>
@@ -622,6 +613,7 @@
       <p class="lead">Simple one-time licenses with immediate ROI. Launch discount applied.</p>
 
       <div class="cards3">
+        <!-- DEMO / TRIAL -->
         <div class="card">
           <span class="pill">DEMO / TRIAL</span>
           <h3 style="margin:10px 0 4px 0;">€0</h3>
@@ -637,6 +629,7 @@
           </div>
         </div>
 
+        <!-- STANDARD -->
         <div class="card">
           <span class="pill">STANDARD PACK</span>
           <h3 style="margin:10px 0 4px 0;">€999</h3>
@@ -651,6 +644,7 @@
           </div>
         </div>
 
+        <!-- PREMIUM -->
         <div class="card popular">
           <div class="ribbon"><span>MOST POPULAR</span></div>
           <span class="pill">PREMIUM PACK</span>
@@ -666,6 +660,7 @@
           </div>
         </div>
 
+        <!-- PREMIUM PLUS -->
         <div class="card">
           <span class="pill">PREMIUM PLUS</span>
           <h3 style="margin:10px 0 4px 0;">€1,599</h3>
@@ -730,7 +725,8 @@
     </div>
   </section>
 
-  <!-- FAQ -->
+  <!-- SERVICES -->
+    <!-- FAQ -->
   <section id="faq" class="section">
     <div class="container">
       <h2>FAQ</h2>
@@ -782,7 +778,6 @@
     </div>
   </section>
 
-  <!-- SERVICES -->
   <section id="services" class="section">
     <div class="container">
       <h2>SERVICES</h2>
@@ -809,13 +804,16 @@
   <section id="trial" class="section">
     <div class="container">
       <h2>DOWNLOAD 3-DAY TRIAL</h2>
-      <p class="lead">Try the automation on a sample workflow. The trial expires automatically after 3 days.</p>
+      <p class="lead">
+        Try the automation on a sample workflow. The trial expires automatically after 3 days.
+      </p>
 
       <div class="two">
         <div class="card">
           <h3 style="margin:0 0 8px 0;">TRIAL DOWNLOAD</h3>
           <p>Click to download the trial EXE (Windows). You can optionally enter your email to receive trial details.</p>
 
+          <!-- Update this file path to where you host the EXE inside your repo -->
           <a class="btn btn-green" id="downloadBtn" href="downloads/MetaMechTrial.exe" download>
             ⬇ DOWNLOAD 3-DAY TRIAL
           </a>
@@ -891,8 +889,12 @@
   <script>
     // Auto add reveal class to key elements
     (function(){
+      // Add reveal to sections (but NEVER fade the hero)
       const targets = document.querySelectorAll('h2, .lead, .card, .kpi, .pill, .result');
-      targets.forEach(el => el.classList.add('reveal'));
+      targets.forEach(el => {
+        if(el.closest('header.hero')) return; // keep hero crisp
+        el.classList.add('reveal');
+      });
     })();
 
     // Scroll reveal observer
@@ -916,12 +918,15 @@
     // ==============================
     // PAYMENT LINKS (EDIT THESE)
     // ==============================
+    // Create Stripe Payment Links and paste them here.
+    // Example: https://buy.stripe.com/xxxx
     const STRIPE_LINKS = {
       standard: '#',
       premium: '#',
       plus: '#'
     };
 
+    // Optional alternative checkout links (PayPal/Gumroad/etc.)
     const ALT_LINKS = {
       standard: '#',
       premium: '#',
@@ -929,7 +934,7 @@
     };
 
     // ==============================
-    // ROI CALCULATOR
+    // ROI CALCULATOR (robust)
     // ==============================
     function fmt(n){
       if(!isFinite(n)) return '0';
@@ -1011,6 +1016,7 @@
       if(payPlan) payPlan.textContent = plan.name;
       if(payTotal) payTotal.textContent = plan.price.toLocaleString('en-IE');
 
+      // If trial, disable payment
       if(plan.key === 'trial'){
         if(checkoutNote) checkoutNote.textContent = 'Trial selected: €0 — no card details required. Download from the Trial section.';
         if(payNote) payNote.textContent = 'Trial is €0. Use the Trial download section. Payment is not required.';
@@ -1029,6 +1035,7 @@
       if(!PLAN_MAP[key]) return;
       selected = key;
 
+      // Sync ROI dropdown + tool cost
       const planSel = document.getElementById('plan');
       const costEl = document.getElementById('cost');
       if(planSel) planSel.value = key;
@@ -1037,6 +1044,7 @@
       calcROI();
       updateCheckoutUI();
 
+      // Button selected state
       document.querySelectorAll('.select-plan').forEach(btn => {
         if(!btn.dataset.original) btn.dataset.original = btn.textContent;
         const k = btn.dataset.plan;
@@ -1044,6 +1052,7 @@
       });
     }
 
+    // Pricing buttons
     document.querySelectorAll('.select-plan').forEach(btn => {
       btn.addEventListener('click', () => {
         applySelection(btn.dataset.plan);
@@ -1051,6 +1060,7 @@
       });
     });
 
+    // ROI dropdown
     const roiPlan = document.getElementById('plan');
     if(roiPlan){
       roiPlan.addEventListener('change', () => {
@@ -1059,6 +1069,7 @@
       });
     }
 
+    // ROI continue
     const roiContinue = document.getElementById('roiContinue');
     if(roiContinue){
       roiContinue.addEventListener('click', () => {
@@ -1067,6 +1078,7 @@
       });
     }
 
+    // Request invoice button (mailto)
     const reqInvoice = document.getElementById('reqInvoice');
     if(reqInvoice){
       reqInvoice.addEventListener('click', (e) => {
@@ -1074,16 +1086,26 @@
         const plan = PLAN_MAP[selected] || PLAN_MAP.standard;
         const subject = encodeURIComponent('MetaMech License Purchase');
         const body = encodeURIComponent(
-          `Hi MetaMech Solution,\n\n` +
-          `I would like to purchase the following plan:\n\n` +
-          `Plan: ${plan.name}\n` +
-          `Price: €${plan.price.toLocaleString('en-IE')}\n\n` +
-          `Please send invoice or secure payment link.\n\nThanks`
+          `Hi MetaMech Solution,
+
+` +
+          `I would like to purchase the following plan:
+
+` +
+          `Plan: ${plan.name}
+` +
+          `Price: €${plan.price.toLocaleString('en-IE')}
+
+` +
+          `Please send invoice or secure payment link.
+
+Thanks`
         );
         window.location.href = `mailto:hi@metamechsolutions.com?subject=${subject}&body=${body}`;
       });
     }
 
+    // Trial email handling (GitHub Pages safe)
     const trialBtn = document.getElementById('trialEmailBtn');
     if(trialBtn){
       trialBtn.addEventListener('click', function(){
@@ -1097,16 +1119,22 @@
 
         const subject = encodeURIComponent('MetaMech 3-Day Trial Request');
         const body = encodeURIComponent(
-          `Hi MetaMech Solution,\n\n` +
-          `I would like to request the 3-day trial.\n\n` +
-          `My email: ${email.trim()}\n\nThanks`
+          `Hi MetaMech Solution,
+
+` +
+          `I would like to request the 3-day trial.
+
+` +
+          `My email: ${email.trim()}
+
+Thanks`
         );
         window.location.href = `mailto:hi@metamechsolutions.com?subject=${subject}&body=${body}`;
         if(msg) msg.textContent = 'Your email client has been opened to send the trial request.';
       });
     }
 
-    // Slim header + auto-hide on scroll
+    // Slim header + auto-hide on scroll down, show on scroll up
     (function(){
       const nav = document.querySelector('.nav');
       if(!nav) return;
