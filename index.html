@@ -1,1247 +1,272 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>MetaMech Solution | Engineering Automation</title>
-  <meta name="description" content="Engineering automation tools and SolidWorks macros that save design hours and reduce costs." />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>MetaMech Solution | Engineering Automation</title>
+<meta name="description" content="Engineering automation tools and SolidWorks macros that save design hours and reduce costs." />
 
-  <style>
-    :root{
-      /* BRAND-LED PREMIUM PALETTE */
-      --bg:#0b1222;
-      --panel:#101c33;
-      --panel2:#0d1730;
-      --text:#fbfdff;
-      --muted:#d3dcf3;
-      --line:rgba(255,255,255,.14);
+<style>
+:root{
+  --bg:#0b1222;
+  --panel:#101c33;
+  --panel2:#0d1730;
+  --text:#fbfdff;
+  --muted:#d3dcf3;
+  --line:rgba(255,255,255,.14);
+  --accent:#16b3b8;
+  --accent2:#f0b429;
+  --radius:18px;
+  --shadow:0 24px 60px rgba(0,0,0,.40);
+}
 
-      /* accents aligned to logo */
-      --accent:#16b3b8;
-      --accent2:#f0b429;
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
 
-      --shadow:0 24px 60px rgba(0,0,0,.40);
-      --radius:18px;
-    }
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  color:var(--text);
+  background:
+    radial-gradient(1100px 650px at 18% 8%, rgba(22,179,184,.18), transparent 62%),
+    radial-gradient(950px 620px at 82% 0%, rgba(240,180,41,.12), transparent 60%),
+    radial-gradient(900px 700px at 50% 120%, rgba(255,255,255,.04), transparent 62%),
+    var(--bg);
+}
 
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
+a{color:inherit;text-decoration:none}
+.container{max-width:1100px;margin:0 auto;padding:0 18px}
 
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", Helvetica;
-      color:var(--text);
-      background:
-        radial-gradient(1100px 650px at 18% 8%, rgba(22,179,184,.18), transparent 62%),
-        radial-gradient(950px 620px at 82% 0%, rgba(240,180,41,.12), transparent 60%),
-        radial-gradient(900px 700px at 50% 120%, rgba(255,255,255,.04), transparent 62%),
-        var(--bg);
-    }
+/* NAV */
+.nav{
+  position:sticky;top:0;z-index:50;
+  background:linear-gradient(180deg,rgba(11,18,34,.92),rgba(11,18,34,.70));
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:8px 0}
+.logo-img{width:110px}
 
-    a{color:inherit;text-decoration:none}
-    .container{max-width:1100px;margin:0 auto;padding:0 18px}
+.menu{display:flex;gap:10px;align-items:center}
+.menu a{padding:10px 12px;border-radius:12px;color:rgba(251,253,255,.86)}
+.menu a:hover{background:rgba(22,179,184,.08)}
 
-    /* NAV */
-    .nav{
-      position:sticky;top:0;z-index:50;
-      background: linear-gradient(180deg, rgba(11,18,34,.92), rgba(11,18,34,.70));
-      backdrop-filter: blur(10px);
-      border-bottom:1px solid var(--line);
-      transition: transform .25s ease, background .25s ease;
-    }
-    .nav.nav--hidden{transform: translateY(-110%);}
+.btn{padding:12px 14px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.03)}
+.btn-primary{background:linear-gradient(135deg,var(--accent),rgba(22,179,184,.6))}
+.btn-green{background:linear-gradient(135deg,var(--accent2),rgba(240,180,41,.6))}
 
-    .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:8px 0;gap:12px;}
+/* HERO */
+.hero{
+  position:relative;
+  padding:64px 0 38px;
+  background:
+    radial-gradient(1200px 720px at 18% 18%, rgba(22,179,184,.24), transparent 62%),
+    radial-gradient(980px 640px at 82% 8%, rgba(240,180,41,.18), transparent 60%),
+    linear-gradient(180deg, rgba(11,18,34,.55), rgba(11,18,34,.90));
+}
+.hero::after{
+  content:"";
+  position:absolute;inset:0;
+  background-image:url("assets/logo/metamech-logo.png");
+  background-size:240px auto;
+  opacity:.03;
+  mix-blend-mode:screen;
+  pointer-events:none;
+}
+.hero .container{position:relative;z-index:1}
 
-    .brand{display:flex;align-items:center;}
-    .logo-img{width:110px;height:auto;display:block;object-fit:contain;filter: drop-shadow(0 4px 10px rgba(0,0,0,.35));}
+.grid{display:grid;grid-template-columns:1.1fr .9fr;gap:20px}
 
-    .menu{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:flex-end}
-    .menu a{padding:10px 12px;border-radius:12px;color:rgba(251,253,255,.86);border:1px solid transparent;letter-spacing:.2px;}
-    .menu a:hover{border-color:rgba(22,179,184,.35);color:var(--text);background:rgba(22,179,184,.08);}
-    .menu a.active{border-color: rgba(22,179,184,.65);background: rgba(22,179,184,.18);box-shadow: 0 6px 20px rgba(22,179,184,.25);}
+.card{
+  position:relative;
+  background:linear-gradient(180deg,var(--panel),var(--panel2));
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:18px;
+}
 
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:12px 14px;border-radius:14px;border:1px solid var(--line);background: rgba(255,255,255,.03);color:var(--text);cursor:pointer;white-space:nowrap;transition: transform .18s ease, filter .18s ease;}
-    .btn:hover{transform: translateY(-1px); filter:brightness(1.03)}
+.card.hero-primary{
+  padding-left:22px;
+  --parallax:0px;
+}
 
-    .btn-primary{background: linear-gradient(135deg, rgba(22,179,184,.98), rgba(22,179,184,.62));border-color: rgba(22,179,184,.55);box-shadow: 0 18px 42px rgba(22,179,184,.18);}
-    .btn-primary:hover{filter:brightness(1.05)}
+/* Accent bar */
+.card.hero-primary::before{
+  content:"";
+  position:absolute;left:0;top:0;bottom:0;
+  width:4px;border-radius:4px;
+  background:linear-gradient(180deg,var(--accent),rgba(22,179,184,.4),var(--accent2));
+  box-shadow:0 0 22px rgba(22,179,184,.5);
+  transform:translateY(var(--parallax));
+  animation:accentBreath 3.2s ease-in-out infinite;
+}
+.card.hero-primary::after{
+  content:"";
+  position:absolute;left:0;top:-35%;
+  width:4px;height:60%;
+  background:linear-gradient(180deg,transparent,rgba(255,255,255,.35),transparent);
+  animation:accentShimmer 2.8s ease-in-out infinite;
+  transform:translateY(var(--parallax));
+}
 
-    .btn-green{background: linear-gradient(135deg, rgba(240,180,41,.98), rgba(240,180,41,.60));border-color: rgba(240,180,41,.55);box-shadow: 0 18px 42px rgba(240,180,41,.16);}
+@keyframes accentBreath{
+  0%,100%{filter:brightness(1)}
+  50%{filter:brightness(1.15)}
+}
+@keyframes accentShimmer{
+  0%{top:-35%;opacity:0}
+  55%{opacity:.35}
+  100%{top:110%;opacity:0}
+}
 
-    .mobile-cta{display:none}
+.accent-word{
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
 
-    /* HERO */
-    .hero{
-      padding:64px 0 38px;
-      background: linear-gradient(180deg, rgba(11,18,34,.55), rgba(11,18,34,.85));
-    }
-    .grid{display:grid;grid-template-columns: 1.1fr .9fr;gap:20px;align-items:stretch;}
+h1{font-size:46px;margin:0 0 14px}
+p{line-height:1.7}
 
-    .card{
-      position:relative;
-      /* MATCH ALL PANELS TO SAME BRIGHTNESS */
-      background: linear-gradient(180deg, var(--panel), var(--panel2));
-      border:1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding:18px;
-      transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
-    }
-    .card:hover{transform: translateY(-3px); border-color: rgba(22,179,184,.22);}
+.hero-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
 
-    /* HERO EMPHASIS */
-    .card.hero-primary{overflow:hidden;padding-left:22px;}
-    .card.hero-primary::before{
-      content:"";
-      position:absolute;left:0;top:0;bottom:0;
-      width:4px;border-radius:4px;
-      background: linear-gradient(180deg, rgba(22,179,184,.95), rgba(22,179,184,.40), rgba(240,180,41,.55));
-      box-shadow: 0 0 20px rgba(22,179,184,.45);
-      animation: accentBreath 3.2s ease-in-out infinite;
-    }
-    .card.hero-primary::after{
-      content:"";
-      position:absolute;left:0;top:-35%;
-      width:4px;height:60%;border-radius:4px;
-      background: linear-gradient(180deg, transparent, rgba(255,255,255,.38), transparent);
-      opacity:.35;
-      animation: accentShimmer 2.8s ease-in-out infinite;
-      pointer-events:none;
-    }
-    @keyframes accentBreath{0%,100%{filter:brightness(1); box-shadow:0 0 18px rgba(22,179,184,.40)}50%{filter:brightness(1.12); box-shadow:0 0 26px rgba(22,179,184,.55)}}
-    @keyframes accentShimmer{0%{top:-35%; opacity:0}20%{opacity:.22}55%{opacity:.35}100%{top:110%; opacity:0}}
+/* KPIs */
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+.kpi{border:1px solid var(--line);border-radius:14px;padding:12px}
 
-    .accent-word{background: linear-gradient(135deg, var(--accent), var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;}
+/* SECTIONS */
+.section{padding:46px 0}
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 
-    h1{font-size:46px;line-height:1.06;margin:0 0 14px 0;letter-spacing:-.9px;color:#ffffff;text-shadow:0 1px 0 rgba(0,0,0,.15),0 8px 22px rgba(0,0,0,.35);}
-    p{margin:0 0 12px 0;color:#ffffff;line-height:1.7}
+/* INDUSTRY CHIPS */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{
+  padding:8px 10px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.03);
+  opacity:0;
+  transform:translateY(8px) scale(.96);
+  animation:chipBreath 9s ease-in-out infinite;
+  transition:.3s ease;
+}
+.chip.is-in{opacity:1;transform:none}
+.chip:hover{transform:translateY(-2px) scale(1.03)}
 
-    .hero-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+@keyframes chipBreath{
+  0%,100%{box-shadow:0 0 0 rgba(22,179,184,0)}
+  50%{box-shadow:0 0 18px rgba(22,179,184,.18)}
+}
 
-    .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
-    .kpi{border:1px solid var(--line);border-radius:14px;padding:12px;background: rgba(255,255,255,.02);}
-    .kpi strong{font-size:18px;display:block;color:#fff}
-    .kpi span{color:#f0f4ff;font-size:13px}
+/* FOOTER */
+.footer{padding:28px 0;border-top:1px solid var(--line);color:var(--muted)}
 
-    /* Scroll reveal */
-    .reveal{opacity:0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease;}
-    .reveal.reveal--in{opacity:1; transform: translateY(0);}
-    header.hero .reveal{opacity:1 !important; transform:none !important;}
-
-    @keyframes floatGlow{0%,100%{ transform: translate3d(0,0,0) scale(1); opacity:.55; }50%{ transform: translate3d(0,-10px,0) scale(1.03); opacity:.75; }}
-
-    /* Sections */
-    .section{padding:46px 0}
-    .section h2{margin:0 0 10px 0;font-size:28px;letter-spacing:-.3px}
-    .section .lead{max-width:760px}
-
-    .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
-    .two{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
-
-    /* Typical industries strip */
-    .industries-strip{padding:18px 0 6px}
-    .strip-card{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:14px 16px;border-radius:16px;border:1px solid var(--line);background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));box-shadow: 0 18px 42px rgba(0,0,0,.22)}
-    .chips{display:flex;flex-wrap:wrap;gap:8px}
-    .chip{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:8px 10px;border-radius:999px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.03);
-      color:rgba(251,253,255,.92);
-      font-size:12px;
-      opacity:0;
-      transform: translateY(8px) scale(.96);
-      transition: transform .35s cubic-bezier(.2,.8,.2,1), opacity .35s ease, box-shadow .35s ease, background .35s ease;
-    }
-    .chip b{font-weight:800}
-    .chip .mini{width:16px;height:16px;flex:0 0 16px}
-    .chip .mini svg{width:16px;height:16px;display:block}
-    .chip:hover{
-      transform: translateY(-2px) scale(1.03);
-      background: linear-gradient(135deg, rgba(22,179,184,.18), rgba(240,180,41,.14));
-      box-shadow: 0 10px 26px rgba(22,179,184,.35);
-    }
-    .chip.is-in{
-      opacity:1;
-      transform: translateY(0) scale(1);
-    }
-
-    /* Services icons + enquiry buttons */
-    .svc-head{display:flex;align-items:center;gap:10px;margin:0 0 8px 0}
-    .ico{width:22px;height:22px;flex:0 0 22px;display:inline-block;filter: drop-shadow(0 6px 12px rgba(0,0,0,.25));}
-    .ico svg{width:22px;height:22px;display:block}
-    .enq-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-    .btn-ghost{background: rgba(255,255,255,.02)}
-
-    /* Service icon headers */
-    .svc-head{display:flex;align-items:center;gap:10px;margin:0 0 8px 0}
-    .svc-ico{width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;filter: drop-shadow(0 6px 12px rgba(0,0,0,.25));}
-    .svc-ico svg{width:22px;height:22px;display:block}
-
-    .pill{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:#ffffff;border:1px solid rgba(22,179,184,.45);padding:6px 10px;border-radius:999px;background: linear-gradient(135deg, rgba(22,179,184,.28), rgba(22,179,184,.12));box-shadow: 0 6px 18px rgba(22,179,184,.25);}
-
-    .list{margin:10px 0 0 0;padding:0 0 0 18px;color:#ffffff}
-    .list li{margin:7px 0}
-
-    .field{display:flex;flex-direction:column;gap:6px}
-    .field label{color:var(--muted);font-size:13px}
-    .field input{padding:12px 12px;border-radius:12px;border:1px solid var(--line);background: rgba(255,255,255,.03);color:var(--text);outline:none;}
-    .select{padding:12px 12px;border-radius:12px;border:1px solid var(--line);background: rgba(255,255,255,.03);color:var(--text);outline:none;}
-    .field input:focus, .select:focus{border-color: rgba(22,179,184,.55)}
-
-    .result{border:1px solid var(--line);border-radius:14px;padding:12px;background: rgba(255,255,255,.02);}
-    .note{font-size:12px;color:#ffffff;opacity:1;line-height:1.55}
-
-    section{scroll-margin-top: 76px;}
-
-    .footer{padding:28px 0 40px;border-top:1px solid var(--line);color:var(--muted)}
-
-    /* Pricing ribbon */
-    .popular{outline:2px solid rgba(22,179,184,.35);box-shadow: 0 28px 70px rgba(0,0,0,.55);}
-    .ribbon{position:absolute;top:14px;right:-46px;transform: rotate(12deg);width:160px;text-align:center;pointer-events:none;}
-    .ribbon span{display:block;padding:8px 10px;font-size:12px;letter-spacing:.9px;font-weight:800;color:#07111a;background: linear-gradient(135deg, rgba(240,180,41,.98), rgba(22,179,184,.95));border:1px solid rgba(255,255,255,.18);border-radius:12px;box-shadow: 0 14px 30px rgba(0,0,0,.35);position:relative;overflow:hidden;animation: ribbonFloat 2.6s ease-in-out infinite;}
-    .ribbon span::after{content:"";position:absolute;top:-40%;left:-60%;width:60%;height:180%;background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent);transform: rotate(22deg);animation: ribbonShine 2.8s ease-in-out infinite;}
-    @keyframes ribbonFloat{0%,100%{ transform: translateY(0);}50%{ transform: translateY(-3px);} }
-    @keyframes ribbonShine{0%{ left:-70%;}55%{ left:120%;}100%{ left:120%;} }
-
-    /* Small status chips */
-    .status{margin-top:10px;padding:10px 12px;border-radius:14px;border:1px solid var(--line);background: rgba(255,255,255,.02);font-size:12px;color:var(--muted)}
-    .status.ok{border-color: rgba(22,179,184,.35); color:#e9feff; background: rgba(22,179,184,.10)}
-    .status.err{border-color: rgba(240,180,41,.35); color:#fff7e3; background: rgba(240,180,41,.10)}
-
-    @media (max-width: 900px){
-      .grid{grid-template-columns:1fr}
-      .cards3{grid-template-columns:1fr}
-      .two{grid-template-columns:1fr}
-      .kpis{grid-template-columns:1fr}
-      .menu{display:none}
-      .mobile-cta{display:inline-flex}
-    }
-  </style>
+@media(max-width:900px){
+  .grid,.cards3,.two,.kpis{grid-template-columns:1fr}
+  .menu{display:none}
+}
+</style>
 </head>
 
 <body>
-  <!-- NAV -->
-  <div class="nav">
-    <div class="container">
-      <div class="nav-inner">
-        <div class="brand">
-          <img src="assets/logo/metamech-logo.png" alt="MetaMech Solution Logo" class="logo-img" />
-        </div>
 
-        <div class="menu">
-          <a href="#tools">TOOLS</a>
-          <a href="#roi">ROI CALCULATOR</a>
-          <a href="#pricing">PRICING</a>
-          <a href="#checkout">CHECKOUT</a>
-          <a href="#services">SERVICES</a>
-          <a href="#trial">3-DAY TRIAL</a>
-          <a href="#contact">CONTACT</a>
-          <a class="btn btn-primary" href="#contact">REQUEST A DEMO</a>
-        </div>
-
-        <a class="btn btn-primary mobile-cta" href="#contact">REQUEST A DEMO</a>
-      </div>
+<!-- NAV -->
+<div class="nav">
+  <div class="container nav-inner">
+    <img src="assets/logo/metamech-logo.png" class="logo-img" alt="MetaMech" />
+    <div class="menu">
+      <a href="#tools">TOOLS</a>
+      <a href="#roi">ROI</a>
+      <a href="#pricing">PRICING</a>
+      <a href="#services">SERVICES</a>
+      <a class="btn btn-primary" href="#contact">REQUEST A DEMO</a>
     </div>
   </div>
+</div>
+
+<!-- HERO -->
+<header class="hero">
+<div class="container">
+<div class="grid">
+<div class="card hero-primary">
+<span class="pill">Designed by an experienced Mechanical Design Engineer</span>
+<h1>ENGINEERING <span class="accent-word">AUTOMATION</span> THAT SAVES DESIGN HOURS</h1>
+<p>Fast, reliable SolidWorks automation built for real production teams.</p>
+
+<div class="hero-cta">
+<a class="btn btn-primary" href="#tools">EXPLORE TOOLS</a>
+<a class="btn" href="#roi">CALCULATE ROI</a>
+<a class="btn btn-green" href="#trial">DOWNLOAD 3-DAY TRIAL</a>
+</div>
+
+<div class="kpis">
+<div class="kpi"><b>1-CLICK OUTPUTS</b><br/>BOM, PDF, STEP, DXF</div>
+<div class="kpi"><b>WORKFLOW FIT</b><br/>Your standards</div>
+<div class="kpi"><b>ROI FOCUSED</b><br/>Hours saved</div>
+</div>
+</div>
+
+<div class="card">
+<h2>WHAT WE AUTOMATE</h2>
+<ul>
+<li>Master BOM + TYPE split</li>
+<li>PDF merge with index</li>
+<li>STEP & DXF exports</li>
+<li>Renumbering logic</li>
+<li>Templates & properties</li>
+</ul>
+</div>
+</div>
+</div>
+</header>
+
+<!-- INDUSTRIES -->
+<section class="section">
+<div class="container">
+<h2>TYPICAL INDUSTRIES</h2>
+<div class="chips">
+<span class="chip">Medical Devices</span>
+<span class="chip">Automation</span>
+<span class="chip">Conveyors</span>
+<span class="chip">System Integration</span>
+<span class="chip">Manufacturing</span>
+</div>
+</div>
+</section>
+
+<div class="footer">
+<div class="container">
+© 2026 MetaMech Solution — Galway, Ireland
+</div>
+</div>
+
+<script>
+/* Chip stagger */
+const chips=document.querySelectorAll('.chip');
+const io=new IntersectionObserver(e=>{
+e.forEach(x=>{
+if(x.isIntersecting){
+[...x.target.children].forEach((c,i)=>setTimeout(()=>c.classList.add('is-in'),i*90));
+io.unobserve(x.target);
+}});
+},{threshold:.2});
+document.querySelectorAll('.chips').forEach(c=>io.observe(c));
+
+/* Micro parallax */
+const hero=document.querySelector('.hero-primary');
+let t=0,c=0;
+hero.addEventListener('mousemove',e=>{
+const r=hero.getBoundingClientRect();
+t=((e.clientY-r.top)/r.height-.5)*12;
+});
+setInterval(()=>{
+c+=(t-c)*.1;
+hero.style.setProperty('--parallax',c+'px');
+},16);
+</script>
 
-  <!-- HERO -->
-  <header class="hero">
-    <div class="container">
-      <div class="grid">
-        <div class="card hero-primary">
-          <span class="pill">Designed by an experienced Mechanical Design Engineer</span>
-          <h1>ENGINEERING <span class="accent-word">AUTOMATION</span> THAT SAVES DESIGN HOURS</h1>
-          <p style="font-size:15px;margin-top:-6px;">Fast, reliable SolidWorks automation built for real production teams</p>
-          <p>
-            MetaMech Solution builds high-performance SolidWorks tools and custom macros to cut repetitive work,
-            reduce human errors, and standardise outputs across your projects.
-          </p>
-          <div class="hero-cta">
-            <a class="btn btn-primary" href="#tools">EXPLORE TOOLS</a>
-            <a class="btn" href="#roi">CALCULATE ROI</a>
-            <a class="btn btn-green" href="#trial">DOWNLOAD 3-DAY TRIAL</a>
-          </div>
-
-          <div class="kpis">
-            <div class="kpi"><strong>1-CLICK OUTPUTS</strong><span>BOM, PDF merge, STEP, DXF exports</span></div>
-            <div class="kpi"><strong>WORKFLOW FIT</strong><span>Customised to your standards & folders</span></div>
-            <div class="kpi"><strong>ROI FOCUSED</strong><span>Save hours every week per engineer</span></div>
-          </div>
-        </div>
-
-        <div class="card">
-          <h2 style="margin:0 0 10px 0;color:#ffffff;">WHAT WE AUTOMATE</h2>
-          <ul class="list">
-            <li><b>Master BOM</b> + split by TYPE, highlight missing properties</li>
-            <li><b>PDF merge</b> with index, page numbers, hierarchical order</li>
-            <li><b>STEP export</b> for unique parts + subassemblies</li>
-            <li><b>Renumbering</b> (DOC logic, VendorPN rules, naming standards)</li>
-            <li><b>Template + Properties</b> across large assemblies</li>
-          </ul>
-
-          <h3 style="margin:16px 0 8px 0; font-size:16px; letter-spacing:.2px;">WHY TEAMS CHOOSE METAMECH</h3>
-          <ul class="list">
-            <li><b>Human-error reduction</b> — automated outputs with repeatable logic</li>
-            <li><b>Company standards</b> — every engineer exports BOMs in the same format</li>
-            <li><b>Close collaboration</b> — we work with your design team to understand real pain points and deliver custom solutions</li>
-            <li><b>Premium outputs</b> — custom properties and templates set up for clean, professional deliverables</li>
-          </ul>
-
-          <div style="margin-top:14px;" class="note">
-            Built for real production assemblies (including large TLA structures) with consistent logs and outputs.
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- TOOLS -->
-  <section id="tools" class="section">
-    <div class="container">
-      <h2>AUTOMATION TOOLS</h2>
-      <p class="lead">
-        Practical engineering tools that remove repetitive tasks and standardise your deliverables.
-        Built for SolidWorks 2022–2025 workflows.
-      </p>
-
-      <div class="cards3">
-        <div class="card">
-          <h3 style="margin:0 0 8px 0;">BOM AUTOMATION</h3>
-          <p>Master BOM + sheets by TYPE, missing property highlighting, consistent formatting.</p>
-          <ul class="list">
-            <li>All levels (TLA → subassemblies → parts)</li>
-            <li>Fast and reliable outputs</li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <h3 style="margin:0 0 8px 0;">PDF MERGE + INDEX</h3>
-          <p>Exports drawings and merges into one PDF arranged hierarchically with an index page.</p>
-          <ul class="list">
-            <li>Order driven by BOM Master</li>
-            <li>Logs missing drawings</li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <h3 style="margin:0 0 8px 0;">STEP / DXF EXPORT</h3>
-          <p>Auto export unique STEP files and sheet metal flat DXF profiles with naming rules.</p>
-          <ul class="list">
-            <li>Material + thickness + qty naming</li>
-            <li>Skips duplicates & logs issues</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ROI -->
-  <section id="roi" class="section">
-    <div class="container">
-      <h2>ROI CALCULATOR</h2>
-      <p class="lead">Estimate weekly, monthly, and annual savings in € based on hours saved per engineer.</p>
-
-      <div class="two">
-        <div class="card">
-          <div class="field"><label>Engineers using the tool</label><input id="eng" type="number" value="2" min="1" /></div>
-          <div class="field"><label>Hours saved per week (per engineer)</label><input id="hrs" type="number" value="2" step="0.5" min="0" /></div>
-          <div class="field"><label>Hourly cost (€)</label><input id="rate" type="number" value="45" min="0" /></div>
-          <div class="field"><label>Weeks per year</label><input id="weeks" type="number" value="48" min="1" /></div>
-
-          <div class="field">
-            <label>Select Plan</label>
-            <select id="plan" class="select">
-              <option value="">-- Choose a plan --</option>
-              <option value="trial" data-price="0">Demo / Trial (3 days) – €0</option>
-              <option value="standard" data-price="999">Standard Pack – €999</option>
-              <option value="premium" data-price="1299">Premium Pack – €1,299</option>
-              <option value="plus" data-price="1599">Premium Plus – €1,599</option>
-            </select>
-          </div>
-
-          <div class="field"><label>Tool cost (€)</label><input id="cost" type="number" value="0" min="0" /></div>
-
-          <div class="hero-cta" style="margin-top:12px">
-            <a class="btn btn-primary" href="#checkout" id="roiContinue">CONTINUE TO CHECKOUT</a>
-          </div>
-
-          <div style="margin-top:12px" class="note">Tip: use your real internal cost rate (salary + overhead) for accurate ROI.</div>
-        </div>
-
-        <div class="card">
-          <div class="result"><b>Weekly Savings:</b> €<span id="wk">0</span></div>
-          <div style="height:10px"></div>
-          <div class="result"><b>Monthly Savings:</b> €<span id="mo">0</span></div>
-          <div style="height:10px"></div>
-          <div class="result"><b>Annual Savings:</b> €<span id="yr">0</span></div>
-          <div style="height:10px"></div>
-          <div class="result"><b>Break-even:</b> <span id="be">—</span></div>
-          <div style="margin-top:12px" class="note">Break-even is calculated only if you enter a Tool Cost.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PRICING -->
-  <section id="pricing" class="section">
-    <div class="container">
-      <h2>PRICING</h2>
-      <p class="lead">Simple one-time licenses with immediate ROI. Launch discount applied.</p>
-
-      <div class="cards3">
-        <div class="card">
-          <span class="pill">DEMO / TRIAL</span>
-          <h3 style="margin:10px 0 4px 0;">€0</h3>
-          <p class="note">No card required</p>
-          <ul class="list">
-            <li>Limited feature access</li>
-            <li>3-day expiry</li>
-            <li>Sample assemblies only</li>
-            <li>Email support</li>
-          </ul>
-          <div style="margin-top:12px"><button class="btn btn-green select-plan" data-plan="trial">START FREE TRIAL</button></div>
-        </div>
-
-        <div class="card">
-          <span class="pill">STANDARD PACK</span>
-          <h3 style="margin:10px 0 4px 0;">€999</h3>
-          <p class="note"><del>€1,110</del> &nbsp; 10% launch discount</p>
-          <ul class="list">
-            <li>BOM automation</li>
-            <li>PDF export + merge</li>
-            <li>Custom BOM template</li>
-          </ul>
-          <div style="margin-top:12px"><button class="btn btn-primary select-plan" data-plan="standard">SELECT STANDARD</button></div>
-        </div>
-
-        <div class="card popular">
-          <div class="ribbon"><span>MOST POPULAR</span></div>
-          <span class="pill">PREMIUM PACK</span>
-          <h3 style="margin:10px 0 4px 0;">€1,299</h3>
-          <p class="note"><del>€1,440</del> &nbsp; 10% launch discount</p>
-          <ul class="list">
-            <li>All Standard features</li>
-            <li>STEP export automation</li>
-            <li>Advanced export options</li>
-          </ul>
-          <div style="margin-top:12px"><button class="btn btn-primary select-plan" data-plan="premium">SELECT PREMIUM</button></div>
-        </div>
-
-        <div class="card">
-          <span class="pill">PREMIUM PLUS</span>
-          <h3 style="margin:10px 0 4px 0;">€1,599</h3>
-          <p class="note"><del>€1,775</del> &nbsp; 10% launch discount</p>
-          <ul class="list">
-            <li>All Premium features</li>
-            <li>Template bulk update</li>
-            <li>Auto numbering system</li>
-          </ul>
-          <div style="margin-top:12px"><button class="btn btn-primary select-plan" data-plan="plus">SELECT PREMIUM PLUS</button></div>
-        </div>
-      </div>
-
-      <p class="note" style="margin-top:14px;">Most teams recover the full license cost within weeks.</p>
-    </div>
-  </section>
-
-  <!-- CHECKOUT (Formspree lead capture) -->
-  <section id="checkout" class="section">
-    <div class="container">
-      <h2>CHECKOUT</h2>
-      <p class="lead">Step 1: Fill your details (saved to Formspree). Step 2: Proceed to payment or trial download.</p>
-
-      <div class="two">
-        <div class="card">
-          <h3>STEP 1 — YOUR DETAILS (REQUIRED)</h3>
-          <p class="note">This form submits to Formspree so you can track who requests trials and who proceeds to purchase.</p>
-
-          <div class="result"><b>Selected Plan:</b> <span id="selPlan">Standard Pack</span></div>
-          <div style="height:10px"></div>
-          <div class="result"><b>Price:</b> €<span id="selPrice">999</span></div>
-
-          <div style="height:14px"></div>
-
-          <form id="leadForm">
-            <!-- Filled by JS before submit -->
-            <input type="hidden" name="plan" id="lead_plan" value="standard" />
-            <input type="hidden" name="price_eur" id="lead_price" value="999" />
-            <input type="hidden" name="source" value="checkout" />
-
-            <div class="two" style="margin-top:10px">
-              <div class="field"><label>Company name *</label><input name="company" id="leadCompany" required placeholder="e.g., ABC Engineering Ltd" /></div>
-              <div class="field"><label>Full name *</label><input name="name" id="leadName" required placeholder="Your name" /></div>
-            </div>
-
-            <div class="two" style="margin-top:10px">
-              <div class="field"><label>Work email *</label><input name="email" id="leadEmail" type="email" required placeholder="you@company.com" /></div>
-              <div class="field"><label>Position / Role *</label><input name="role" id="leadRole" required placeholder="Mechanical Design Engineer" /></div>
-            </div>
-
-            <div class="two" style="margin-top:10px">
-              <div class="field"><label>Phone (optional)</label><input name="phone" id="leadPhone" placeholder="+353 ..." /></div>
-              <div class="field"><label>Country *</label><input name="country" id="leadCountry" required placeholder="Ireland" /></div>
-            </div>
-
-            <div class="field" style="margin-top:10px">
-              <label>Company address (optional)</label>
-              <input name="address" id="leadAddress" placeholder="Street, City, Eircode" />
-            </div>
-
-            <div style="height:10px"></div>
-            <button class="btn btn-primary" type="submit" id="saveDetailsBtn">SAVE DETAILS</button>
-            <div class="status" id="leadStatus">Status: details not submitted yet.</div>
-          </form>
-        </div>
-
-        <div class="card">
-          <h3>STEP 2 — NEXT ACTION</h3>
-          <p class="note">After you save details, you can proceed to payment (paid plans) or go to the Trial section (trial plan).</p>
-
-          <div class="result" style="display:flex;justify-content:space-between;gap:10px;align-items:center;">
-            <div>
-              <b>Plan:</b> <span id="payPlan">Standard Pack</span><br />
-              <b>Total:</b> €<span id="payTotal">999</span>
-            </div>
-            <span class="pill">Secure checkout</span>
-          </div>
-
-          <div style="height:12px"></div>
-
-          <a class="btn btn-green" id="payNow" href="#" rel="nofollow">PAY NOW (STRIPE)</a>
-          <div style="height:10px"></div>
-          <a class="btn" id="payAlt" href="#" rel="nofollow">PAY WITH REVOLUT</a>
-          <div style="height:10px"></div>
-          <a class="btn btn-primary" id="reqInvoice" href="#" rel="nofollow">REQUEST INVOICE (EMAIL)</a>
-
-          <div class="status" id="payStatus">Status: Save details first, then proceed.</div>
-
-          <div class="note" id="payNote" style="margin-top:10px;">
-            Tip: add your Stripe Payment Links in STRIPE_LINKS. Revolut link is already connected.
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SERVICES -->
-  <!-- INDUSTRIES -->
-  <section id="industries" class="section">
-    <div class="container">
-      <h2>TYPICAL INDUSTRIES</h2>
-      <p class="lead">We support engineering-driven industries with both automation tools and hands-on mechanical design expertise.</p>
-
-      <div class="industries-strip">
-        <div class="strip-card">
-          <div>
-            <div class="pill">Trusted by engineers</div>
-            <div style="height:8px"></div>
-            <div style="font-weight:800;letter-spacing:.2px">WHERE THIS FITS BEST</div>
-            <div class="note" style="margin-top:4px">Medical devices, automation, conveyors, and system integration.</div>
-          </div>
-          <div class="chips" aria-label="Typical industries">
-            <span class="chip"><span class="mini" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3c3.2 2.2 5 5.6 5 9.3 0 3.8-1.8 7.2-5 8.7-3.2-1.5-5-4.9-5-8.7C7 8.6 8.8 5.2 12 3Z" stroke="rgba(22,179,184,.95)" stroke-width="1.8"/><path d="M12 7v10" stroke="rgba(240,180,41,.9)" stroke-width="1.8"/></svg></span><b>Medical devices</b></span>
-            <span class="chip"><span class="mini" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M7 7h10v10H7V7Z" stroke="rgba(22,179,184,.95)" stroke-width="1.8"/><path d="M4 12h3M17 12h3M12 4v3M12 17v3" stroke="rgba(240,180,41,.9)" stroke-width="1.8" stroke-linecap="round"/></svg></span><b>Automation</b></span>
-            <span class="chip"><span class="mini" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 16h16" stroke="rgba(240,180,41,.9)" stroke-width="1.8" stroke-linecap="round"/><path d="M6 16l2-8h8l2 8" stroke="rgba(22,179,184,.95)" stroke-width="1.8" stroke-linejoin="round"/></svg></span><b>Conveyors</b></span>
-            <span class="chip"><span class="mini" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M6 18V8l6-3 6 3v10" stroke="rgba(22,179,184,.95)" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 18v-5h6v5" stroke="rgba(240,180,41,.9)" stroke-width="1.8"/></svg></span><b>System integration</b></span>
-            <span class="chip"><span class="mini" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M7 20h10" stroke="rgba(240,180,41,.9)" stroke-width="1.8" stroke-linecap="round"/><path d="M9 4h6v9l-3 2-3-2V4Z" stroke="rgba(22,179,184,.95)" stroke-width="1.8" stroke-linejoin="round"/></svg></span><b>Manufacturing</b></span>
-          </div>
-        </div>
-      </div>
-
-      <div class="cards3">
-        <div class="card">
-          <h3 style="margin:0 0 6px 0;">Medical &amp; Life Sciences</h3>
-          <p>Medical device equipment, assembly fixtures, validation-friendly automation, and clean design practices.</p>
-        </div>
-        <div class="card">
-          <h3 style="margin:0 0 6px 0;">Industrial Automation</h3>
-          <p>Automation cells, custom machines, guarding, operator stations, and production-ready layouts.</p>
-        </div>
-        <div class="card">
-          <h3 style="margin:0 0 6px 0;">Conveying &amp; Material Handling</h3>
-          <p>Modular and bespoke conveyor systems, transfers, lifts, and integrated material flow solutions.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="services" class="section">
-    <div class="container">
-      <h2>MECHANICAL DESIGN SERVICES</h2>
-      <p class="lead">Beyond automation, we also provide end-to-end mechanical design services — from concept to manufacturing-ready deliverables.</p>
-
-      <div class="cards3">
-        <div class="card">
-          <div class="svc-head">
-            <span class="svc-ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none"><path d="M10.5 6.5a5 5 0 0 1 7.07 0l.93.93-2.1 2.1-.93-.93a2 2 0 0 0-2.83 0l-1.3 1.3 3.2 3.2-1.8 1.8-3.2-3.2-1.3 1.3a2 2 0 0 0 0 2.83l.93.93-2.1 2.1-.93-.93a5 5 0 0 1 0-7.07l5.26-5.26Z" stroke="var(--accent)" stroke-width="1.8"/><path d="M14.8 3.6 20.4 9.2" stroke="var(--accent2)" stroke-width="1.8" stroke-linecap="round"/></svg>
-            </span>
-            <div class="svc-head">
-          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M10.5 6.5a5 5 0 0 1 7.07 0l.93.93-2.1 2.1-.93-.93a2 2 0 0 0-2.83 0l-1.3 1.3 3.2 3.2-1.8 1.8-3.2-3.2-1.3 1.3a2 2 0 0 0 0 2.83l.93.93-2.1 2.1-.93-.93a5 5 0 0 1 0-7.07l5.26-5.26Z" stroke="rgba(22,179,184,.95)" stroke-width="1.8" stroke-linejoin="round"/><path d="M14.8 3.6 20.4 9.2" stroke="rgba(240,180,41,.9)" stroke-width="1.8" stroke-linecap="round"/></svg></span>
-          <h3 style="margin:0;">MECHANICAL DESIGN &amp; ENGINEERING</h3>
-        </div>
-          </div>
-          <ul class="list">
-            <li>Medical equipment design (fixtures, modules, automation cells)</li>
-            <li>Custom machine design based on specific process requirements</li>
-            <li>Conveyor system design (modular &amp; bespoke)</li>
-            <li>Application engineering &amp; early-stage concept design</li>
-            <li>System-level CAD layouts as a system integrator</li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <div class="svc-head">
-            <span class="svc-ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none"><path d="M7 7h10v10H7V7Z" stroke="var(--accent)" stroke-width="1.8"/><path d="M4 12h3M17 12h3M12 4v3M12 17v3" stroke="var(--accent2)" stroke-width="1.8" stroke-linecap="round"/></svg>
-            </span>
-            <div class="svc-head">
-          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M7 7h10v10H7V7Z" stroke="rgba(22,179,184,.95)" stroke-width="1.8"/><path d="M4 12h3M17 12h3M12 4v3M12 17v3" stroke="rgba(240,180,41,.9)" stroke-width="1.8" stroke-linecap="round"/></svg></span>
-          <h3 style="margin:0;">CAD, LAYOUT &amp; MANUFACTURING</h3>
-        </div>
-          </div>
-          <ul class="list">
-            <li>3D modelling &amp; large assembly management</li>
-            <li>2D to 3D conversion of legacy drawings</li>
-            <li>Detailed manufacturing drawings with tolerances</li>
-            <li>DXF generation for sheet metal &amp; laser cutting</li>
-            <li>Production-ready drawing packs</li>
-          </ul>
-        </div>
-
-        <div class="card">
-          <div class="svc-head">
-            <span class="svc-ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none"><path d="M6 6h10a2 2 0 0 1 2 2v12H8a2 2 0 0 1-2-2V6Z" stroke="var(--accent)" stroke-width="1.8"/><path d="M8 4h10a2 2 0 0 1 2 2v14" stroke="var(--accent2)" stroke-width="1.8" stroke-linecap="round"/></svg>
-            </span>
-            <div class="svc-head">
-          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M6 6h10a2 2 0 0 1 2 2v12H8a2 2 0 0 1-2-2V6Z" stroke="rgba(22,179,184,.95)" stroke-width="1.8" stroke-linejoin="round"/><path d="M8 4h10a2 2 0 0 1 2 2v14" stroke="rgba(240,180,41,.9)" stroke-width="1.8" stroke-linecap="round"/><path d="M9 10h6M9 14h6" stroke="rgba(255,255,255,.7)" stroke-width="1.6" stroke-linecap="round"/></svg></span>
-          <h3 style="margin:0;">DESIGN LIBRARIES &amp; STANDARDS</h3>
-        </div>
-          </div>
-          <ul class="list">
-            <li>Weldment libraries (including ITEM aluminium profiles)</li>
-            <li>Custom weldment profiles &amp; structural members</li>
-            <li>Reusable standard parts &amp; design templates</li>
-            <li>Property standards &amp; naming conventions</li>
-            <li>Consistent, maintainable design libraries</li>
-          </ul>
-        </div>
-      </div>
-
-      <div style="margin-top:18px" class="card">
-        <h3 style="margin:0 0 8px 0;">NEED A CUSTOM ENGINEERING SOLUTION?</h3>
-        <p>Every project is different. We work closely with your design and manufacturing teams to understand real constraints, workflows, and standards — then deliver practical, production-ready solutions.</p>
-        <p class="note">Select a service below. The enquiry form will be pre-filled so you can submit faster.</p>
-
-        <div class="enq-row">
-          <button class="btn btn-primary" type="button" onclick="prefillServiceEnquiry('Mechanical design support (medical equipment / automation modules)')">ENQUIRE — MECHANICAL DESIGN</button>
-          <button class="btn btn-ghost" type="button" onclick="prefillServiceEnquiry('Conveyor design / system integration layout (3D layout, integration, envelope checks)')">ENQUIRE — CONVEYOR / LAYOUT</button>
-          <button class="btn btn-ghost" type="button" onclick="prefillServiceEnquiry('Manufacturing drawings / tolerances / DXF outputs (sheet metal & fabrication)')">ENQUIRE — DRAWINGS / DXF</button>
-          <a class="btn btn-green" href="#contact">OPEN CONTACT FORM</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TRIAL (Formspree gate) -->
-  <section id="trial" class="section">
-    <div class="container">
-      <h2>DOWNLOAD 3-DAY TRIAL</h2>
-      <p class="lead">Trial is €0, no card required — but details are required to unlock the download.</p>
-
-      <div class="two">
-        <div class="card">
-          <h3 style="margin:0 0 8px 0;">TRIAL DOWNLOAD</h3>
-          <p>Fill the form to unlock download. This submits to Formspree so you can track who downloaded the trial.</p>
-
-          <form id="trialForm">
-            <input type="hidden" name="plan" value="trial" />
-            <input type="hidden" name="price_eur" value="0" />
-            <input type="hidden" name="source" value="trial" />
-
-            <div class="two" style="margin-top:10px">
-              <div class="field"><label>Company name *</label><input name="company" id="trialCompany" required placeholder="e.g., ABC Engineering Ltd" /></div>
-              <div class="field"><label>Full name *</label><input name="name" id="trialName" required placeholder="Your name" /></div>
-            </div>
-
-            <div class="two" style="margin-top:10px">
-              <div class="field"><label>Work email *</label><input name="email" id="trialEmail" type="email" required placeholder="you@company.com" /></div>
-              <div class="field"><label>Position / Role *</label><input name="role" id="trialRole" required placeholder="Mechanical Design Engineer" /></div>
-            </div>
-
-            <div class="field" style="margin-top:10px"><label>Country *</label><input name="country" id="trialCountry" required placeholder="Ireland" /></div>
-
-            <div style="height:10px"></div>
-            <button class="btn btn-primary" type="submit">UNLOCK TRIAL DOWNLOAD</button>
-            <div class="status" id="trialStatus">Status: enter details to enable download.</div>
-          </form>
-
-          <div style="height:12px"></div>
-          <a class="btn btn-green" id="downloadBtn" href="#" download aria-disabled="true" style="opacity:.55;pointer-events:none;">⬇ DOWNLOAD 3-DAY TRIAL</a>
-
-          <div style="margin-top:10px" class="note">When unlocked, download points to <b>downloads/MetaMechTrial.exe</b> in your repo.</div>
-        </div>
-
-        <div class="card">
-          <h3 style="margin:0 0 8px 0;">HOW THE TRIAL WORKS</h3>
-          <ul class="list">
-            <li>Install & run the EXE</li>
-            <li>Trial period begins on first run</li>
-            <li>Expires after 72 hours (3 days)</li>
-            <li>Contact us to activate full license</li>
-          </ul>
-          <div style="margin-top:12px" class="note">Want stronger protection? We can upgrade to online key activation (recommended for a “big brand” product).</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT (Formspree demo request) -->
-  <section id="contact" class="section">
-    <div class="container">
-      <h2>CONTACT</h2>
-      <p class="lead">Send a demo request directly from the site (Formspree). No email app needed.</p>
-
-      <div class="two">
-        <div class="card">
-          <h3 style="margin:0 0 8px 0;">REQUEST A DEMO</h3>
-
-          <form id="demoForm">
-            <input type="hidden" name="enquiry_type" id="enquiryType" value="General" />
-            <input type="hidden" name="source" value="demo" />
-
-            <div class="two" style="margin-top:10px">
-              <div class="field"><label>Company name *</label><input name="company" required placeholder="e.g., ABC Engineering Ltd" /></div>
-              <div class="field"><label>Full name *</label><input name="name" required placeholder="Your name" /></div>
-            </div>
-
-            <div class="two" style="margin-top:10px">
-              <div class="field"><label>Work email *</label><input name="email" type="email" required placeholder="you@company.com" /></div>
-              <div class="field"><label>SolidWorks version</label><input name="solidworks" placeholder="2022 / 2023 / 2024 / 2025" /></div>
-            </div>
-
-            <div class="field" style="margin-top:10px">
-              <label>What do you want to automate? *</label>
-              <input name="message" id="contactMessage" required placeholder="BOM / PDF merge / STEP / DXF / renumbering..." />
-              <input type="hidden" name="service_interest" id="serviceInterest" value="" />
-            </div>
-
-            <div style="height:10px"></div>
-            <button class="btn btn-primary" type="submit">SEND DEMO REQUEST</button>
-            <div class="status" id="demoStatus">Status: not sent yet.</div>
-
-            <div class="note" style="margin-top:10px;">Or email us directly: <a href="mailto:hi@metamechsolutions.com" style="text-decoration:underline;">hi@metamechsolutions.com</a></div>
-          </form>
-        </div>
-
-        <div class="card">
-          <h3 style="margin:0 0 8px 0;">WHAT TO SEND US</h3>
-          <ul class="list">
-            <li>SolidWorks version (2022–2025)</li>
-            <li>Example assembly structure (TLA + subs)</li>
-            <li>Required naming rules</li>
-            <li>Outputs needed (BOM/PDF/STEP/DXF)</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-    <!-- ADMIN (hidden) -->
-  <section id="admin" class="section" style="display:none">
-    <div class="container">
-      <h2>ADMIN</h2>
-      <p class="lead">Set Formspree endpoint once. Saved in this browser only.</p>
-
-      <div class="two">
-        <div class="card">
-          <h3 style="margin:0 0 8px 0;">FORMSPREE ENDPOINT</h3>
-          <p class="note">Paste your endpoint from Formspree (example: https://formspree.io/f/abcdwxyz).</p>
-          <div class="field">
-            <label>Endpoint</label>
-            <input id="adminEndpoint" placeholder="https://formspree.io/f/abcdwxyz" />
-          </div>
-          <div style="height:10px"></div>
-          <button class="btn btn-primary" id="adminSave">SAVE ENDPOINT</button>
-          <div class="status" id="adminStatus">Status: not set.</div>
-        </div>
-        <div class="card">
-          <h3 style="margin:0 0 8px 0;">HOW TO USE</h3>
-          <ul class="list">
-            <li>Open your website with <b>?admin=1</b> (example: yoursite.com/?admin=1)</li>
-            <li>Paste endpoint → Save</li>
-            <li>Refresh the page</li>
-            <li>All forms will start saving into your Formspree Inbox</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="footer">
-    <div class="container">
-      <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;">
-        <div>© <span id="yrNow"></span> MetaMech Solution</div>
-        <div class="note">Built for engineering teams • Galway, Ireland</div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    // ==============================
-    // FORM SETTINGS
-    // ==============================
-    // 1) Create a Formspree form
-    // 2) Paste your endpoint below (looks like: https://formspree.io/f/xxxxxx)
-    // Formspree endpoint can be set WITHOUT editing code:
-    // - Open the site with ?admin=1
-    // - Paste endpoint once (stored in your browser localStorage)
-    // Example: https://formspree.io/f/abcdwxyz
-    const FORMSPREE_ENDPOINT_DEFAULT = "PASTE_YOUR_FORMSPREE_ENDPOINT_HERE";
-    function getFormspreeEndpoint(){
-      try{
-        const saved = localStorage.getItem('mm_formspree_endpoint');
-        if(saved && /^https:\/\/formspree\.io\/f\//.test(saved)) return saved;
-      }catch(e){}
-      return FORMSPREE_ENDPOINT_DEFAULT;
-    }
-
-    // ==============================
-    // REVEAL ANIMATIONS
-    // ==============================
-    (function(){
-      const targets = document.querySelectorAll('h2, .lead, .card, .kpi, .pill, .result');
-      targets.forEach(el => { if(el.closest('header.hero')) return; el.classList.add('reveal'); });
-    })();
-    (function(){
-      const items = document.querySelectorAll('.reveal');
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if(e.isIntersecting){ e.target.classList.add('reveal--in'); io.unobserve(e.target); }
-        });
-      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-      items.forEach(el => io.observe(el));
-    })();
-
-    // Footer year
-    const yr = document.getElementById('yrNow');
-    if(yr) yr.textContent = new Date().getFullYear();
-
-    // ==============================
-    // PAYMENT LINKS
-    // ==============================
-    // Paste Stripe payment links here when ready
-    const STRIPE_LINKS = { standard:'#', premium:'#', plus:'#' };
-
-    // Revolut personal link (you provided)
-    const REVOLUT_LINK = "https://revolut.me/saviosyl";
-
-    // ==============================
-    // ROI CALCULATOR
-    // ==============================
-    function fmt(n){ if(!isFinite(n)) return '0'; return Math.round(n).toLocaleString('en-IE'); }
-    function calcROI(){
-      const eng = parseFloat((document.getElementById('eng')||{}).value) || 0;
-      const hrs = parseFloat((document.getElementById('hrs')||{}).value) || 0;
-      const rate = parseFloat((document.getElementById('rate')||{}).value) || 0;
-      const weeks = parseFloat((document.getElementById('weeks')||{}).value) || 0;
-      const cost = parseFloat((document.getElementById('cost')||{}).value) || 0;
-
-      const weekly = eng * hrs * rate;
-      const monthly = weekly * 4.33;
-      const annual = weekly * weeks;
-
-      const wkOut = document.getElementById('wk');
-      const moOut = document.getElementById('mo');
-      const yrOut = document.getElementById('yr');
-      const beOut = document.getElementById('be');
-
-      if(wkOut) wkOut.textContent = fmt(weekly);
-      if(moOut) moOut.textContent = fmt(monthly);
-      if(yrOut) yrOut.textContent = fmt(annual);
-
-      if(beOut){
-        if(cost > 0 && weekly > 0){
-          const weeksToBE = cost / weekly;
-          const daysToBE = weeksToBE * 7;
-          beOut.textContent = (daysToBE < 7) ? `${Math.ceil(daysToBE)} days` : `${weeksToBE.toFixed(1)} weeks`;
-        } else beOut.textContent = '—';
-      }
-    }
-    ['eng','hrs','rate','weeks','cost'].forEach(id => {
-      const el = document.getElementById(id);
-      if(!el) return;
-      el.addEventListener('input', calcROI);
-      el.addEventListener('change', calcROI);
-    });
-
-    // ==============================
-    // PLAN SELECTION
-    // ==============================
-    const PLAN_MAP = {
-      trial:    { key:'trial',    name:'Demo / Trial (3 days)', price:0 },
-      standard: { key:'standard', name:'Standard Pack', price:999 },
-      premium:  { key:'premium',  name:'Premium Pack',  price:1299 },
-      plus:     { key:'plus',     name:'Premium Plus',  price:1599 }
-    };
-    let selected = 'standard';
-
-    function updateCheckoutUI(){
-      const plan = PLAN_MAP[selected] || PLAN_MAP.standard;
-
-      const selPlan = document.getElementById('selPlan');
-      const selPrice = document.getElementById('selPrice');
-      const payPlan = document.getElementById('payPlan');
-      const payTotal = document.getElementById('payTotal');
-      const payNow = document.getElementById('payNow');
-      const payAlt = document.getElementById('payAlt');
-      const payStatus = document.getElementById('payStatus');
-
-      if(selPlan) selPlan.textContent = plan.name;
-      if(selPrice) selPrice.textContent = plan.price.toLocaleString('en-IE');
-      if(payPlan) payPlan.textContent = plan.name;
-      if(payTotal) payTotal.textContent = plan.price.toLocaleString('en-IE');
-
-      // Hidden fields for lead form
-      const lfPlan = document.getElementById('lead_plan');
-      const lfPrice = document.getElementById('lead_price');
-      if(lfPlan) lfPlan.value = plan.key;
-      if(lfPrice) lfPrice.value = String(plan.price);
-
-      if(payAlt){
-        payAlt.textContent = 'PAY WITH REVOLUT';
-        payAlt.href = REVOLUT_LINK;
-        payAlt.style.display = 'inline-flex';
-      }
-
-      if(plan.key === 'trial'){
-        if(payNow){ payNow.textContent = 'GO TO TRIAL DOWNLOAD'; payNow.href = '#trial'; }
-        if(payStatus) payStatus.textContent = 'Status: Save details, then go to the Trial section (no payment).';
-      } else {
-        if(payNow){ payNow.textContent = 'PAY NOW (STRIPE)'; payNow.href = '#'; }
-        if(payStatus) payStatus.textContent = 'Status: Save details first, then you can proceed to payment.';
-      }
-    }
-
-    function applySelection(key){
-      if(!PLAN_MAP[key]) return;
-      selected = key;
-
-      // Sync ROI dropdown + tool cost
-      const planSel = document.getElementById('plan');
-      const costEl = document.getElementById('cost');
-      if(planSel) planSel.value = key;
-      if(costEl) costEl.value = PLAN_MAP[key].price;
-
-      calcROI();
-      updateCheckoutUI();
-
-      // Button selected state
-      document.querySelectorAll('.select-plan').forEach(btn => {
-        if(!btn.dataset.original) btn.dataset.original = btn.textContent;
-        const k = btn.dataset.plan;
-        btn.textContent = (k === key) ? 'SELECTED ✓' : btn.dataset.original;
-      });
-    }
-
-    // Pricing buttons
-    document.querySelectorAll('.select-plan').forEach(btn => {
-      btn.addEventListener('click', () => { applySelection(btn.dataset.plan); location.hash = '#checkout'; });
-    });
-
-    // ROI dropdown
-    const roiPlan = document.getElementById('plan');
-    if(roiPlan){
-      roiPlan.addEventListener('change', () => {
-        const key = roiPlan.value;
-        if(PLAN_MAP[key]) applySelection(key);
-      });
-    }
-
-    // ROI continue
-    const roiContinue = document.getElementById('roiContinue');
-    if(roiContinue){
-      roiContinue.addEventListener('click', () => {
-        const key = (document.getElementById('plan')||{}).value || selected;
-        applySelection(key);
-      });
-    }
-
-    // ==============================
-    // FORMSPREE SUBMIT (AJAX)
-    // ==============================
-    async function postToFormspree(formEl, statusEl){
-      const FORMSPREE_ENDPOINT = getFormspreeEndpoint();
-
-      if(FORMSPREE_ENDPOINT.includes('PASTE_YOUR_') ){
-        if(statusEl){
-          statusEl.className = 'status err';
-          statusEl.textContent = 'Status: Formspree endpoint not set. Paste your endpoint in FORMSPREE_ENDPOINT.';
-        }
-        return { ok:false };
-      }
-
-      const data = new FormData(formEl);
-
-      try{
-        const res = await fetch(FORMSPREE_ENDPOINT, {
-          method: 'POST',
-          body: data,
-          headers: { 'Accept': 'application/json' }
-        });
-
-        if(res.ok){
-          if(statusEl){
-            statusEl.className = 'status ok';
-            statusEl.textContent = 'Status: submitted successfully. You can proceed.';
-          }
-          return { ok:true };
-        }
-
-        if(statusEl){
-          statusEl.className = 'status err';
-          statusEl.textContent = 'Status: submit failed. Please try again.';
-        }
-        return { ok:false };
-      } catch(err){
-        if(statusEl){
-          statusEl.className = 'status err';
-          statusEl.textContent = 'Status: network error. Please try again.';
-        }
-        return { ok:false };
-      }
-    }
-
-    // Lead form (checkout)
-    let leadSubmitted = false;
-    const leadForm = document.getElementById('leadForm');
-    const leadStatus = document.getElementById('leadStatus');
-    if(leadForm){
-      leadForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const out = await postToFormspree(leadForm, leadStatus);
-        leadSubmitted = !!out.ok;
-      });
-    }
-
-    // Trial form
-    const trialForm = document.getElementById('trialForm');
-    const trialStatus = document.getElementById('trialStatus');
-    const downloadBtn = document.getElementById('downloadBtn');
-    if(trialForm){
-      trialForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const out = await postToFormspree(trialForm, trialStatus);
-        if(out.ok && downloadBtn){
-          downloadBtn.href = 'downloads/MetaMechTrial.exe';
-          downloadBtn.style.opacity = '1';
-          downloadBtn.style.pointerEvents = 'auto';
-          downloadBtn.setAttribute('aria-disabled','false');
-          trialStatus.className = 'status ok';
-          trialStatus.textContent = 'Status: unlocked. Download enabled.';
-        }
-      });
-    }
-
-    // Demo form
-    const demoForm = document.getElementById('demoForm');
-    const demoStatus = document.getElementById('demoStatus');
-    if(demoForm){
-      demoForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        await postToFormspree(demoForm, demoStatus);
-      });
-    }
-
-    // Pay buttons require lead submission (paid plans)
-    const payNow = document.getElementById('payNow');
-    const payAlt = document.getElementById('payAlt');
-    const payStatus = document.getElementById('payStatus');
-
-    function requireLead(){
-      if(leadSubmitted) return true;
-      if(payStatus){
-        payStatus.className = 'status err';
-        payStatus.textContent = 'Status: please SAVE DETAILS first (Formspree) before proceeding.';
-      }
-      location.hash = '#checkout';
-      const first = document.getElementById('leadCompany');
-      if(first) first.focus();
-      return false;
-    }
-
-    if(payNow){
-      payNow.addEventListener('click', (e) => {
-        const plan = PLAN_MAP[selected] || PLAN_MAP.standard;
-        if(plan.key === 'trial') return; // goes to #trial
-
-        e.preventDefault();
-        if(!requireLead()) return;
-
-        const url = STRIPE_LINKS[plan.key] || '#';
-        if(!url || url === '#'){
-          if(payStatus){
-            payStatus.className = 'status err';
-            payStatus.textContent = 'Status: Stripe link not configured yet. Paste it into STRIPE_LINKS.';
-          }
-          return;
-        }
-        window.open(url, '_blank', 'noopener');
-      });
-    }
-
-    if(payAlt){
-      payAlt.addEventListener('click', (e) => {
-        const plan = PLAN_MAP[selected] || PLAN_MAP.standard;
-        if(plan.key === 'trial') return;
-
-        // Require lead capture even for Revolut
-        if(!requireLead()){
-          e.preventDefault();
-          return;
-        }
-        // allow default link open
-      });
-    }
-
-    // Request invoice button (mailto)
-    const reqInvoice = document.getElementById('reqInvoice');
-    if(reqInvoice){
-      reqInvoice.addEventListener('click', (e) => {
-        e.preventDefault();
-        const plan = PLAN_MAP[selected] || PLAN_MAP.standard;
-        const subject = encodeURIComponent('MetaMech License Purchase');
-        const body = encodeURIComponent(
-          `Hi MetaMech Solution,
-
-` +
-          `I would like to purchase the following plan:
-
-` +
-          `Plan: ${plan.name}
-` +
-          `Price: €${plan.price.toLocaleString('en-IE')}
-
-` +
-          `Please send invoice or secure payment link.
-
-Thanks`
-        );
-        window.location.href = `mailto:hi@metamechsolutions.com?subject=${subject}&body=${body}`;
-      });
-    }
-
-    // Slim header auto-hide
-    (function(){
-      const nav = document.querySelector('.nav');
-      if(!nav) return;
-      let lastY = window.scrollY;
-      let ticking = false;
-
-      function onScroll(){
-        const y = window.scrollY;
-        const down = y > lastY;
-        const delta = Math.abs(y - lastY);
-        if(delta > 10){
-          if(down && y > 120) nav.classList.add('nav--hidden');
-          else nav.classList.remove('nav--hidden');
-          lastY = y;
-        }
-        ticking = false;
-      }
-
-      window.addEventListener('scroll', () => {
-        if(!ticking){ window.requestAnimationFrame(onScroll); ticking = true; }
-      });
-    })();
-
-    // ==============================
-    // ADMIN PANEL (toggle via ?admin=1)
-    // ==============================
-    (function(){
-      try{
-        const params = new URLSearchParams(location.search);
-        const adminOn = params.get('admin') === '1';
-        const adminSec = document.getElementById('admin');
-        if(adminSec) adminSec.style.display = adminOn ? 'block' : 'none';
-
-        if(adminOn){
-          const inp = document.getElementById('adminEndpoint');
-          const btn = document.getElementById('adminSave');
-          const st  = document.getElementById('adminStatus');
-          const current = getFormspreeEndpoint();
-
-          if(inp && current && !current.includes('PASTE_YOUR_')) inp.value = current;
-          if(st){
-            st.className = (current && !current.includes('PASTE_YOUR_')) ? 'status ok' : 'status err';
-            st.textContent = (current && !current.includes('PASTE_YOUR_'))
-              ? 'Status: endpoint set. Forms will save to Formspree.'
-              : 'Status: endpoint not set yet.';
-          }
-
-          if(btn){
-            btn.addEventListener('click', () => {
-              const v = (inp && inp.value || '').trim();
-              if(!/^https:\/\/formspree\.io\/f\//.test(v)){
-                if(st){ st.className = 'status err'; st.textContent = 'Status: invalid endpoint. It must start with https://formspree.io/f/'; }
-                return;
-              }
-              try{ localStorage.setItem('mm_formspree_endpoint', v); }catch(e){}
-              if(st){ st.className = 'status ok'; st.textContent = 'Status: saved. Refresh the page to use it.'; }
-            });
-          }
-        }
-      }catch(e){}
-    })();
-
-    // ==============================
-    // CHIP STAGGER ANIMATION (Industries)
-    // ==============================
-    (function(){
-      const chips = document.querySelectorAll('.chip');
-      if(!chips.length) return;
-
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if(entry.isIntersecting){
-            const list = entry.target.querySelectorAll('.chip');
-            list.forEach((chip, i) => {
-              setTimeout(() => chip.classList.add('is-in'), i * 90);
-            });
-            io.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.2 });
-
-      document.querySelectorAll('.chips').forEach(el => io.observe(el));
-    })();
-
-    // ==============================
-    // SERVICES → ENQUIRY PREFILL
-    // ==============================
-    function prefillServiceEnquiry(type){
-      // Set enquiry type + prefill message
-      const et = document.getElementById('enquiryType');
-      const msg = document.getElementById('contactMessage');
-      const interest = document.getElementById('serviceInterest');
-
-      if(et) et.value = 'Services';
-      if(interest) interest.value = type;
-      if(msg){
-        msg.value = 'Service Enquiry: ' + type;
-      }
-
-      // Jump to contact + focus
-      location.hash = '#contact';
-      setTimeout(() => { if(msg) msg.focus(); }, 80);
-    }
-
-    // Init
-    calcROI();
-    applySelection('standard');
-  </script>
 </body>
 </html>
