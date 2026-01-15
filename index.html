@@ -8,6 +8,7 @@
 
   <style>
     :root{
+      /* BRAND-LED PREMIUM PALETTE */
       --bg:#0b1222;
       --panel:#101c33;
       --panel2:#0d1730;
@@ -15,7 +16,7 @@
       --muted:#d3dcf3;
       --line:rgba(255,255,255,.14);
 
-      /* logo aligned accents */
+      /* accents aligned to logo */
       --accent:#16b3b8;
       --accent2:#f0b429;
 
@@ -25,6 +26,7 @@
 
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
+
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", Helvetica;
@@ -48,68 +50,30 @@
       transition: transform .25s ease, background .25s ease;
     }
     .nav.nav--hidden{transform: translateY(-110%);}
-    .nav-inner{
-      display:flex;align-items:center;justify-content:space-between;
-      padding:8px 0;gap:12px;
-    }
-    .brand{display:flex;align-items:center;}
-    .logo-img{
-      width:110px;height:auto;display:block;object-fit:contain;
-      filter: drop-shadow(0 4px 10px rgba(0,0,0,.35));
-    }
-    .menu{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:flex-end}
-    .menu a{
-      padding:10px 12px;border-radius:12px;
-      color:rgba(251,253,255,.86);
-      border:1px solid transparent;
-      letter-spacing:.2px;
-    }
-    .menu a:hover{
-      border-color:rgba(22,179,184,.45);
-      color:var(--text);
-      background:rgba(22,179,184,.12);
-    }
-    .menu a.active{
-      border-color: rgba(22,179,184,.65);
-      background: rgba(22,179,184,.18);
-      box-shadow: 0 6px 20px rgba(22,179,184,.25);
-    }
 
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;gap:10px;
-      padding:12px 14px;border-radius:14px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      color:var(--text);
-      cursor:pointer;
-      white-space:nowrap;
-      transition: transform .18s ease, filter .18s ease;
-    }
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:8px 0;gap:12px;}
+
+    .brand{display:flex;align-items:center;}
+    .logo-img{width:110px;height:auto;display:block;object-fit:contain;filter: drop-shadow(0 4px 10px rgba(0,0,0,.35));}
+
+    .menu{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:flex-end}
+    .menu a{padding:10px 12px;border-radius:12px;color:rgba(251,253,255,.86);border:1px solid transparent;letter-spacing:.2px;}
+    .menu a:hover{border-color:rgba(22,179,184,.35);color:var(--text);background:rgba(22,179,184,.08);}
+    .menu a.active{border-color: rgba(22,179,184,.65);background: rgba(22,179,184,.18);box-shadow: 0 6px 20px rgba(22,179,184,.25);}
+
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:12px 14px;border-radius:14px;border:1px solid var(--line);background: rgba(255,255,255,.03);color:var(--text);cursor:pointer;white-space:nowrap;transition: transform .18s ease, filter .18s ease;}
     .btn:hover{transform: translateY(-1px); filter:brightness(1.03)}
-    .btn-primary{
-      background: linear-gradient(135deg, rgba(22,179,184,.98), rgba(22,179,184,.62));
-      border-color: rgba(22,179,184,.55);
-      box-shadow: 0 18px 42px rgba(22,179,184,.18);
-    }
-    .btn-green{
-      background: linear-gradient(135deg, rgba(240,180,41,.98), rgba(240,180,41,.60));
-      border-color: rgba(240,180,41,.55);
-      box-shadow: 0 18px 42px rgba(240,180,41,.16);
-    }
-    .btn:disabled, .btn[aria-disabled="true"]{
-      opacity:.55; pointer-events:none;
-    }
+
+    .btn-primary{background: linear-gradient(135deg, rgba(22,179,184,.98), rgba(22,179,184,.62));border-color: rgba(22,179,184,.55);box-shadow: 0 18px 42px rgba(22,179,184,.18);}
+    .btn-primary:hover{filter:brightness(1.05)}
+
+    .btn-green{background: linear-gradient(135deg, rgba(240,180,41,.98), rgba(240,180,41,.60));border-color: rgba(240,180,41,.55);box-shadow: 0 18px 42px rgba(240,180,41,.16);}
 
     .mobile-cta{display:none}
 
     /* HERO */
     .hero{padding:64px 0 38px}
-    .grid{
-      display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap:20px;
-      align-items:stretch;
-    }
+    .grid{display:grid;grid-template-columns: 1.1fr .9fr;gap:20px;align-items:stretch;}
 
     .card{
       position:relative;
@@ -141,48 +105,27 @@
       animation: accentShimmer 2.8s ease-in-out infinite;
       pointer-events:none;
     }
-    @keyframes accentBreath{
-      0%,100%{filter:brightness(1); box-shadow:0 0 18px rgba(22,179,184,.40)}
-      50%{filter:brightness(1.12); box-shadow:0 0 26px rgba(22,179,184,.55)}
-    }
-    @keyframes accentShimmer{
-      0%{top:-35%; opacity:0}
-      20%{opacity:.22}
-      55%{opacity:.35}
-      100%{top:110%; opacity:0}
-    }
+    @keyframes accentBreath{0%,100%{filter:brightness(1); box-shadow:0 0 18px rgba(22,179,184,.40)}50%{filter:brightness(1.12); box-shadow:0 0 26px rgba(22,179,184,.55)}}
+    @keyframes accentShimmer{0%{top:-35%; opacity:0}20%{opacity:.22}55%{opacity:.35}100%{top:110%; opacity:0}}
 
-    .accent-word{
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-    }
+    .accent-word{background: linear-gradient(135deg, var(--accent), var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;}
 
-    h1{
-      font-size:46px;line-height:1.06;margin:0 0 14px 0;
-      letter-spacing:-.9px;
-      color:#ffffff;
-      text-shadow: 0 2px 0 rgba(0,0,0,.25), 0 14px 36px rgba(0,0,0,.55);
-    }
-    p{margin:0 0 12px 0;color:#f4f7ff;line-height:1.72}
+    h1{font-size:46px;line-height:1.06;margin:0 0 14px 0;letter-spacing:-.9px;color:#ffffff;text-shadow:0 2px 0 rgba(0,0,0,.25),0 14px 36px rgba(0,0,0,.55);}
+    p{margin:0 0 12px 0;color:#eef3ff;line-height:1.7}
 
     .hero-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
 
     .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
-    .kpi{
-      border:1px solid var(--line);
-      border-radius:14px;
-      padding:12px;
-      background: rgba(255,255,255,.02);
-    }
+    .kpi{border:1px solid var(--line);border-radius:14px;padding:12px;background: rgba(255,255,255,.02);}
     .kpi strong{font-size:18px;display:block;color:#fff}
     .kpi span{color:#f0f4ff;font-size:13px}
 
-    /* Scroll-reveal */
+    /* Scroll reveal */
     .reveal{opacity:0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease;}
     .reveal.reveal--in{opacity:1; transform: translateY(0);}
     header.hero .reveal{opacity:1 !important; transform:none !important;}
+
+    @keyframes floatGlow{0%,100%{ transform: translate3d(0,0,0) scale(1); opacity:.55; }50%{ transform: translate3d(0,-10px,0) scale(1.03); opacity:.75; }}
 
     /* Sections */
     .section{padding:46px 0}
@@ -192,75 +135,36 @@
     .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
     .two{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
 
-    .pill{
-      display:inline-flex;align-items:center;gap:8px;
-      font-size:12px;
-      color:#ffffff;
-      border:1px solid rgba(22,179,184,.55);
-      padding:6px 10px;border-radius:999px;
-      background: linear-gradient(135deg, rgba(22,179,184,.38), rgba(22,179,184,.18));
-      box-shadow: 0 8px 22px rgba(22,179,184,.35);
-    }
+    .pill{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:#ffffff;border:1px solid rgba(22,179,184,.45);padding:6px 10px;border-radius:999px;background: linear-gradient(135deg, rgba(22,179,184,.28), rgba(22,179,184,.12));box-shadow: 0 6px 18px rgba(22,179,184,.25);}
+
     .list{margin:10px 0 0 0;padding:0 0 0 18px;color:#eef3ff}
     .list li{margin:7px 0}
 
     .field{display:flex;flex-direction:column;gap:6px}
     .field label{color:var(--muted);font-size:13px}
-    .field input{
-      padding:12px 12px;border-radius:12px;border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      color:var(--text);
-      outline:none;
-    }
-    .select{
-      padding:12px 12px;border-radius:12px;border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      color:var(--text);
-      outline:none;
-    }
+    .field input{padding:12px 12px;border-radius:12px;border:1px solid var(--line);background: rgba(255,255,255,.03);color:var(--text);outline:none;}
+    .select{padding:12px 12px;border-radius:12px;border:1px solid var(--line);background: rgba(255,255,255,.03);color:var(--text);outline:none;}
     .field input:focus, .select:focus{border-color: rgba(22,179,184,.55)}
 
-    .result{
-      border:1px solid var(--line);
-      border-radius:14px;
-      padding:12px;
-      background: rgba(255,255,255,.02);
-    }
-    .note{font-size:12px;color:var(--muted);opacity:.95;line-height:1.5}
+    .result{border:1px solid var(--line);border-radius:14px;padding:12px;background: rgba(255,255,255,.02);}
+    .note{font-size:12px;color:var(--muted);opacity:.9;line-height:1.5}
 
     section{scroll-margin-top: 76px;}
 
     .footer{padding:28px 0 40px;border-top:1px solid var(--line);color:var(--muted)}
 
-    /* Most Popular ribbon */
-    .popular{
-      outline:2px solid rgba(22,179,184,.35);
-      box-shadow: 0 28px 70px rgba(0,0,0,.55);
-    }
-    .ribbon{
-      position:absolute; top:14px; right:-46px;
-      transform: rotate(12deg); width:160px; text-align:center; pointer-events:none;
-    }
-    .ribbon span{
-      display:block;padding:8px 10px;font-size:12px;letter-spacing:.9px;font-weight:800;
-      color:#07111a;
-      background: linear-gradient(135deg, rgba(240,180,41,.98), rgba(22,179,184,.95));
-      border:1px solid rgba(255,255,255,.18);
-      border-radius:12px;
-      box-shadow: 0 14px 30px rgba(0,0,0,.35);
-      position:relative; overflow:hidden;
-      animation: ribbonFloat 2.6s ease-in-out infinite;
-    }
-    .ribbon span::after{
-      content:"";
-      position:absolute; top:-40%; left:-60%;
-      width:60%; height:180%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent);
-      transform: rotate(22deg);
-      animation: ribbonShine 2.8s ease-in-out infinite;
-    }
+    /* Pricing ribbon */
+    .popular{outline:2px solid rgba(22,179,184,.35);box-shadow: 0 28px 70px rgba(0,0,0,.55);}
+    .ribbon{position:absolute;top:14px;right:-46px;transform: rotate(12deg);width:160px;text-align:center;pointer-events:none;}
+    .ribbon span{display:block;padding:8px 10px;font-size:12px;letter-spacing:.9px;font-weight:800;color:#07111a;background: linear-gradient(135deg, rgba(240,180,41,.98), rgba(22,179,184,.95));border:1px solid rgba(255,255,255,.18);border-radius:12px;box-shadow: 0 14px 30px rgba(0,0,0,.35);position:relative;overflow:hidden;animation: ribbonFloat 2.6s ease-in-out infinite;}
+    .ribbon span::after{content:"";position:absolute;top:-40%;left:-60%;width:60%;height:180%;background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent);transform: rotate(22deg);animation: ribbonShine 2.8s ease-in-out infinite;}
     @keyframes ribbonFloat{0%,100%{ transform: translateY(0);}50%{ transform: translateY(-3px);} }
     @keyframes ribbonShine{0%{ left:-70%;}55%{ left:120%;}100%{ left:120%;} }
+
+    /* Small status chips */
+    .status{margin-top:10px;padding:10px 12px;border-radius:14px;border:1px solid var(--line);background: rgba(255,255,255,.02);font-size:12px;color:var(--muted)}
+    .status.ok{border-color: rgba(22,179,184,.35); color:#e9feff; background: rgba(22,179,184,.10)}
+    .status.err{border-color: rgba(240,180,41,.35); color:#fff7e3; background: rgba(240,180,41,.10)}
 
     @media (max-width: 900px){
       .grid{grid-template-columns:1fr}
@@ -299,7 +203,7 @@
   </div>
 
   <!-- HERO -->
-  <header class="hero">
+  <header class="hero" style="animation: floatGlow 7.5s ease-in-out infinite;">
     <div class="container">
       <div class="grid">
         <div class="card hero-primary">
@@ -419,9 +323,7 @@
             <a class="btn btn-primary" href="#checkout" id="roiContinue">CONTINUE TO CHECKOUT</a>
           </div>
 
-          <div style="margin-top:12px" class="note">
-            Tip: use your real internal cost rate (salary + overhead) for accurate ROI.
-          </div>
+          <div style="margin-top:12px" class="note">Tip: use your real internal cost rate (salary + overhead) for accurate ROI.</div>
         </div>
 
         <div class="card">
@@ -455,9 +357,7 @@
             <li>Sample assemblies only</li>
             <li>Email support</li>
           </ul>
-          <div style="margin-top:12px">
-            <button class="btn btn-green select-plan" data-plan="trial" data-price="0">START FREE TRIAL</button>
-          </div>
+          <div style="margin-top:12px"><button class="btn btn-green select-plan" data-plan="trial">START FREE TRIAL</button></div>
         </div>
 
         <div class="card">
@@ -469,9 +369,7 @@
             <li>PDF export + merge</li>
             <li>Custom BOM template</li>
           </ul>
-          <div style="margin-top:12px">
-            <button class="btn btn-primary select-plan" data-plan="standard" data-price="999">SELECT STANDARD</button>
-          </div>
+          <div style="margin-top:12px"><button class="btn btn-primary select-plan" data-plan="standard">SELECT STANDARD</button></div>
         </div>
 
         <div class="card popular">
@@ -484,9 +382,7 @@
             <li>STEP export automation</li>
             <li>Advanced export options</li>
           </ul>
-          <div style="margin-top:12px">
-            <button class="btn btn-primary select-plan" data-plan="premium" data-price="1299">SELECT PREMIUM</button>
-          </div>
+          <div style="margin-top:12px"><button class="btn btn-primary select-plan" data-plan="premium">SELECT PREMIUM</button></div>
         </div>
 
         <div class="card">
@@ -498,9 +394,7 @@
             <li>Template bulk update</li>
             <li>Auto numbering system</li>
           </ul>
-          <div style="margin-top:12px">
-            <button class="btn btn-primary select-plan" data-plan="plus" data-price="1599">SELECT PREMIUM PLUS</button>
-          </div>
+          <div style="margin-top:12px"><button class="btn btn-primary select-plan" data-plan="plus">SELECT PREMIUM PLUS</button></div>
         </div>
       </div>
 
@@ -508,56 +402,58 @@
     </div>
   </section>
 
-  <!-- CHECKOUT -->
+  <!-- CHECKOUT (Formspree lead capture) -->
   <section id="checkout" class="section">
     <div class="container">
       <h2>CHECKOUT</h2>
-      <p class="lead">Step 1: Fill your details. Step 2: Proceed to payment (or trial download).</p>
+      <p class="lead">Step 1: Fill your details (saved to Formspree). Step 2: Proceed to payment or trial download.</p>
 
       <div class="two">
-        <!-- LEFT: Selection + Form -->
         <div class="card">
-          <h3>STEP 1 — YOUR SELECTION</h3>
+          <h3>STEP 1 — YOUR DETAILS (REQUIRED)</h3>
+          <p class="note">This form submits to Formspree so you can track who requests trials and who proceeds to purchase.</p>
+
           <div class="result"><b>Selected Plan:</b> <span id="selPlan">Standard Pack</span></div>
           <div style="height:10px"></div>
           <div class="result"><b>Price:</b> €<span id="selPrice">999</span></div>
 
           <div style="height:14px"></div>
-          <h3 style="margin:0 0 8px 0;">STEP 1 — YOUR DETAILS (REQUIRED)</h3>
-          <p class="note" style="margin-top:0">We use this to track trial downloads and license purchases. (Saved locally in your browser.)</p>
 
           <form id="leadForm">
+            <!-- Filled by JS before submit -->
+            <input type="hidden" name="plan" id="lead_plan" value="standard" />
+            <input type="hidden" name="price_eur" id="lead_price" value="999" />
+            <input type="hidden" name="source" value="checkout" />
+
             <div class="two" style="margin-top:10px">
-              <div class="field"><label>Company name *</label><input id="leadCompany" required placeholder="e.g., ABC Engineering Ltd" /></div>
-              <div class="field"><label>Full name *</label><input id="leadName" required placeholder="Your name" /></div>
+              <div class="field"><label>Company name *</label><input name="company" id="leadCompany" required placeholder="e.g., ABC Engineering Ltd" /></div>
+              <div class="field"><label>Full name *</label><input name="name" id="leadName" required placeholder="Your name" /></div>
             </div>
 
             <div class="two" style="margin-top:10px">
-              <div class="field"><label>Work email *</label><input id="leadEmail" type="email" required placeholder="you@company.com" /></div>
-              <div class="field"><label>Position / Role *</label><input id="leadRole" required placeholder="Mechanical Design Engineer" /></div>
+              <div class="field"><label>Work email *</label><input name="email" id="leadEmail" type="email" required placeholder="you@company.com" /></div>
+              <div class="field"><label>Position / Role *</label><input name="role" id="leadRole" required placeholder="Mechanical Design Engineer" /></div>
             </div>
 
             <div class="two" style="margin-top:10px">
-              <div class="field"><label>Phone (optional)</label><input id="leadPhone" placeholder="+353 ..." /></div>
-              <div class="field"><label>Country *</label><input id="leadCountry" required placeholder="Ireland" /></div>
+              <div class="field"><label>Phone (optional)</label><input name="phone" id="leadPhone" placeholder="+353 ..." /></div>
+              <div class="field"><label>Country *</label><input name="country" id="leadCountry" required placeholder="Ireland" /></div>
             </div>
 
             <div class="field" style="margin-top:10px">
               <label>Company address (optional)</label>
-              <input id="leadAddress" placeholder="Street, City, Eircode" />
+              <input name="address" id="leadAddress" placeholder="Street, City, Eircode" />
             </div>
 
             <div style="height:10px"></div>
-            <button class="btn btn-primary" type="submit">SAVE DETAILS</button>
-            <div style="height:10px"></div>
-            <div class="note" id="leadStatus">Status: details not saved yet.</div>
+            <button class="btn btn-primary" type="submit" id="saveDetailsBtn">SAVE DETAILS</button>
+            <div class="status" id="leadStatus">Status: details not submitted yet.</div>
           </form>
         </div>
 
-        <!-- RIGHT: Payment (unlocked after details) -->
         <div class="card">
-          <h3>STEP 2 — PAYMENT / NEXT ACTION</h3>
-          <p class="note">Paid plans use external secure checkout links (Stripe recommended). Trial requires no card.</p>
+          <h3>STEP 2 — NEXT ACTION</h3>
+          <p class="note">After you save details, you can proceed to payment (paid plans) or go to the Trial section (trial plan).</p>
 
           <div class="result" style="display:flex;justify-content:space-between;gap:10px;align-items:center;">
             <div>
@@ -571,72 +467,14 @@
 
           <a class="btn btn-green" id="payNow" href="#" rel="nofollow">PAY NOW (STRIPE)</a>
           <div style="height:10px"></div>
-          <a class="btn" id="payAlt" href="#" rel="nofollow">PAY WITH ALTERNATIVE LINK</a>
+          <a class="btn" id="payAlt" href="#" rel="nofollow">PAY WITH REVOLUT</a>
           <div style="height:10px"></div>
           <a class="btn btn-primary" id="reqInvoice" href="#" rel="nofollow">REQUEST INVOICE (EMAIL)</a>
 
-          <div style="margin-top:12px" class="note" id="payNote">
-            Paste your real Stripe Payment Links in the script (STRIPE_LINKS). Trial goes to the Trial section.
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+          <div class="status" id="payStatus">Status: Save details first, then proceed.</div>
 
-  <!-- TRIAL -->
-  <section id="trial" class="section">
-    <div class="container">
-      <h2>DOWNLOAD 3-DAY TRIAL</h2>
-      <p class="lead">Trial is €0, no card required — but details are required to unlock the download.</p>
-
-      <div class="two">
-        <div class="card">
-          <h3 style="margin:0 0 8px 0;">TRIAL DOWNLOAD</h3>
-          <p>Enter details then unlock the trial EXE download.</p>
-
-          <form id="trialForm">
-            <div class="two" style="margin-top:10px">
-              <div class="field"><label>Company name *</label><input id="trialCompany" required placeholder="e.g., ABC Engineering Ltd" /></div>
-              <div class="field"><label>Full name *</label><input id="trialName" required placeholder="Your name" /></div>
-            </div>
-
-            <div class="two" style="margin-top:10px">
-              <div class="field"><label>Work email *</label><input id="trialEmail" type="email" required placeholder="you@company.com" /></div>
-              <div class="field"><label>Position / Role *</label><input id="trialRole" required placeholder="Mechanical Design Engineer" /></div>
-            </div>
-
-            <div class="field" style="margin-top:10px">
-              <label>Country *</label>
-              <input id="trialCountry" required placeholder="Ireland" />
-            </div>
-
-            <div style="height:10px"></div>
-            <button class="btn btn-primary" type="submit">UNLOCK TRIAL DOWNLOAD</button>
-            <div style="height:10px"></div>
-            <div class="note" id="trialMsg">Status: enter details to enable download.</div>
-          </form>
-
-          <div style="height:12px"></div>
-
-          <a class="btn btn-green" id="downloadBtn" href="#" download aria-disabled="true" style="opacity:.55;pointer-events:none;">
-            ⬇ DOWNLOAD 3-DAY TRIAL
-          </a>
-
-          <div style="margin-top:10px" class="note">
-            When unlocked, the download link points to <b>downloads/MetaMechTrial.exe</b> in your repo.
-          </div>
-        </div>
-
-        <div class="card">
-          <h3 style="margin:0 0 8px 0;">HOW THE TRIAL WORKS</h3>
-          <ul class="list">
-            <li>Install & run the EXE</li>
-            <li>Trial period begins on first run</li>
-            <li>Expires after 72 hours (3 days)</li>
-            <li>Contact us to activate full license</li>
-          </ul>
-          <div style="margin-top:12px" class="note">
-            Want stronger protection? We can upgrade to online key activation (recommended for a “big brand” product).
+          <div class="note" id="payNote" style="margin-top:10px;">
+            Tip: add your Stripe Payment Links in STRIPE_LINKS. Revolut link is already connected.
           </div>
         </div>
       </div>
@@ -657,19 +495,93 @@
     </div>
   </section>
 
-  <!-- CONTACT -->
+  <!-- TRIAL (Formspree gate) -->
+  <section id="trial" class="section">
+    <div class="container">
+      <h2>DOWNLOAD 3-DAY TRIAL</h2>
+      <p class="lead">Trial is €0, no card required — but details are required to unlock the download.</p>
+
+      <div class="two">
+        <div class="card">
+          <h3 style="margin:0 0 8px 0;">TRIAL DOWNLOAD</h3>
+          <p>Fill the form to unlock download. This submits to Formspree so you can track who downloaded the trial.</p>
+
+          <form id="trialForm">
+            <input type="hidden" name="plan" value="trial" />
+            <input type="hidden" name="price_eur" value="0" />
+            <input type="hidden" name="source" value="trial" />
+
+            <div class="two" style="margin-top:10px">
+              <div class="field"><label>Company name *</label><input name="company" id="trialCompany" required placeholder="e.g., ABC Engineering Ltd" /></div>
+              <div class="field"><label>Full name *</label><input name="name" id="trialName" required placeholder="Your name" /></div>
+            </div>
+
+            <div class="two" style="margin-top:10px">
+              <div class="field"><label>Work email *</label><input name="email" id="trialEmail" type="email" required placeholder="you@company.com" /></div>
+              <div class="field"><label>Position / Role *</label><input name="role" id="trialRole" required placeholder="Mechanical Design Engineer" /></div>
+            </div>
+
+            <div class="field" style="margin-top:10px"><label>Country *</label><input name="country" id="trialCountry" required placeholder="Ireland" /></div>
+
+            <div style="height:10px"></div>
+            <button class="btn btn-primary" type="submit">UNLOCK TRIAL DOWNLOAD</button>
+            <div class="status" id="trialStatus">Status: enter details to enable download.</div>
+          </form>
+
+          <div style="height:12px"></div>
+          <a class="btn btn-green" id="downloadBtn" href="#" download aria-disabled="true" style="opacity:.55;pointer-events:none;">⬇ DOWNLOAD 3-DAY TRIAL</a>
+
+          <div style="margin-top:10px" class="note">When unlocked, download points to <b>downloads/MetaMechTrial.exe</b> in your repo.</div>
+        </div>
+
+        <div class="card">
+          <h3 style="margin:0 0 8px 0;">HOW THE TRIAL WORKS</h3>
+          <ul class="list">
+            <li>Install & run the EXE</li>
+            <li>Trial period begins on first run</li>
+            <li>Expires after 72 hours (3 days)</li>
+            <li>Contact us to activate full license</li>
+          </ul>
+          <div style="margin-top:12px" class="note">Want stronger protection? We can upgrade to online key activation (recommended for a “big brand” product).</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT (Formspree demo request) -->
   <section id="contact" class="section">
     <div class="container">
       <h2>CONTACT</h2>
-      <p class="lead">Tell us your workflow pain points. We’ll suggest the best automation approach.</p>
+      <p class="lead">Send a demo request directly from the site (Formspree). No email app needed.</p>
 
       <div class="two">
         <div class="card">
           <h3 style="margin:0 0 8px 0;">REQUEST A DEMO</h3>
-          <p class="note">GitHub Pages is static, so this uses an email link (or connect Formspree / Google Form).</p>
-          <a class="btn btn-primary" href="mailto:hi@metamechsolutions.com?subject=MetaMech%20Demo%20Request&body=Hi%20MetaMech%20Solution%2C%0A%0ACompany%3A%0AWorkflow%20to%20automate%3A%0ASolidWorks%20version%3A%0A%0AThanks%2C">
-            ✉ EMAIL US
-          </a>
+
+          <form id="demoForm">
+            <input type="hidden" name="source" value="demo" />
+
+            <div class="two" style="margin-top:10px">
+              <div class="field"><label>Company name *</label><input name="company" required placeholder="e.g., ABC Engineering Ltd" /></div>
+              <div class="field"><label>Full name *</label><input name="name" required placeholder="Your name" /></div>
+            </div>
+
+            <div class="two" style="margin-top:10px">
+              <div class="field"><label>Work email *</label><input name="email" type="email" required placeholder="you@company.com" /></div>
+              <div class="field"><label>SolidWorks version</label><input name="solidworks" placeholder="2022 / 2023 / 2024 / 2025" /></div>
+            </div>
+
+            <div class="field" style="margin-top:10px">
+              <label>What do you want to automate? *</label>
+              <input name="message" required placeholder="BOM / PDF merge / STEP / DXF / renumbering..." />
+            </div>
+
+            <div style="height:10px"></div>
+            <button class="btn btn-primary" type="submit">SEND DEMO REQUEST</button>
+            <div class="status" id="demoStatus">Status: not sent yet.</div>
+
+            <div class="note" style="margin-top:10px;">Or email us directly: <a href="mailto:hi@metamechsolutions.com" style="text-decoration:underline;">hi@metamechsolutions.com</a></div>
+          </form>
         </div>
 
         <div class="card">
@@ -695,54 +607,47 @@
   </div>
 
   <script>
-    // Reveal: add class (skip hero)
+    // ==============================
+    // FORM SETTINGS
+    // ==============================
+    // 1) Create a Formspree form
+    // 2) Paste your endpoint below (looks like: https://formspree.io/f/xxxxxx)
+    const FORMSPREE_ENDPOINT = "PASTE_YOUR_FORMSPREE_ENDPOINT_HERE";
+
+    // ==============================
+    // REVEAL ANIMATIONS
+    // ==============================
     (function(){
       const targets = document.querySelectorAll('h2, .lead, .card, .kpi, .pill, .result');
-      targets.forEach(el => {
-        if(el.closest('header.hero')) return;
-        el.classList.add('reveal');
-      });
+      targets.forEach(el => { if(el.closest('header.hero')) return; el.classList.add('reveal'); });
     })();
-
-    // Reveal observer
     (function(){
       const items = document.querySelectorAll('.reveal');
       const io = new IntersectionObserver((entries) => {
         entries.forEach(e => {
-          if(e.isIntersecting){
-            e.target.classList.add('reveal--in');
-            io.unobserve(e.target);
-          }
+          if(e.isIntersecting){ e.target.classList.add('reveal--in'); io.unobserve(e.target); }
         });
       }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
       items.forEach(el => io.observe(el));
     })();
 
-    // Year
+    // Footer year
     const yr = document.getElementById('yrNow');
     if(yr) yr.textContent = new Date().getFullYear();
 
     // ==============================
-    // PAYMENT LINKS (PASTE REAL LINKS)
+    // PAYMENT LINKS
     // ==============================
-    const STRIPE_LINKS = {
-      standard: '#',
-      premium: '#',
-      plus: '#'
-    };
-    const ALT_LINKS = {
-      standard: 'https://revolut.me/saviosyl',
-      premium: 'https://revolut.me/saviosyl',
-      plus: 'https://revolut.me/saviosyl'
-    };
+    // Paste Stripe payment links here when ready
+    const STRIPE_LINKS = { standard:'#', premium:'#', plus:'#' };
+
+    // Revolut personal link (you provided)
+    const REVOLUT_LINK = "https://revolut.me/saviosyl";
 
     // ==============================
-    // ROI
+    // ROI CALCULATOR
     // ==============================
-    function fmt(n){
-      if(!isFinite(n)) return '0';
-      return Math.round(n).toLocaleString('en-IE');
-    }
+    function fmt(n){ if(!isFinite(n)) return '0'; return Math.round(n).toLocaleString('en-IE'); }
     function calcROI(){
       const eng = parseFloat((document.getElementById('eng')||{}).value) || 0;
       const hrs = parseFloat((document.getElementById('hrs')||{}).value) || 0;
@@ -754,11 +659,15 @@
       const monthly = weekly * 4.33;
       const annual = weekly * weeks;
 
-      (document.getElementById('wk')||{}).textContent = fmt(weekly);
-      (document.getElementById('mo')||{}).textContent = fmt(monthly);
-      (document.getElementById('yr')||{}).textContent = fmt(annual);
-
+      const wkOut = document.getElementById('wk');
+      const moOut = document.getElementById('mo');
+      const yrOut = document.getElementById('yr');
       const beOut = document.getElementById('be');
+
+      if(wkOut) wkOut.textContent = fmt(weekly);
+      if(moOut) moOut.textContent = fmt(monthly);
+      if(yrOut) yrOut.textContent = fmt(annual);
+
       if(beOut){
         if(cost > 0 && weekly > 0){
           const weeksToBE = cost / weekly;
@@ -769,11 +678,13 @@
     }
     ['eng','hrs','rate','weeks','cost'].forEach(id => {
       const el = document.getElementById(id);
-      if(el){ el.addEventListener('input', calcROI); el.addEventListener('change', calcROI); }
+      if(!el) return;
+      el.addEventListener('input', calcROI);
+      el.addEventListener('change', calcROI);
     });
 
     // ==============================
-    // Plans
+    // PLAN SELECTION
     // ==============================
     const PLAN_MAP = {
       trial:    { key:'trial',    name:'Demo / Trial (3 days)', price:0 },
@@ -783,134 +694,40 @@
     };
     let selected = 'standard';
 
-    // ==============================
-    // Lead capture (local storage)
-    // ==============================
-    function saveLead(obj){ try{ localStorage.setItem('mm_lead', JSON.stringify(obj)); }catch(e){} }
-    function loadLead(){ try{ return JSON.parse(localStorage.getItem('mm_lead')||'null'); }catch(e){ return null; } }
-    function leadIsComplete(lead){
-      if(!lead) return false;
-      return !!(lead.company && lead.name && lead.email && lead.role && lead.country);
-    }
-    function applyLeadToCheckout(lead){
-      if(!lead) return;
-      const map = {
-        leadCompany: lead.company, leadName: lead.name, leadEmail: lead.email,
-        leadRole: lead.role, leadPhone: lead.phone, leadCountry: lead.country, leadAddress: lead.address
-      };
-      Object.keys(map).forEach(id => {
-        const el = document.getElementById(id);
-        if(el && map[id]) el.value = map[id];
-      });
-      const status = document.getElementById('leadStatus');
-      if(status){
-        status.textContent = leadIsComplete(lead)
-          ? `Status: details saved for ${lead.company} (${lead.email}).`
-          : 'Status: details not saved yet.';
-      }
-    }
-
-    // Checkout form
-    const leadForm = document.getElementById('leadForm');
-    if(leadForm){
-      leadForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const lead = {
-          company: (document.getElementById('leadCompany')||{}).value?.trim() || '',
-          name: (document.getElementById('leadName')||{}).value?.trim() || '',
-          email: (document.getElementById('leadEmail')||{}).value?.trim() || '',
-          role: (document.getElementById('leadRole')||{}).value?.trim() || '',
-          phone: (document.getElementById('leadPhone')||{}).value?.trim() || '',
-          country: (document.getElementById('leadCountry')||{}).value?.trim() || '',
-          address: (document.getElementById('leadAddress')||{}).value?.trim() || '',
-          source: 'checkout',
-          plan: selected,
-          ts: new Date().toISOString()
-        };
-
-        const status = document.getElementById('leadStatus');
-        if(!leadIsComplete(lead)){
-          if(status) status.textContent = 'Status: please fill all required fields (*) before continuing.';
-          return;
-        }
-
-        saveLead(lead);
-        applyLeadToCheckout(lead);
-
-        // mirror to trial form (nice UX)
-        const tmap = {
-          trialCompany: lead.company, trialName: lead.name, trialEmail: lead.email, trialRole: lead.role, trialCountry: lead.country
-        };
-        Object.keys(tmap).forEach(id => {
-          const el = document.getElementById(id);
-          if(el && tmap[id]) el.value = tmap[id];
-        });
-      });
-    }
-
-    // Trial unlock
-    const trialForm = document.getElementById('trialForm');
-    if(trialForm){
-      trialForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const lead = {
-          company: (document.getElementById('trialCompany')||{}).value?.trim() || '',
-          name: (document.getElementById('trialName')||{}).value?.trim() || '',
-          email: (document.getElementById('trialEmail')||{}).value?.trim() || '',
-          role: (document.getElementById('trialRole')||{}).value?.trim() || '',
-          country: (document.getElementById('trialCountry')||{}).value?.trim() || '',
-          source: 'trial',
-          plan: 'trial',
-          ts: new Date().toISOString()
-        };
-
-        const msg = document.getElementById('trialMsg');
-        if(!leadIsComplete(lead)){
-          if(msg) msg.textContent = 'Status: please fill all required fields (*) to enable download.';
-          return;
-        }
-
-        saveLead(lead);
-        if(msg) msg.textContent = `Status: unlocked. Download enabled for ${lead.company}.`;
-
-        const d = document.getElementById('downloadBtn');
-        if(d){
-          d.href = 'downloads/MetaMechTrial.exe';
-          d.style.opacity = '1';
-          d.style.pointerEvents = 'auto';
-          d.setAttribute('aria-disabled','false');
-        }
-      });
-    }
-
-    function setPayLinks(key){
-      const payNow = document.getElementById('payNow');
-      const payAlt = document.getElementById('payAlt');
-      if(payNow) payNow.href = STRIPE_LINKS[key] || '#';
-      if(payAlt) payAlt.href = ALT_LINKS[key] || '#';
-    }
-
     function updateCheckoutUI(){
       const plan = PLAN_MAP[selected] || PLAN_MAP.standard;
 
-      (document.getElementById('selPlan')||{}).textContent = plan.name;
-      (document.getElementById('selPrice')||{}).textContent = plan.price.toLocaleString('en-IE');
-      (document.getElementById('payPlan')||{}).textContent = plan.name;
-      (document.getElementById('payTotal')||{}).textContent = plan.price.toLocaleString('en-IE');
-
-      const payNote = document.getElementById('payNote');
+      const selPlan = document.getElementById('selPlan');
+      const selPrice = document.getElementById('selPrice');
+      const payPlan = document.getElementById('payPlan');
+      const payTotal = document.getElementById('payTotal');
       const payNow = document.getElementById('payNow');
       const payAlt = document.getElementById('payAlt');
+      const payStatus = document.getElementById('payStatus');
+
+      if(selPlan) selPlan.textContent = plan.name;
+      if(selPrice) selPrice.textContent = plan.price.toLocaleString('en-IE');
+      if(payPlan) payPlan.textContent = plan.name;
+      if(payTotal) payTotal.textContent = plan.price.toLocaleString('en-IE');
+
+      // Hidden fields for lead form
+      const lfPlan = document.getElementById('lead_plan');
+      const lfPrice = document.getElementById('lead_price');
+      if(lfPlan) lfPlan.value = plan.key;
+      if(lfPrice) lfPrice.value = String(plan.price);
+
+      if(payAlt){
+        payAlt.textContent = 'PAY WITH REVOLUT';
+        payAlt.href = REVOLUT_LINK;
+        payAlt.style.display = 'inline-flex';
+      }
 
       if(plan.key === 'trial'){
-        if(payNote) payNote.textContent = 'Trial is €0. Fill your details, then unlock download in the Trial section.';
-        if(payNow){ payNow.textContent = 'CONTINUE TO TRIAL DOWNLOAD'; payNow.href = '#trial'; }
-        if(payAlt) payAlt.style.display = 'none';
+        if(payNow){ payNow.textContent = 'GO TO TRIAL DOWNLOAD'; payNow.href = '#trial'; }
+        if(payStatus) payStatus.textContent = 'Status: Save details, then go to the Trial section (no payment).';
       } else {
-        if(payNote) payNote.textContent = 'Fill your details (Step 1), then PAY NOW opens secure checkout in a new tab.';
         if(payNow){ payNow.textContent = 'PAY NOW (STRIPE)'; payNow.href = '#'; }
-        if(payAlt) payAlt.style.display = 'inline-flex';
-        setPayLinks(plan.key);
+        if(payStatus) payStatus.textContent = 'Status: Save details first, then you can proceed to payment.';
       }
     }
 
@@ -918,6 +735,7 @@
       if(!PLAN_MAP[key]) return;
       selected = key;
 
+      // Sync ROI dropdown + tool cost
       const planSel = document.getElementById('plan');
       const costEl = document.getElementById('cost');
       if(planSel) planSel.value = key;
@@ -926,25 +744,25 @@
       calcROI();
       updateCheckoutUI();
 
+      // Button selected state
       document.querySelectorAll('.select-plan').forEach(btn => {
         if(!btn.dataset.original) btn.dataset.original = btn.textContent;
-        btn.textContent = (btn.dataset.plan === key) ? 'SELECTED ✓' : btn.dataset.original;
+        const k = btn.dataset.plan;
+        btn.textContent = (k === key) ? 'SELECTED ✓' : btn.dataset.original;
       });
     }
 
-    // Pricing select buttons
+    // Pricing buttons
     document.querySelectorAll('.select-plan').forEach(btn => {
-      btn.addEventListener('click', () => {
-        applySelection(btn.dataset.plan);
-        location.hash = '#checkout';
-      });
+      btn.addEventListener('click', () => { applySelection(btn.dataset.plan); location.hash = '#checkout'; });
     });
 
     // ROI dropdown
     const roiPlan = document.getElementById('plan');
     if(roiPlan){
       roiPlan.addEventListener('change', () => {
-        if(PLAN_MAP[roiPlan.value]) applySelection(roiPlan.value);
+        const key = roiPlan.value;
+        if(PLAN_MAP[key]) applySelection(key);
       });
     }
 
@@ -957,85 +775,169 @@
       });
     }
 
-    // PAY NOW: require lead then open payment
-    const payNowBtn = document.getElementById('payNow');
-    if(payNowBtn){
-      payNowBtn.addEventListener('click', (e) => {
+    // ==============================
+    // FORMSPREE SUBMIT (AJAX)
+    // ==============================
+    async function postToFormspree(formEl, statusEl){
+      if(FORMSPREE_ENDPOINT.includes('PASTE_YOUR_')){
+        if(statusEl){
+          statusEl.className = 'status err';
+          statusEl.textContent = 'Status: Formspree endpoint not set. Paste your endpoint in FORMSPREE_ENDPOINT.';
+        }
+        return { ok:false };
+      }
+
+      const data = new FormData(formEl);
+
+      try{
+        const res = await fetch(FORMSPREE_ENDPOINT, {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if(res.ok){
+          if(statusEl){
+            statusEl.className = 'status ok';
+            statusEl.textContent = 'Status: submitted successfully. You can proceed.';
+          }
+          return { ok:true };
+        }
+
+        if(statusEl){
+          statusEl.className = 'status err';
+          statusEl.textContent = 'Status: submit failed. Please try again.';
+        }
+        return { ok:false };
+      } catch(err){
+        if(statusEl){
+          statusEl.className = 'status err';
+          statusEl.textContent = 'Status: network error. Please try again.';
+        }
+        return { ok:false };
+      }
+    }
+
+    // Lead form (checkout)
+    let leadSubmitted = false;
+    const leadForm = document.getElementById('leadForm');
+    const leadStatus = document.getElementById('leadStatus');
+    if(leadForm){
+      leadForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const out = await postToFormspree(leadForm, leadStatus);
+        leadSubmitted = !!out.ok;
+      });
+    }
+
+    // Trial form
+    const trialForm = document.getElementById('trialForm');
+    const trialStatus = document.getElementById('trialStatus');
+    const downloadBtn = document.getElementById('downloadBtn');
+    if(trialForm){
+      trialForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const out = await postToFormspree(trialForm, trialStatus);
+        if(out.ok && downloadBtn){
+          downloadBtn.href = 'downloads/MetaMechTrial.exe';
+          downloadBtn.style.opacity = '1';
+          downloadBtn.style.pointerEvents = 'auto';
+          downloadBtn.setAttribute('aria-disabled','false');
+          trialStatus.className = 'status ok';
+          trialStatus.textContent = 'Status: unlocked. Download enabled.';
+        }
+      });
+    }
+
+    // Demo form
+    const demoForm = document.getElementById('demoForm');
+    const demoStatus = document.getElementById('demoStatus');
+    if(demoForm){
+      demoForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        await postToFormspree(demoForm, demoStatus);
+      });
+    }
+
+    // Pay buttons require lead submission (paid plans)
+    const payNow = document.getElementById('payNow');
+    const payAlt = document.getElementById('payAlt');
+    const payStatus = document.getElementById('payStatus');
+
+    function requireLead(){
+      if(leadSubmitted) return true;
+      if(payStatus){
+        payStatus.className = 'status err';
+        payStatus.textContent = 'Status: please SAVE DETAILS first (Formspree) before proceeding.';
+      }
+      location.hash = '#checkout';
+      const first = document.getElementById('leadCompany');
+      if(first) first.focus();
+      return false;
+    }
+
+    if(payNow){
+      payNow.addEventListener('click', (e) => {
         const plan = PLAN_MAP[selected] || PLAN_MAP.standard;
-        if(plan.key === 'trial') return;
+        if(plan.key === 'trial') return; // goes to #trial
 
         e.preventDefault();
-
-        const lead = loadLead();
-        if(!leadIsComplete(lead)){
-          location.hash = '#checkout';
-          const st = document.getElementById('leadStatus');
-          if(st) st.textContent = 'Status: please SAVE DETAILS (*) before proceeding to payment.';
-          const first = document.getElementById('leadCompany');
-          if(first) first.focus();
-          return;
-        }
+        if(!requireLead()) return;
 
         const url = STRIPE_LINKS[plan.key] || '#';
         if(!url || url === '#'){
-          alert('Stripe link is not configured yet. Paste your Stripe Payment Link URL in STRIPE_LINKS.');
+          if(payStatus){
+            payStatus.className = 'status err';
+            payStatus.textContent = 'Status: Stripe link not configured yet. Paste it into STRIPE_LINKS.';
+          }
           return;
         }
         window.open(url, '_blank', 'noopener');
       });
     }
 
-    // ALT pay: require lead then open
-    const payAltBtn = document.getElementById('payAlt');
-    if(payAltBtn){
-      payAltBtn.addEventListener('click', (e) => {
+    if(payAlt){
+      payAlt.addEventListener('click', (e) => {
         const plan = PLAN_MAP[selected] || PLAN_MAP.standard;
         if(plan.key === 'trial') return;
 
-        e.preventDefault();
-
-        const lead = loadLead();
-        if(!leadIsComplete(lead)){
-          location.hash = '#checkout';
-          const st = document.getElementById('leadStatus');
-          if(st) st.textContent = 'Status: please SAVE DETAILS (*) before proceeding.';
-          const first = document.getElementById('leadCompany');
-          if(first) first.focus();
+        // Require lead capture even for Revolut
+        if(!requireLead()){
+          e.preventDefault();
           return;
         }
-
-        const url = ALT_LINKS[plan.key] || '#';
-        if(!url || url === '#'){
-          alert('Alternative payment link is not configured yet.');
-          return;
-        }
-        window.open(url, '_blank', 'noopener');
+        // allow default link open
       });
     }
 
-    // Request invoice
+    // Request invoice button (mailto)
     const reqInvoice = document.getElementById('reqInvoice');
     if(reqInvoice){
       reqInvoice.addEventListener('click', (e) => {
         e.preventDefault();
         const plan = PLAN_MAP[selected] || PLAN_MAP.standard;
-        const lead = loadLead();
         const subject = encodeURIComponent('MetaMech License Purchase');
         const body = encodeURIComponent(
-          `Hi MetaMech Solution,\n\n` +
-          `I would like to purchase the following plan:\n\n` +
-          `Plan: ${plan.name}\n` +
-          `Price: €${plan.price.toLocaleString('en-IE')}\n\n` +
-          (leadIsComplete(lead)
-            ? `Buyer details:\nCompany: ${lead.company}\nName: ${lead.name}\nEmail: ${lead.email}\nRole: ${lead.role}\nCountry: ${lead.country}\n\n`
-            : '') +
-          `Please send invoice or secure payment link.\n\nThanks`
+          `Hi MetaMech Solution,
+
+` +
+          `I would like to purchase the following plan:
+
+` +
+          `Plan: ${plan.name}
+` +
+          `Price: €${plan.price.toLocaleString('en-IE')}
+
+` +
+          `Please send invoice or secure payment link.
+
+Thanks`
         );
         window.location.href = `mailto:hi@metamechsolutions.com?subject=${subject}&body=${body}`;
       });
     }
 
-    // Nav auto-hide on scroll
+    // Slim header auto-hide
     (function(){
       const nav = document.querySelector('.nav');
       if(!nav) return;
@@ -1046,7 +948,6 @@
         const y = window.scrollY;
         const down = y > lastY;
         const delta = Math.abs(y - lastY);
-
         if(delta > 10){
           if(down && y > 120) nav.classList.add('nav--hidden');
           else nav.classList.remove('nav--hidden');
@@ -1056,19 +957,13 @@
       }
 
       window.addEventListener('scroll', () => {
-        if(!ticking){
-          window.requestAnimationFrame(onScroll);
-          ticking = true;
-        }
+        if(!ticking){ window.requestAnimationFrame(onScroll); ticking = true; }
       });
     })();
 
     // Init
     calcROI();
-    const existingLead = loadLead();
-    if(existingLead) applyLeadToCheckout(existingLead);
     applySelection('standard');
   </script>
 </body>
 </html>
-
