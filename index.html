@@ -8,15 +8,17 @@
 
   <style>
     :root{
-      --bg:#070b14;
-      --panel:#0c1424;
-      --panel2:#0a1120;
-      --text:#f3f6ff;
-      --muted:#b6c2da;
+      /* BRAND-LED PREMIUM PALETTE (derived from logo feel: teal + amber on deep navy) */
+      --bg:#070b14;            /* deep navy */
+      --panel:#0c1424;         /* cards/nav base */
+      --panel2:#0a1120;        /* secondary panels */
+      --text:#f3f6ff;          /* crisp light text */
+      --muted:#b6c2da;         /* calmer secondary text */
       --line:rgba(255,255,255,.08);
 
-      --accent:#16b3b8;        /* teal */
-      --accent2:#f0b429;       /* amber */
+      /* accents (premium, not neon) */
+      --accent:#16b3b8;        /* teal (brand primary) */
+      --accent2:#f0b429;       /* amber (brand secondary) */
 
       --shadow:0 24px 60px rgba(0,0,0,.48);
       --radius:18px;
@@ -56,6 +58,7 @@
       gap:12px;
     }
 
+    /* Logo-only brand (NO highlight box) */
     .brand{display:flex;align-items:center;}
     .logo-img{
       width:110px;
@@ -98,6 +101,7 @@
       box-shadow: 0 18px 42px rgba(240,180,41,.16);
     }
 
+    /* Mobile CTA */
     .mobile-cta{display:none}
 
     /* HERO */
@@ -116,9 +120,7 @@
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       padding:18px;
-      transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
     }
-    .card:hover{transform: translateY(-3px); border-color: rgba(22,179,184,.22);}
 
     h1{
       font-size:44px;line-height:1.08;margin:0 0 12px 0;
@@ -128,8 +130,6 @@
     p{margin:0 0 12px 0;color:var(--muted);line-height:1.65}
 
     .hero-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-    .btn{transition: transform .18s ease, filter .18s ease;}
-    .btn:hover{transform: translateY(-1px); filter:brightness(1.03)}
 
     .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
     .kpi{
@@ -141,19 +141,41 @@
     .kpi strong{font-size:18px;display:block}
     .kpi span{color:var(--muted);font-size:13px}
 
+    /* Subtle animated background glow */
     @keyframes floatGlow{
       0%,100%{ transform: translate3d(0,0,0) scale(1); opacity:.55; }
       50%{ transform: translate3d(0,-10px,0) scale(1.03); opacity:.75; }
     }
 
+    /* Scroll-reveal animations */
     .reveal{opacity:0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease;}
     .reveal.reveal--in{opacity:1; transform: translateY(0);}
 
+    /* Premium micro-interactions */
+    .card{transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;}
+    .card:hover{transform: translateY(-3px); border-color: rgba(22,179,184,.22);}
+    .btn{transition: transform .18s ease, filter .18s ease;}
+    .btn:hover{transform: translateY(-1px); filter:brightness(1.03)}
+
+    /* Image / preview styling */
+    .preview-grid{display:grid; grid-template-columns: 1.2fr .8fr; gap:12px; margin-top:14px;}
+    .preview-main, .preview-side{border-radius: var(--radius); border:1px solid var(--line); background: rgba(255,255,255,.02); overflow:hidden;}
+    .preview-main img, .preview-side img{width:100%; height:100%; object-fit:cover; display:block;}
+    .preview-side{display:grid; grid-template-rows: 1fr 1fr; gap:12px; padding:12px;}
+    .preview-side .shot{border-radius:14px; overflow:hidden; border:1px solid var(--line);}
+
+    @media (max-width: 900px){
+      .preview-grid{grid-template-columns:1fr}
+      .preview-side{grid-template-rows: auto; grid-template-columns:1fr;}
+    }
+
+    /* Sections */
     .section{padding:46px 0}
     .section h2{margin:0 0 10px 0;font-size:28px;letter-spacing:-.3px}
     .section .lead{max-width:760px}
 
     .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+
     .pill{
       display:inline-flex;align-items:center;gap:8px;
       font-size:12px;color:var(--muted);
@@ -161,6 +183,7 @@
       padding:6px 10px;border-radius:999px;
       background: rgba(22,179,184,.06);
     }
+
     .list{margin:10px 0 0 0;padding:0 0 0 18px;color:var(--muted)}
     .list li{margin:7px 0}
 
@@ -168,8 +191,16 @@
 
     .field{display:flex;flex-direction:column;gap:6px}
     .field label{color:var(--muted);font-size:13px}
-    .field input, .select{
+    .field input{
       padding:12px 12px;border-radius:12px;border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color:var(--text);
+      outline:none;
+    }
+    .select{
+      padding:12px 12px;
+      border-radius:12px;
+      border:1px solid var(--line);
       background: rgba(255,255,255,.03);
       color:var(--text);
       outline:none;
@@ -185,9 +216,10 @@
 
     .note{font-size:12px;color:var(--muted);opacity:.9;line-height:1.5}
 
+    /* Anchor offset for sticky header */
     section{scroll-margin-top: 76px;}
-    .footer{padding:28px 0 40px;border-top:1px solid var(--line);color:var(--muted)}
 
+    .footer{padding:28px 0 40px;border-top:1px solid var(--line);color:var(--muted)}
     /* Pricing: Most Popular ribbon */
     .popular{
       outline:2px solid rgba(22,179,184,.35);
@@ -238,6 +270,7 @@
       100%{ left:120%; }
     }
 
+    /* Responsive */
     @media (max-width: 900px){
       .grid{grid-template-columns:1fr}
       .cards3{grid-template-columns:1fr}
@@ -254,6 +287,7 @@
   <div class="nav">
     <div class="container">
       <div class="nav-inner">
+        <!-- LOGO ONLY (110px). Update filename if needed -->
         <div class="brand">
           <img src="assets/logo/metamech-logo.png" alt="MetaMech Solution Logo" class="logo-img" />
         </div>
@@ -262,6 +296,7 @@
           <a href="#tools">TOOLS</a>
           <a href="#roi">ROI CALCULATOR</a>
           <a href="#pricing">PRICING</a>
+          <a href="#checkout">CHECKOUT</a>
           <a href="#services">SERVICES</a>
           <a href="#trial">3-DAY TRIAL</a>
           <a href="#contact">CONTACT</a>
@@ -332,6 +367,36 @@
     </div>
   </header>
 
+  <!-- PRODUCT PREVIEW (Screenshots / Photos) -->
+  <section id="preview" class="section">
+    <div class="container">
+      <h2 class="reveal">PRODUCT PREVIEW</h2>
+      <p class="lead reveal">A quick visual look at the automation experience and outputs (replace with your real screenshots anytime).</p>
+
+      <div class="preview-grid">
+        <div class="card preview-main reveal">
+          <img src="assets/images/preview-main.jpg" alt="MetaMech automation preview" onerror="this.style.display='none'" />
+          <div style="padding:14px;" class="note">
+            Tip: add your EXE UI screenshot here (assets/images/preview-main.jpg).
+          </div>
+        </div>
+
+        <div class="preview-side">
+          <div class="card shot reveal">
+            <img src="assets/images/preview-bom.jpg" alt="BOM export example" onerror="this.style.display='none'" />
+            <div style="padding:12px;" class="note">BOM export example (preview-bom.jpg)</div>
+          </div>
+          <div class="card shot reveal">
+            <img src="assets/images/preview-pdf.jpg" alt="PDF merge example" onerror="this.style.display='none'" />
+            <div style="padding:12px;" class="note">PDF merge output (preview-pdf.jpg)</div>
+          </div>
+        </div>
+      </div>
+
+      <p class="note reveal" style="margin-top:10px;">Add these files to your repo: <b>assets/images/preview-main.jpg</b>, <b>preview-bom.jpg</b>, <b>preview-pdf.jpg</b>.</p>
+    </div>
+  </section>
+
   <!-- TOOLS -->
   <section id="tools" class="section">
     <div class="container">
@@ -342,6 +407,7 @@
       </p>
 
       <div class="cards3">
+        <!-- Note: cards are revealed on scroll -->
         <div class="card">
           <h3 style="margin:0 0 8px 0;">BOM AUTOMATION</h3>
           <p>Master BOM + sheets by TYPE, missing property highlighting, consistent formatting.</p>
@@ -373,6 +439,36 @@
   </section>
 
   <!-- ROI -->
+  <!-- TRUSTED -->
+  <section id="trusted" class="section">
+    <div class="container">
+      <h2>TRUSTED BY ENGINEERS</h2>
+      <p class="lead">Built for real-world SolidWorks workflows where speed, standards, and consistency matter.</p>
+
+      <div class="cards3">
+        <div class="card">
+          <h3 style="margin:0 0 8px 0;">BUILT FOR LARGE ASSEMBLIES</h3>
+          <p>Designed to perform on complex TLAs and deep sub-assembly structures without breaking your workflow.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin:0 0 8px 0;">CONSISTENT OUTPUTS</h3>
+          <p>Standardised BOM/PDF/STEP results so every engineer exports the same format, every time.</p>
+        </div>
+        <div class="card">
+          <h3 style="margin:0 0 8px 0;">ENGINEER-LED DELIVERY</h3>
+          <p>We work closely with your design team initially to understand real challenges and deliver custom-fit solutions.</p>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:12px;">
+        <p style="margin:0;color:var(--muted);">
+          “The automation paid for itself quickly — fewer manual steps, fewer mistakes, and faster releases.”
+        </p>
+        <p class="note" style="margin:8px 0 0 0;">— Typical feedback from engineering teams (examples)</p>
+      </div>
+    </div>
+  </section>
+
   <section id="roi" class="section">
     <div class="container">
       <h2>ROI CALCULATOR</h2>
@@ -404,7 +500,7 @@
             <label>Select Plan</label>
             <select id="plan" class="select">
               <option value="">-- Choose a plan --</option>
-              <option value="demo" data-price="0">Demo / Trial (3 days) – €0</option>
+              <option value="trial" data-price="0">Demo / Trial (3 days) – €0</option>
               <option value="standard" data-price="999">Standard Pack – €999</option>
               <option value="premium" data-price="1299">Premium Pack – €1,299</option>
               <option value="plus" data-price="1599">Premium Plus – €1,599</option>
@@ -413,11 +509,11 @@
 
           <div class="field">
             <label>Tool cost (€)</label>
-            <input id="cost" type="number" value="999" min="0" />
+            <input id="cost" type="number" value="0" min="0" />
           </div>
 
           <div class="hero-cta" style="margin-top:12px">
-            <a class="btn btn-primary" href="#checkout" id="roiContinue">CONTINUE TO CHECKOUT</a>
+            <a class="btn btn-primary" href="#checkout" id="roiContinue">CONTINUE TO PURCHASE</a>
           </div>
 
           <div style="margin-top:12px" class="note">
@@ -446,23 +542,22 @@
   <section id="pricing" class="section">
     <div class="container">
       <h2>PRICING</h2>
-      <p class="lead">Pick a package. Selecting any package will auto-fill ROI + Checkout.</p>
+      <p class="lead">Simple one-time licenses with immediate ROI. Launch discount applied.</p>
 
-      <div class="cards3" style="grid-template-columns:repeat(4,1fr);">
-        <!-- DEMO -->
+      <div class="cards3">
+        <!-- DEMO / TRIAL -->
         <div class="card">
           <span class="pill">DEMO / TRIAL</span>
           <h3 style="margin:10px 0 4px 0;">€0</h3>
-          <p class="note">No card details required • 3-day expiry</p>
+          <p class="note">No card required</p>
           <ul class="list">
-            <li>Try the workflow on a sample project</li>
-            <li>BOM automation preview (limited)</li>
-            <li>PDF export preview (limited)</li>
-            <li>Shows logs + output style</li>
-            <li>Upgrade anytime to full license</li>
+            <li>Limited feature access</li>
+            <li>3-day expiry</li>
+            <li>Sample assemblies only</li>
+            <li>Email support</li>
           </ul>
-          <div class="hero-cta" style="margin-top:12px">
-            <button class="btn btn-green plan-btn" data-plan="demo">SELECT DEMO</button>
+          <div style="margin-top:12px">
+            <button class="btn btn-green select-plan" data-plan="trial" data-price="0">START FREE TRIAL</button>
           </div>
         </div>
 
@@ -472,30 +567,28 @@
           <h3 style="margin:10px 0 4px 0;">€999</h3>
           <p class="note"><del>€1,110</del> &nbsp; 10% launch discount</p>
           <ul class="list">
-            <li><b>BOM automation</b> (all levels)</li>
-            <li><b>Custom BOM template</b> setup</li>
-            <li><b>PDF export + merge</b> (hierarchy)</li>
-            <li>Standardised outputs</li>
+            <li>BOM automation</li>
+            <li>PDF export + merge</li>
+            <li>Custom BOM template</li>
           </ul>
-          <div class="hero-cta" style="margin-top:12px">
-            <button class="btn btn-primary plan-btn" data-plan="standard">SELECT STANDARD</button>
+          <div style="margin-top:12px">
+            <button class="btn btn-primary select-plan" data-plan="standard" data-price="999">SELECT STANDARD</button>
           </div>
         </div>
 
         <!-- PREMIUM -->
         <div class="card popular">
-          <div class="ribbon" aria-label="Most Popular"><span>MOST POPULAR</span></div>
+          <div class="ribbon"><span>MOST POPULAR</span></div>
           <span class="pill">PREMIUM PACK</span>
           <h3 style="margin:10px 0 4px 0;">€1,299</h3>
           <p class="note"><del>€1,440</del> &nbsp; 10% launch discount</p>
           <ul class="list">
-            <li><b>All Standard features</b></li>
-            <li><b>STEP export</b> automation</li>
-            <li>Options: parts / assemblies / both</li>
-            <li>Supplier-ready exports</li>
+            <li>All Standard features</li>
+            <li>STEP export automation</li>
+            <li>Advanced export options</li>
           </ul>
-          <div class="hero-cta" style="margin-top:12px">
-            <button class="btn btn-primary plan-btn" data-plan="premium">SELECT PREMIUM</button>
+          <div style="margin-top:12px">
+            <button class="btn btn-primary select-plan" data-plan="premium" data-price="1299">SELECT PREMIUM</button>
           </div>
         </div>
 
@@ -505,87 +598,17 @@
           <h3 style="margin:10px 0 4px 0;">€1,599</h3>
           <p class="note"><del>€1,775</del> &nbsp; 10% launch discount</p>
           <ul class="list">
-            <li><b>All Premium features</b></li>
-            <li>Drawing template update/change</li>
-            <li>Renumbering + clean-up</li>
-            <li>1-click custom property update</li>
+            <li>All Premium features</li>
+            <li>Template bulk update</li>
+            <li>Auto numbering system</li>
           </ul>
-          <div class="hero-cta" style="margin-top:12px">
-            <button class="btn btn-primary plan-btn" data-plan="plus">SELECT PREMIUM PLUS</button>
+          <div style="margin-top:12px">
+            <button class="btn btn-primary select-plan" data-plan="plus" data-price="1599">SELECT PREMIUM PLUS</button>
           </div>
         </div>
       </div>
 
-      <div class="card" style="margin-top:14px;">
-        <h3 style="margin:0 0 10px 0;">PACKAGE COMPARISON</h3>
-        <div style="overflow:auto;">
-          <table style="width:100%;border-collapse:collapse;min-width:820px;">
-            <thead>
-              <tr>
-                <th style="text-align:left;padding:10px;border-bottom:1px solid var(--line);">Feature</th>
-                <th style="text-align:left;padding:10px;border-bottom:1px solid var(--line);">Demo/Trial</th>
-                <th style="text-align:left;padding:10px;border-bottom:1px solid var(--line);">Standard</th>
-                <th style="text-align:left;padding:10px;border-bottom:1px solid var(--line);">Premium</th>
-                <th style="text-align:left;padding:10px;border-bottom:1px solid var(--line);">Premium Plus</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td style="padding:10px;border-bottom:1px solid var(--line);">3-day access</td>
-                <td style="padding:10px;border-bottom:1px solid var(--line);">✅</td>
-                <td style="padding:10px;border-bottom:1px solid var(--line);">—</td>
-                <td style="padding:10px;border-bottom:1px solid var(--line);">—</td>
-                <td style="padding:10px;border-bottom:1px solid var(--line);">—</td>
-              </tr>
-              <tr>
-                <td style="padding:10px;border-bottom:1px solid var(--line);">BOM automation</td>
-                <td style="padding:10px;border-bottom:1px solid var(--line);">Limited</td>
-                <td style="padding:10px;border-bottom:1px solid var(--line);">✅</td>
-                <td style="padding:10px;border-bottom:1px solid var(--line);">✅</td>
-                <td style="padding:10px;border-bottom:1px solid var(--line);">✅</td>
-              </tr>
-              <tr>
-                <td style="padding:10px;border-bottom:1px solid var(--line);">PDF export / merge + index</td>
-                <td style="padding:10px;border-bottom:1px solid var(--line);">Limited</td>
-                <td style="padding:10px;border-bottom:1px solid var(--line);">✅</td>
-                <td style="padding:10px;border-bottom:1px solid var(--line);">✅</td>
-                <td style="padding:10px;border-bottom:1px solid var(--line);">✅</td>
-              </tr>
-              <tr>
-                <td style="padding:10px;border-bottom:1px solid var(--line);">STEP export</td>
-                <td style="padding:10px;border-bottom:1px solid var(--line);">—</td>
-                <td style="padding:10px;border-bottom:1px solid var(--line);">—</td>
-                <td style="padding:10px;border-bottom:1px solid var(--line);">✅</td>
-                <td style="padding:10px;border-bottom:1px solid var(--line);">✅</td>
-              </tr>
-              <tr>
-                <td style="padding:10px;border-bottom:1px solid var(--line);">Template update/change</td>
-                <td style="padding:10px;border-bottom:1px solid var(--line);">—</td>
-                <td style="padding:10px;border-bottom:1px solid var(--line);">—</td>
-                <td style="padding:10px;border-bottom:1px solid var(--line);">—</td>
-                <td style="padding:10px;border-bottom:1px solid var(--line);">✅</td>
-              </tr>
-              <tr>
-                <td style="padding:10px;border-bottom:1px solid var(--line);">Renumbering + clean-up</td>
-                <td style="padding:10px;border-bottom:1px solid var(--line);">—</td>
-                <td style="padding:10px;border-bottom:1px solid var(--line);">—</td>
-                <td style="padding:10px;border-bottom:1px solid var(--line);">—</td>
-                <td style="padding:10px;border-bottom:1px solid var(--line);">✅</td>
-              </tr>
-              <tr>
-                <td style="padding:10px;border-bottom:1px solid var(--line);"><b>Price</b></td>
-                <td style="padding:10px;border-bottom:1px solid var(--line);"><b>€0</b></td>
-                <td style="padding:10px;border-bottom:1px solid var(--line);"><b>€999</b></td>
-                <td style="padding:10px;border-bottom:1px solid var(--line);"><b>€1,299</b></td>
-                <td style="padding:10px;border-bottom:1px solid var(--line);"><b>€1,599</b></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="note" style="margin:10px 0 0 0;">
-          Demo is for evaluation only. Full licenses unlock complete automation, unlimited use, and support.
-        </p>
-      </div>
+      <p class="note" style="margin-top:14px;">Most teams recover the full license cost within weeks.</p>
     </div>
   </section>
 
@@ -593,31 +616,100 @@
   <section id="checkout" class="section">
     <div class="container">
       <h2>CHECKOUT</h2>
-      <p class="lead">Select a package and proceed. Demo/Trial is €0 and requires no card details.</p>
+      <p class="lead">Select a plan, then proceed to payment. Trial is €0 and requires no card details.</p>
 
       <div class="two">
         <div class="card">
           <h3>YOUR SELECTION</h3>
+          <p class="note">Plan and price sync automatically from Pricing buttons or the ROI calculator.</p>
           <div class="result"><b>Selected Plan:</b> <span id="selPlan">Standard Pack</span></div>
           <div style="height:10px"></div>
           <div class="result"><b>Price:</b> €<span id="selPrice">999</span></div>
           <div style="height:10px"></div>
-          <div class="note" id="checkoutNote">You’ll receive an email with invoice or secure payment link.</div>
+          <div class="note" id="checkoutNote">Ready to pay? Choose a secure checkout option on the right.</div>
         </div>
 
         <div class="card">
-          <h3>NEXT STEP</h3>
-          <p class="note">For licenses, request a payment link. For Demo/Trial, download directly.</p>
+          <h3>PAYMENT</h3>
+          <p class="note">GitHub Pages is static, so payment is done via external secure checkout links (Stripe recommended).</p>
 
-          <a class="btn btn-green" id="payBtn" href="javascript:void(0)">REQUEST PAYMENT</a>
+          <div class="result" style="display:flex;justify-content:space-between;gap:10px;align-items:center;">
+            <div>
+              <b>Plan:</b> <span id="payPlan">Standard Pack</span><br />
+              <b>Total:</b> €<span id="payTotal">999</span>
+            </div>
+            <span class="pill">Secure checkout</span>
+          </div>
+
+          <div style="height:12px"></div>
+
+          <a class="btn btn-green" id="payNow" href="#" rel="nofollow">PAY NOW (STRIPE)</a>
           <div style="height:10px"></div>
-          <a class="btn btn-primary" href="#trial">GO TO TRIAL DOWNLOAD</a>
+          <a class="btn" id="payAlt" href="#" rel="nofollow">PAY WITH ALTERNATIVE LINK</a>
+          <div style="height:10px"></div>
+          <a class="btn btn-primary" id="reqInvoice" href="#" rel="nofollow">REQUEST INVOICE (EMAIL)</a>
+
+          <div style="margin-top:12px" class="note" id="payNote">
+            Paste your real Stripe Payment Links in the script (STRIPE_LINKS). Trial skips payment.
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- SERVICES -->
+    <!-- FAQ -->
+  <section id="faq" class="section">
+    <div class="container">
+      <h2>FAQ</h2>
+      <p class="lead">Quick answers about licensing, updates, and SolidWorks compatibility.</p>
+
+      <div class="two">
+        <div class="card">
+          <details open>
+            <summary style="cursor:pointer; font-weight:700;">How does licensing work?</summary>
+            <p class="note" style="margin-top:10px;">
+              One-time license per company/team. Activation is linked to your environment and can be moved if you change machines.
+            </p>
+          </details>
+          <hr style="border:none;border-top:1px solid var(--line);margin:12px 0;" />
+
+          <details>
+            <summary style="cursor:pointer; font-weight:700;">Is this compatible with my SolidWorks version?</summary>
+            <p class="note" style="margin-top:10px;">Designed for SolidWorks 2022–2025 workflows. If you have an older version, we can advise the best approach.</p>
+          </details>
+          <hr style="border:none;border-top:1px solid var(--line);margin:12px 0;" />
+
+          <details>
+            <summary style="cursor:pointer; font-weight:700;">What is included in the setup?</summary>
+            <p class="note" style="margin-top:10px;">Initial alignment with your folder structure, naming rules, templates, and required BOM/PDF formats.</p>
+          </details>
+        </div>
+
+        <div class="card">
+          <details open>
+            <summary style="cursor:pointer; font-weight:700;">Do you provide updates?</summary>
+            <p class="note" style="margin-top:10px;">Yes. Minor improvements and bug fixes are provided as we refine features and compatibility.</p>
+          </details>
+          <hr style="border:none;border-top:1px solid var(--line);margin:12px 0;" />
+
+          <details>
+            <summary style="cursor:pointer; font-weight:700;">Can you customise outputs for our standards?</summary>
+            <p class="note" style="margin-top:10px;">Absolutely. We can tailor custom properties, templates, naming rules, and sheet formats so your outputs look premium and consistent.</p>
+          </details>
+          <hr style="border:none;border-top:1px solid var(--line);margin:12px 0;" />
+
+          <details>
+            <summary style="cursor:pointer; font-weight:700;">How does the 3-day trial work?</summary>
+            <p class="note" style="margin-top:10px;">Trial starts on first run and expires after 72 hours. It’s ideal for validating workflow fit before purchase.</p>
+          </details>
+        </div>
+      </div>
+
+      <p class="note" style="margin-top:14px;">Still have questions? Email us at <a href="mailto:hi@metamechsolutions.com" style="text-decoration:underline;">hi@metamechsolutions.com</a>.</p>
+    </div>
+  </section>
+
   <section id="services" class="section">
     <div class="container">
       <h2>SERVICES</h2>
@@ -644,13 +736,16 @@
   <section id="trial" class="section">
     <div class="container">
       <h2>DOWNLOAD 3-DAY TRIAL</h2>
-      <p class="lead">Try the automation on a sample workflow. The trial expires automatically after 3 days.</p>
+      <p class="lead">
+        Try the automation on a sample workflow. The trial expires automatically after 3 days.
+      </p>
 
       <div class="two">
         <div class="card">
           <h3 style="margin:0 0 8px 0;">TRIAL DOWNLOAD</h3>
-          <p>Click to download the trial EXE (Windows). No card details required.</p>
+          <p>Click to download the trial EXE (Windows). You can optionally enter your email to receive trial details.</p>
 
+          <!-- Update this file path to where you host the EXE inside your repo -->
           <a class="btn btn-green" id="downloadBtn" href="downloads/MetaMechTrial.exe" download>
             ⬇ DOWNLOAD 3-DAY TRIAL
           </a>
@@ -671,16 +766,15 @@
         </div>
 
         <div class="card">
-          <h3 style="margin:0 0 8px 0;">WHAT’S INCLUDED IN DEMO/TRIAL</h3>
+          <h3 style="margin:0 0 8px 0;">HOW THE TRIAL WORKS</h3>
           <ul class="list">
-            <li>UI + workflow preview</li>
-            <li>Limited BOM export demonstration</li>
-            <li>Limited PDF export demonstration</li>
-            <li>Logs + output style validation</li>
-            <li>72-hour automatic expiry</li>
+            <li>Install & run the EXE</li>
+            <li>Trial period begins on first run</li>
+            <li>Expires after 72 hours (3 days)</li>
+            <li>Contact us to activate full license</li>
           </ul>
           <div style="margin-top:12px" class="note">
-            Need a full test against a real TLA? Email us and we can guide the best trial setup.
+            Want stronger protection? We can upgrade to online key activation (recommended for a “big brand” product).
           </div>
         </div>
       </div>
@@ -696,7 +790,7 @@
       <div class="two">
         <div class="card">
           <h3 style="margin:0 0 8px 0;">REQUEST A DEMO</h3>
-          <p class="note">GitHub Pages is static — this opens email directly.</p>
+          <p class="note">Since GitHub Pages is static, this uses an email link (or you can connect Formspree / Google Form).</p>
           <a class="btn btn-primary" href="mailto:hi@metamechsolutions.com?subject=MetaMech%20Demo%20Request&body=Hi%20MetaMech%20Solution%2C%0A%0ACompany%3A%0AWorkflow%20to%20automate%3A%0ASolidWorks%20version%3A%0A%0AThanks%2C">
             ✉ EMAIL US
           </a>
@@ -725,10 +819,15 @@
   </div>
 
   <script>
-    // ---- Reveal animations ----
+    // Auto add reveal class to key elements
     (function(){
       const targets = document.querySelectorAll('h2, .lead, .card, .kpi, .pill, .result');
       targets.forEach(el => el.classList.add('reveal'));
+    })();
+
+    // Scroll reveal observer
+    (function(){
+      const items = document.querySelectorAll('.reveal');
       const io = new IntersectionObserver((entries) => {
         entries.forEach(e => {
           if(e.isIntersecting){
@@ -737,162 +836,236 @@
           }
         });
       }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+      items.forEach(el => io.observe(el));
     })();
 
-    // ---- Helpers ----
+    // Footer year
+    const yr = document.getElementById('yrNow');
+    if(yr) yr.textContent = new Date().getFullYear();
+
+    // ==============================
+    // PAYMENT LINKS (EDIT THESE)
+    // ==============================
+    // Create Stripe Payment Links and paste them here.
+    // Example: https://buy.stripe.com/xxxx
+    const STRIPE_LINKS = {
+      standard: '#',
+      premium: '#',
+      plus: '#'
+    };
+
+    // Optional alternative checkout links (PayPal/Gumroad/etc.)
+    const ALT_LINKS = {
+      standard: '#',
+      premium: '#',
+      plus: '#'
+    };
+
+    // ==============================
+    // ROI CALCULATOR (robust)
+    // ==============================
     function fmt(n){
-      if(!isFinite(n)) return "0";
+      if(!isFinite(n)) return '0';
       return Math.round(n).toLocaleString('en-IE');
     }
 
-    // ---- ROI calc ----
     function calcROI(){
-      const eng = parseFloat(document.getElementById('eng').value) || 0;
-      const hrs = parseFloat(document.getElementById('hrs').value) || 0;
-      const rate = parseFloat(document.getElementById('rate').value) || 0;
-      const weeks = parseFloat(document.getElementById('weeks').value) || 0;
-      const cost = parseFloat(document.getElementById('cost').value) || 0;
+      const eng = parseFloat((document.getElementById('eng')||{}).value) || 0;
+      const hrs = parseFloat((document.getElementById('hrs')||{}).value) || 0;
+      const rate = parseFloat((document.getElementById('rate')||{}).value) || 0;
+      const weeks = parseFloat((document.getElementById('weeks')||{}).value) || 0;
+      const cost = parseFloat((document.getElementById('cost')||{}).value) || 0;
 
       const weekly = eng * hrs * rate;
       const monthly = weekly * 4.33;
       const annual = weekly * weeks;
 
-      document.getElementById('wk').textContent = fmt(weekly);
-      document.getElementById('mo').textContent = fmt(monthly);
-      document.getElementById('yr').textContent = fmt(annual);
+      const wkOut = document.getElementById('wk');
+      const moOut = document.getElementById('mo');
+      const yrOut = document.getElementById('yr');
+      const beOut = document.getElementById('be');
 
-      const be = document.getElementById('be');
-      if(cost > 0 && weekly > 0){
-        const weeksToBE = cost / weekly;
-        const daysToBE = weeksToBE * 7;
-        be.textContent = (daysToBE < 7) ? `${Math.ceil(daysToBE)} days` : `${weeksToBE.toFixed(1)} weeks`;
-      } else {
-        be.textContent = "—";
+      if(wkOut) wkOut.textContent = fmt(weekly);
+      if(moOut) moOut.textContent = fmt(monthly);
+      if(yrOut) yrOut.textContent = fmt(annual);
+
+      if(beOut){
+        if(cost > 0 && weekly > 0){
+          const weeksToBE = cost / weekly;
+          const daysToBE = weeksToBE * 7;
+          beOut.textContent = (daysToBE < 7) ? `${Math.ceil(daysToBE)} days` : `${weeksToBE.toFixed(1)} weeks`;
+        } else {
+          beOut.textContent = '—';
+        }
       }
     }
 
     ['eng','hrs','rate','weeks','cost'].forEach(id => {
       const el = document.getElementById(id);
+      if(!el) return;
       el.addEventListener('input', calcROI);
       el.addEventListener('change', calcROI);
     });
 
-    // ---- Plans ----
+    // ==============================
+    // PLAN SELECTION + CHECKOUT
+    // ==============================
     const PLAN_MAP = {
-      demo:     { name: 'Demo / Trial (3 days)', price: 0 },
-      standard: { name: 'Standard Pack', price: 999 },
-      premium:  { name: 'Premium Pack', price: 1299 },
-      plus:     { name: 'Premium Plus', price: 1599 }
+      trial:    { key:'trial',    name:'Demo / Trial (3 days)', price:0 },
+      standard: { key:'standard', name:'Standard Pack', price:999 },
+      premium:  { key:'premium',  name:'Premium Pack',  price:1299 },
+      plus:     { key:'plus',     name:'Premium Plus',  price:1599 }
     };
 
-    let selectedPlanKey = 'standard';
+    let selected = 'standard';
+
+    function setPayLinks(key){
+      const payNow = document.getElementById('payNow');
+      const payAlt = document.getElementById('payAlt');
+
+      if(payNow) payNow.href = STRIPE_LINKS[key] || '#';
+      if(payAlt) payAlt.href = ALT_LINKS[key] || '#';
+    }
+
+    function updateCheckoutUI(){
+      const plan = PLAN_MAP[selected] || PLAN_MAP.standard;
+
+      const selPlan = document.getElementById('selPlan');
+      const selPrice = document.getElementById('selPrice');
+      const payPlan = document.getElementById('payPlan');
+      const payTotal = document.getElementById('payTotal');
+      const checkoutNote = document.getElementById('checkoutNote');
+      const payNote = document.getElementById('payNote');
+      const payNow = document.getElementById('payNow');
+      const payAlt = document.getElementById('payAlt');
+
+      if(selPlan) selPlan.textContent = plan.name;
+      if(selPrice) selPrice.textContent = plan.price.toLocaleString('en-IE');
+      if(payPlan) payPlan.textContent = plan.name;
+      if(payTotal) payTotal.textContent = plan.price.toLocaleString('en-IE');
+
+      // If trial, disable payment
+      if(plan.key === 'trial'){
+        if(checkoutNote) checkoutNote.textContent = 'Trial selected: €0 — no card details required. Download from the Trial section.';
+        if(payNote) payNote.textContent = 'Trial is €0. Use the Trial download section. Payment is not required.';
+        if(payNow){ payNow.textContent = 'NO PAYMENT REQUIRED (TRIAL)'; payNow.href = '#trial'; }
+        if(payAlt){ payAlt.style.display = 'none'; }
+      } else {
+        if(checkoutNote) checkoutNote.textContent = 'Ready to pay? Choose a secure checkout option on the right.';
+        if(payNote) payNote.textContent = 'Paste your real Stripe Payment Links in the script (STRIPE_LINKS).';
+        if(payNow){ payNow.textContent = 'PAY NOW (STRIPE)'; }
+        if(payAlt){ payAlt.style.display = 'inline-flex'; }
+        setPayLinks(plan.key);
+      }
+    }
 
     function applySelection(key){
-      const plan = PLAN_MAP[key];
-      if(!plan) return;
-      selectedPlanKey = key;
+      if(!PLAN_MAP[key]) return;
+      selected = key;
 
-      // ROI dropdown + tool cost
+      // Sync ROI dropdown + tool cost
       const planSel = document.getElementById('plan');
       const costEl = document.getElementById('cost');
-      planSel.value = key;
-      costEl.value = plan.price;
-
-      // Checkout text
-      document.getElementById('selPlan').textContent = plan.name;
-      document.getElementById('selPrice').textContent = plan.price.toLocaleString('en-IE');
-
-      // Checkout behavior
-      const payBtn = document.getElementById('payBtn');
-      const note = document.getElementById('checkoutNote');
-      if(key === 'demo'){
-        payBtn.textContent = 'NO PAYMENT REQUIRED (DEMO)';
-        payBtn.setAttribute('data-disabled','1');
-        note.textContent = 'Demo/Trial is €0 — download the trial from the Trial section. No card details required.';
-      } else {
-        payBtn.textContent = 'REQUEST PAYMENT';
-        payBtn.removeAttribute('data-disabled');
-        note.textContent = 'You’ll receive an email with invoice or secure payment link.';
-      }
-
-      // Visual feedback on pricing buttons
-      document.querySelectorAll('.plan-btn').forEach(btn => {
-        const k = btn.getAttribute('data-plan');
-        if(!btn.dataset.original) btn.dataset.original = btn.textContent;
-        btn.textContent = (k === key) ? 'SELECTED ✓' : btn.dataset.original;
-      });
+      if(planSel) planSel.value = key;
+      if(costEl) costEl.value = PLAN_MAP[key].price;
 
       calcROI();
+      updateCheckoutUI();
+
+      // Button selected state
+      document.querySelectorAll('.select-plan').forEach(btn => {
+        if(!btn.dataset.original) btn.dataset.original = btn.textContent;
+        const k = btn.dataset.plan;
+        btn.textContent = (k === key) ? 'SELECTED ✓' : btn.dataset.original;
+      });
     }
 
     // Pricing buttons
-    document.querySelectorAll('.plan-btn').forEach(btn => {
+    document.querySelectorAll('.select-plan').forEach(btn => {
       btn.addEventListener('click', () => {
-        applySelection(btn.getAttribute('data-plan'));
-        window.location.hash = '#checkout';
+        applySelection(btn.dataset.plan);
+        location.hash = '#checkout';
       });
     });
 
     // ROI dropdown
-    document.getElementById('plan').addEventListener('change', (e) => {
-      const key = e.target.value;
-      if(PLAN_MAP[key]) applySelection(key);
-    });
+    const roiPlan = document.getElementById('plan');
+    if(roiPlan){
+      roiPlan.addEventListener('change', () => {
+        const key = roiPlan.value;
+        if(PLAN_MAP[key]) applySelection(key);
+      });
+    }
 
-    // ROI Continue
-    document.getElementById('roiContinue').addEventListener('click', () => {
-      const key = document.getElementById('plan').value || selectedPlanKey;
-      if(PLAN_MAP[key]) applySelection(key);
-    });
+    // ROI continue
+    const roiContinue = document.getElementById('roiContinue');
+    if(roiContinue){
+      roiContinue.addEventListener('click', () => {
+        const key = (document.getElementById('plan')||{}).value || selected;
+        applySelection(key);
+      });
+    }
 
-    // Payment request (email) OR demo -> trial
-    document.getElementById('payBtn').addEventListener('click', () => {
-      const payBtn = document.getElementById('payBtn');
-      if(payBtn.getAttribute('data-disabled') === '1'){
-        window.location.hash = '#trial';
-        return;
-      }
+    // Request invoice button (mailto)
+    const reqInvoice = document.getElementById('reqInvoice');
+    if(reqInvoice){
+      reqInvoice.addEventListener('click', (e) => {
+        e.preventDefault();
+        const plan = PLAN_MAP[selected] || PLAN_MAP.standard;
+        const subject = encodeURIComponent('MetaMech License Purchase');
+        const body = encodeURIComponent(
+          `Hi MetaMech Solution,
 
-      const plan = PLAN_MAP[selectedPlanKey] || PLAN_MAP.standard;
-      const subject = encodeURIComponent('MetaMech License Purchase');
-      const body = encodeURIComponent(
-        `Hi MetaMech Solution,\n\n` +
-        `I would like to purchase the following plan:\n\n` +
-        `Plan: ${plan.name}\n` +
-        `Price: €${plan.price.toLocaleString('en-IE')}\n\n` +
-        `Please send invoice or secure payment link.\n\nThanks`
-      );
-      window.location.href = `mailto:hi@metamechsolutions.com?subject=${subject}&body=${body}`;
-    });
+` +
+          `I would like to purchase the following plan:
 
-    // Trial email
-    document.getElementById('trialEmailBtn').addEventListener('click', () => {
-      const email = (document.getElementById('trialEmail').value || "").trim();
-      const msg = document.getElementById('trialMsg');
+` +
+          `Plan: ${plan.name}
+` +
+          `Price: €${plan.price.toLocaleString('en-IE')}
 
-      if(!email){
-        msg.textContent = "Please enter an email (optional) or just download the trial.";
-        return;
-      }
+` +
+          `Please send invoice or secure payment link.
 
-      const subject = encodeURIComponent("MetaMech 3-Day Trial Request");
-      const body = encodeURIComponent(
-        `Hi MetaMech Solution,\n\n` +
-        `I would like to request the 3-day trial.\n\n` +
-        `My email: ${email}\n\nThanks`
-      );
+Thanks`
+        );
+        window.location.href = `mailto:hi@metamechsolutions.com?subject=${subject}&body=${body}`;
+      });
+    }
 
-      window.location.href = `mailto:hi@metamechsolutions.com?subject=${subject}&body=${body}`;
-      msg.textContent = "Your email client has been opened to send the trial request.";
-    });
+    // Trial email handling (GitHub Pages safe)
+    const trialBtn = document.getElementById('trialEmailBtn');
+    if(trialBtn){
+      trialBtn.addEventListener('click', function(){
+        const email = (document.getElementById('trialEmail')||{}).value || '';
+        const msg = document.getElementById('trialMsg');
 
-    // Footer year
-    document.getElementById('yrNow').textContent = new Date().getFullYear();
+        if(!email.trim()){
+          if(msg) msg.textContent = 'Please enter an email (optional) or just download the trial.';
+          return;
+        }
 
-    // Hide header on scroll down
+        const subject = encodeURIComponent('MetaMech 3-Day Trial Request');
+        const body = encodeURIComponent(
+          `Hi MetaMech Solution,
+
+` +
+          `I would like to request the 3-day trial.
+
+` +
+          `My email: ${email.trim()}
+
+Thanks`
+        );
+        window.location.href = `mailto:hi@metamechsolutions.com?subject=${subject}&body=${body}`;
+        if(msg) msg.textContent = 'Your email client has been opened to send the trial request.';
+      });
+    }
+
+    // Slim header + auto-hide on scroll down, show on scroll up
     (function(){
       const nav = document.querySelector('.nav');
+      if(!nav) return;
       let lastY = window.scrollY;
       let ticking = false;
 
@@ -917,7 +1090,8 @@
       });
     })();
 
-    // Default
+    // Init
+    calcROI();
     applySelection('standard');
   </script>
 </body>
