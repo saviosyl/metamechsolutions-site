@@ -155,7 +155,7 @@
       background: rgba(255,255,255,.02);
     }
     .kpi strong{font-size:18px;display:block}
-    .kpi span{color:var(--muted);font-size:13px}
+    .kpi span{color:#eef3ff;font-size:13px}
 
     /* Subtle animated background glow */
     @keyframes floatGlow{
@@ -194,13 +194,15 @@
 
     .pill{
       display:inline-flex;align-items:center;gap:8px;
-      font-size:12px;color:var(--muted);
-      border:1px solid rgba(22,179,184,.22);
+      font-size:12px;
+      color:#ffffff; /* brighter text */
+      border:1px solid rgba(22,179,184,.45);
       padding:6px 10px;border-radius:999px;
-      background: rgba(22,179,184,.06);
+      background: linear-gradient(135deg, rgba(22,179,184,.28), rgba(22,179,184,.12));
+      box-shadow: 0 6px 18px rgba(22,179,184,.25);
     }
 
-    .list{margin:10px 0 0 0;padding:0 0 0 18px;color:var(--muted)}
+    .list{margin:10px 0 0 0;padding:0 0 0 18px;color:#eef3ff}
     .list li{margin:7px 0}
 
     .two{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
@@ -328,8 +330,7 @@
   <header class="hero" style="animation: floatGlow 7.5s ease-in-out infinite;">
     <div class="container">
       <div class="grid">
-        <div class="card">
-          <span class="pill">Designed by an experienced Mechanical Design Engineer</span>
+        <div class="card hero-primary">\n          <span class="pill">Designed by an experienced Mechanical Design Engineer</span>
           <h1>ENGINEERING AUTOMATION THAT SAVES DESIGN HOURS</h1>
           <p style="font-size:15px;color:#eaf6ff;margin-top:-6px;">Fast, reliable SolidWorks automation built for real production teams</p>
           <p>
