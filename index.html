@@ -9,16 +9,15 @@
   <style>
     :root{
       /* BRAND-LED PREMIUM PALETTE (derived from logo feel: teal + amber on deep navy) */
-      --bg:#070b14;            /* deep navy */
-      --panel:#0c1424;         /* cards/nav base */
-      --panel2:#0a1120;        /* secondary panels */
-      --text:#f3f6ff;          /* crisp light text */
-      --muted:#b6c2da;         /* calmer secondary text */
+      --bg:#070b14;
+      --panel:#0c1424;
+      --panel2:#0a1120;
+      --text:#f3f6ff;
+      --muted:#b6c2da;
       --line:rgba(255,255,255,.08);
 
-      /* accents (premium, not neon) */
-      --accent:#16b3b8;        /* teal (brand primary) */
-      --accent2:#f0b429;       /* amber (brand secondary) */
+      --accent:#16b3b8;        /* teal */
+      --accent2:#f0b429;       /* amber */
 
       --shadow:0 24px 60px rgba(0,0,0,.48);
       --radius:18px;
@@ -120,7 +119,9 @@
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       padding:18px;
+      transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
     }
+    .card:hover{transform: translateY(-3px); border-color: rgba(22,179,184,.22);}
 
     h1{
       font-size:44px;line-height:1.08;margin:0 0 12px 0;
@@ -130,6 +131,8 @@
     p{margin:0 0 12px 0;color:var(--muted);line-height:1.65}
 
     .hero-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .btn{transition: transform .18s ease, filter .18s ease;}
+    .btn:hover{transform: translateY(-1px); filter:brightness(1.03)}
 
     .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
     .kpi{
@@ -151,12 +154,6 @@
     .reveal{opacity:0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease;}
     .reveal.reveal--in{opacity:1; transform: translateY(0);}
 
-    /* Premium micro-interactions */
-    .card{transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;}
-    .card:hover{transform: translateY(-3px); border-color: rgba(22,179,184,.22);}
-    .btn{transition: transform .18s ease, filter .18s ease;}
-    .btn:hover{transform: translateY(-1px); filter:brightness(1.03)}
-
     /* Image / preview styling */
     .preview-grid{display:grid; grid-template-columns: 1.2fr .8fr; gap:12px; margin-top:14px;}
     .preview-main, .preview-side{border-radius: var(--radius); border:1px solid var(--line); background: rgba(255,255,255,.02); overflow:hidden;}
@@ -175,7 +172,6 @@
     .section .lead{max-width:760px}
 
     .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
-
     .pill{
       display:inline-flex;align-items:center;gap:8px;
       font-size:12px;color:var(--muted);
@@ -191,13 +187,13 @@
 
     .field{display:flex;flex-direction:column;gap:6px}
     .field label{color:var(--muted);font-size:13px}
-    .field input{
+    .field input, .select{
       padding:12px 12px;border-radius:12px;border:1px solid var(--line);
       background: rgba(255,255,255,.03);
       color:var(--text);
       outline:none;
     }
-    .field input:focus{border-color: rgba(47,125,246,.6)}
+    .field input:focus, .select:focus{border-color: rgba(22,179,184,.55)}
 
     .result{
       border:1px solid var(--line);
@@ -212,6 +208,7 @@
     section{scroll-margin-top: 76px;}
 
     .footer{padding:28px 0 40px;border-top:1px solid var(--line);color:var(--muted)}
+
     /* Pricing: Most Popular ribbon */
     .popular{
       outline:2px solid rgba(22,179,184,.35);
@@ -279,15 +276,15 @@
   <div class="nav">
     <div class="container">
       <div class="nav-inner">
-        <!-- LOGO ONLY (110px). Update filename if needed -->
         <div class="brand">
           <img src="assets/logo/metamech-logo.png" alt="MetaMech Solution Logo" class="logo-img" />
         </div>
 
         <div class="menu">
           <a href="#tools">TOOLS</a>
+          <a href="#preview">PRODUCT PREVIEW</a>
           <a href="#roi">ROI CALCULATOR</a>
-          <a href="#services">SERVICES</a>
+          <a href="#pricing">PRICING</a>
           <a href="#trial">3-DAY TRIAL</a>
           <a href="#contact">CONTACT</a>
           <a class="btn btn-primary" href="#contact">REQUEST A DEMO</a>
@@ -357,7 +354,7 @@
     </div>
   </header>
 
-  <!-- PRODUCT PREVIEW (Screenshots / Photos) -->
+  <!-- PRODUCT PREVIEW -->
   <section id="preview" class="section">
     <div class="container">
       <h2 class="reveal">PRODUCT PREVIEW</h2>
@@ -397,7 +394,6 @@
       </p>
 
       <div class="cards3">
-        <!-- Note: cards are revealed on scroll -->
         <div class="card">
           <h3 style="margin:0 0 8px 0;">BOM AUTOMATION</h3>
           <p>Master BOM + sheets by TYPE, missing property highlighting, consistent formatting.</p>
@@ -428,7 +424,6 @@
     </div>
   </section>
 
-  <!-- ROI -->
   <!-- TRUSTED -->
   <section id="trusted" class="section">
     <div class="container">
@@ -459,6 +454,7 @@
     </div>
   </section>
 
+  <!-- ROI -->
   <section id="roi" class="section">
     <div class="container">
       <h2>ROI CALCULATOR</h2>
@@ -487,8 +483,23 @@
           </div>
 
           <div class="field">
-            <label>Tool cost (optional €)</label>
+            <label>Select plan cost (auto-fills Tool Cost)</label>
+            <select id="plan" class="select">
+              <option value="custom">Custom / Enter manually</option>
+              <option value="standard" data-price="999">Standard Pack — €999</option>
+              <option value="premium" data-price="1299">Premium Pack — €1,299</option>
+              <option value="plus" data-price="1599">Premium Plus — €1,599</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label>Tool cost (€)</label>
             <input id="cost" type="number" value="0" min="0" />
+          </div>
+
+          <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
+            <a class="btn btn-primary" href="#checkout" id="roiContinue">CONTINUE TO CHECKOUT</a>
+            <a class="btn" href="#pricing">VIEW PACKAGES</a>
           </div>
 
           <div style="margin-top:12px" class="note">
@@ -520,7 +531,6 @@
       <p class="lead">Simple one-time licenses with immediate ROI. Launch discount applied.</p>
 
       <div class="cards3">
-        <!-- STANDARD -->
         <div class="card">
           <span class="pill">STANDARD PACK</span>
           <h3 style="margin:10px 0 4px 0;">€999</h3>
@@ -534,7 +544,6 @@
           </ul>
         </div>
 
-        <!-- PREMIUM -->
         <div class="card popular">
           <div class="ribbon" aria-label="Most Popular"><span>MOST POPULAR</span></div>
           <span class="pill">PREMIUM PACK</span>
@@ -549,7 +558,6 @@
           </ul>
         </div>
 
-        <!-- PREMIUM PLUS -->
         <div class="card">
           <span class="pill">PREMIUM PLUS</span>
           <h3 style="margin:10px 0 4px 0;">€1,599</h3>
@@ -570,8 +578,88 @@
     </div>
   </section>
 
-  <!-- SERVICES -->
-    <!-- FAQ -->
+  <!-- CHECKOUT (Form + Payment Step) -->
+  <section id="checkout" class="section">
+    <div class="container">
+      <h2>CHECKOUT</h2>
+      <p class="lead">Step 1: confirm your details. Step 2: proceed to secure payment.</p>
+
+      <div class="two">
+        <div class="card">
+          <h3 style="margin:0 0 8px 0;">YOUR DETAILS</h3>
+
+          <div class="field">
+            <label>Selected plan</label>
+            <input id="coPlan" type="text" value="" placeholder="Select a plan from ROI / Pricing" readonly />
+          </div>
+
+          <div class="field">
+            <label>Price (€)</label>
+            <input id="coPrice" type="number" value="0" min="0" readonly />
+          </div>
+
+          <div class="field">
+            <label>Your name</label>
+            <input id="coName" type="text" placeholder="Full name" />
+          </div>
+
+          <div class="field">
+            <label>Company</label>
+            <input id="coCompany" type="text" placeholder="Company name" />
+          </div>
+
+          <div class="field">
+            <label>Email</label>
+            <input id="coEmail" type="email" placeholder="you@company.com" />
+          </div>
+
+          <div class="field">
+            <label>SolidWorks version</label>
+            <input id="coSW" type="text" placeholder="e.g., SolidWorks 2024" />
+          </div>
+
+          <div class="field">
+            <label>Notes (optional)</label>
+            <input id="coNotes" type="text" placeholder="Any standards, templates, or requirements" />
+          </div>
+
+          <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
+            <button class="btn btn-primary" id="coProceed" type="button">PROCEED TO PAYMENT</button>
+            <button class="btn" id="coInvoice" type="button">REQUEST INVOICE (EMAIL)</button>
+          </div>
+
+          <div class="note" id="coMsg" style="margin-top:10px;">
+            Tip: connect Stripe Payment Links later. Until then, “Request Invoice” opens a pre-filled email.
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 style="margin:0 0 8px 0;">PAYMENT</h3>
+          <p class="note">Paste your real secure payment links in the code (Stripe Payment Links recommended).</p>
+
+          <div class="result" style="display:flex;justify-content:space-between;gap:10px;align-items:center;">
+            <div>
+              <b>Plan:</b> <span id="payPlan">—</span><br />
+              <b>Total:</b> €<span id="payTotal">0</span>
+            </div>
+            <span class="pill">Secure checkout</span>
+          </div>
+
+          <div style="height:12px"></div>
+
+          <a class="btn btn-green" id="payNow" href="#" rel="nofollow">PAY NOW</a>
+          <div style="height:10px"></div>
+          <a class="btn" id="payAlt" href="#" rel="nofollow">PAY WITH ALTERNATIVE LINK</a>
+
+          <div style="margin-top:12px" class="note">
+            If links are not connected yet, use <b>REQUEST INVOICE</b> and we will email a secure payment link.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
   <section id="faq" class="section">
     <div class="container">
       <h2>FAQ</h2>
@@ -623,6 +711,7 @@
     </div>
   </section>
 
+  <!-- SERVICES -->
   <section id="services" class="section">
     <div class="container">
       <h2>SERVICES</h2>
@@ -658,7 +747,6 @@
           <h3 style="margin:0 0 8px 0;">TRIAL DOWNLOAD</h3>
           <p>Click to download the trial EXE (Windows). You can optionally enter your email to receive trial details.</p>
 
-          <!-- Update this file path to where you host the EXE inside your repo -->
           <a class="btn btn-green" id="downloadBtn" href="downloads/MetaMechTrial.exe" download>
             ⬇ DOWNLOAD 3-DAY TRIAL
           </a>
@@ -671,7 +759,7 @@
           </div>
 
           <div style="height:10px"></div>
-          <button class="btn btn-primary" id="trialEmailBtn">SEND ME TRIAL DETAILS</button>
+          <button class="btn btn-primary" id="trialEmailBtn" type="button">SEND ME TRIAL DETAILS</button>
 
           <div style="margin-top:10px" class="note" id="trialMsg">
             Enter your email and click <b>SEND ME TRIAL DETAILS</b> — it will open your email app with a pre-filled message.
@@ -753,40 +841,186 @@
       items.forEach(el => io.observe(el));
     })();
 
-
-    // ROI calculator
-    function fmt(n){ return Math.round(n).toLocaleString('en-IE'); }
+    // ---------- ROI calculator (robust) ----------
+    function fmt(n){
+      if(!isFinite(n)) return "0";
+      return Math.round(n).toLocaleString('en-IE');
+    }
 
     function calcROI(){
-      const eng = +document.getElementById('eng').value || 0;
-      const hrs = +document.getElementById('hrs').value || 0;
-      const rate = +document.getElementById('rate').value || 0;
-      const weeks = +document.getElementById('weeks').value || 0;
-      const cost = +document.getElementById('cost').value || 0;
+      const engEl = document.getElementById('eng');
+      const hrsEl = document.getElementById('hrs');
+      const rateEl = document.getElementById('rate');
+      const weeksEl = document.getElementById('weeks');
+      const costEl = document.getElementById('cost');
 
-      const weekly = eng * hrs * rate;
+      if(!engEl || !hrsEl || !rateEl || !weeksEl || !costEl) return;
+
+      const eng = parseFloat(engEl.value);
+      const hrs = parseFloat(hrsEl.value);
+      const rate = parseFloat(rateEl.value);
+      const weeks = parseFloat(weeksEl.value);
+      const cost = parseFloat(costEl.value);
+
+      const weekly = (isFinite(eng)?eng:0) * (isFinite(hrs)?hrs:0) * (isFinite(rate)?rate:0);
       const monthly = weekly * 4.33;
-      const annual = weekly * weeks;
+      const annual = weekly * (isFinite(weeks)?weeks:0);
 
-      document.getElementById('wk').textContent = fmt(weekly);
-      document.getElementById('mo').textContent = fmt(monthly);
-      document.getElementById('yr').textContent = fmt(annual);
+      const wkOut = document.getElementById('wk');
+      const moOut = document.getElementById('mo');
+      const yrOut = document.getElementById('yr');
+      const beOut = document.getElementById('be');
 
-      if(cost > 0 && weekly > 0){
-        const weeksToBE = cost / weekly;
-        const daysToBE = weeksToBE * 7;
-        document.getElementById('be').textContent = (daysToBE < 7)
-          ? `${Math.ceil(daysToBE)} days`
-          : `${weeksToBE.toFixed(1)} weeks`;
-      } else {
-        document.getElementById('be').textContent = "—";
+      if(wkOut) wkOut.textContent = fmt(weekly);
+      if(moOut) moOut.textContent = fmt(monthly);
+      if(yrOut) yrOut.textContent = fmt(annual);
+
+      if(beOut){
+        if(isFinite(cost) && cost > 0 && weekly > 0){
+          const weeksToBE = cost / weekly;
+          const daysToBE = weeksToBE * 7;
+          beOut.textContent = (daysToBE < 7) ? `${Math.ceil(daysToBE)} days` : `${weeksToBE.toFixed(1)} weeks`;
+        } else {
+          beOut.textContent = "—";
+        }
       }
     }
 
-    ["eng","hrs","rate","weeks","cost"].forEach(id => {
-      document.getElementById(id).addEventListener('input', calcROI);
-    });
-    calcROI();
+    function bindROI(){
+      ['eng','hrs','rate','weeks','cost'].forEach(id => {
+        const el = document.getElementById(id);
+        if(!el) return;
+        el.addEventListener('input', calcROI);
+        el.addEventListener('change', calcROI);
+      });
+      calcROI();
+      setTimeout(calcROI, 50);
+    }
+    bindROI();
+
+    // ---------- Checkout + Payment wiring ----------
+    // Paste your REAL secure payment links later (Stripe Payment Links recommended)
+    const PAY_LINKS = {
+      standard: '#',
+      premium:  '#',
+      plus:     '#'
+    };
+
+    function setCheckoutPlan(key, price){
+      const planNameMap = { standard:'Standard Pack', premium:'Premium Pack', plus:'Premium Plus' };
+      const name = planNameMap[key] || 'Custom Selection';
+
+      const coPlan = document.getElementById('coPlan');
+      const coPrice = document.getElementById('coPrice');
+      const payPlan = document.getElementById('payPlan');
+      const payTotal = document.getElementById('payTotal');
+      const payNow = document.getElementById('payNow');
+      const payAlt = document.getElementById('payAlt');
+
+      if(coPlan) coPlan.value = name;
+      if(coPrice) coPrice.value = isFinite(price) ? price : 0;
+      if(payPlan) payPlan.textContent = name;
+      if(payTotal) payTotal.textContent = fmt(isFinite(price) ? price : 0);
+
+      const link = PAY_LINKS[key] || '#';
+      if(payNow) payNow.href = link;
+      if(payAlt) payAlt.href = link;
+    }
+
+    // ROI plan selector -> auto-fill tool cost + prime checkout
+    (function(){
+      const planSel = document.getElementById('plan');
+      const costEl = document.getElementById('cost');
+      const cont = document.getElementById('roiContinue');
+
+      function applyFromROI(){
+        const key = planSel ? planSel.value : 'custom';
+        let price = parseFloat(costEl ? costEl.value : '0');
+        if(!isFinite(price)) price = 0;
+
+        if(key === 'standard' || key === 'premium' || key === 'plus'){
+          setCheckoutPlan(key, price);
+        } else {
+          setCheckoutPlan('standard', price);
+          const coPlan = document.getElementById('coPlan');
+          if(coPlan) coPlan.value = 'Custom Selection';
+        }
+      }
+
+      if(planSel && costEl){
+        planSel.addEventListener('change', () => {
+          const opt = planSel.options[planSel.selectedIndex];
+          const p = parseFloat(opt?.getAttribute('data-price') || '0');
+          const key = planSel.value;
+
+          if(isFinite(p) && key !== 'custom') costEl.value = p;
+          applyFromROI();
+          calcROI();
+        });
+      }
+
+      if(cont){
+        cont.addEventListener('click', () => applyFromROI());
+      }
+
+      // prime checkout once
+      setTimeout(applyFromROI, 50);
+    })();
+
+    // Checkout buttons: Proceed / Invoice email
+    (function(){
+      const proceed = document.getElementById('coProceed');
+      const invoice = document.getElementById('coInvoice');
+      const msg = document.getElementById('coMsg');
+
+      function collectCheckout(){
+        return {
+          plan: (document.getElementById('coPlan')?.value || '').trim(),
+          price: (document.getElementById('coPrice')?.value || '0').trim(),
+          name: (document.getElementById('coName')?.value || '').trim(),
+          company: (document.getElementById('coCompany')?.value || '').trim(),
+          email: (document.getElementById('coEmail')?.value || '').trim(),
+          sw: (document.getElementById('coSW')?.value || '').trim(),
+          notes: (document.getElementById('coNotes')?.value || '').trim()
+        };
+      }
+
+      function openInvoiceEmail(){
+        const d = collectCheckout();
+        const subject = encodeURIComponent(`MetaMech Purchase Request — ${d.plan || 'License'}`);
+        const body = encodeURIComponent(
+          `Hi MetaMech Solution,\n\n` +
+          `I would like to purchase: ${d.plan}\n` +
+          `Price: €${d.price}\n\n` +
+          `Name: ${d.name}\n` +
+          `Company: ${d.company}\n` +
+          `Email: ${d.email}\n` +
+          `SolidWorks: ${d.sw}\n` +
+          `Notes: ${d.notes}\n\n` +
+          `Please send the secure payment link / invoice.\n\nThanks`
+        );
+        window.location.href = `mailto:hi@metamechsolutions.com?subject=${subject}&body=${body}`;
+      }
+
+      if(invoice){
+        invoice.addEventListener('click', () => {
+          openInvoiceEmail();
+          if(msg) msg.textContent = 'Your email client has been opened with a pre-filled invoice request.';
+        });
+      }
+
+      if(proceed){
+        proceed.addEventListener('click', () => {
+          const payNow = document.getElementById('payNow');
+          if(payNow && payNow.getAttribute('href') === '#'){
+            openInvoiceEmail();
+            if(msg) msg.textContent = 'Payment link not connected yet. We opened an email to request the secure payment link.';
+          } else {
+            payNow?.click();
+          }
+        });
+      }
+    })();
 
     // Footer year
     document.getElementById('yrNow').textContent = new Date().getFullYear();
@@ -803,19 +1037,12 @@
 
       const subject = encodeURIComponent("MetaMech 3-Day Trial Request");
       const body = encodeURIComponent(
-        "Hi MetaMech Solution,
-
-" +
-        "I would like to request the 3-day trial.
-
-" +
-        "My email: " + email + "
-
-" +
-        "Thanks" 
+        `Hi MetaMech Solution,\n\n` +
+        `I would like to request the 3-day trial.\n\n` +
+        `My email: ${email}\n\n` +
+        `Thanks`
       );
 
-      // Open user's email client with a pre-filled request
       window.location.href = `mailto:hi@metamechsolutions.com?subject=${subject}&body=${body}`;
       msg.textContent = "Your email client has been opened to send the trial request.";
     });
@@ -831,7 +1058,6 @@
         const down = y > lastY;
         const delta = Math.abs(y - lastY);
 
-        // Only react after small movement to avoid flicker
         if(delta > 10){
           if(down && y > 120){
             nav.classList.add('nav--hidden');
