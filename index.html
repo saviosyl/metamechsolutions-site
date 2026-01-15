@@ -8,7 +8,6 @@
 
   <style>
     :root{
-      /* BRAND-LED PREMIUM PALETTE (derived from logo feel: teal + amber on deep navy) */
       --bg:#070b14;
       --panel:#0c1424;
       --panel2:#0a1120;
@@ -57,7 +56,6 @@
       gap:12px;
     }
 
-    /* Logo-only brand (NO highlight box) */
     .brand{display:flex;align-items:center;}
     .logo-img{
       width:110px;
@@ -100,7 +98,6 @@
       box-shadow: 0 18px 42px rgba(240,180,41,.16);
     }
 
-    /* Mobile CTA */
     .mobile-cta{display:none}
 
     /* HERO */
@@ -144,29 +141,14 @@
     .kpi strong{font-size:18px;display:block}
     .kpi span{color:var(--muted);font-size:13px}
 
-    /* Subtle animated background glow */
     @keyframes floatGlow{
       0%,100%{ transform: translate3d(0,0,0) scale(1); opacity:.55; }
       50%{ transform: translate3d(0,-10px,0) scale(1.03); opacity:.75; }
     }
 
-    /* Scroll-reveal animations */
     .reveal{opacity:0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease;}
     .reveal.reveal--in{opacity:1; transform: translateY(0);}
 
-    /* Image / preview styling */
-    .preview-grid{display:grid; grid-template-columns: 1.2fr .8fr; gap:12px; margin-top:14px;}
-    .preview-main, .preview-side{border-radius: var(--radius); border:1px solid var(--line); background: rgba(255,255,255,.02); overflow:hidden;}
-    .preview-main img, .preview-side img{width:100%; height:100%; object-fit:cover; display:block;}
-    .preview-side{display:grid; grid-template-rows: 1fr 1fr; gap:12px; padding:12px;}
-    .preview-side .shot{border-radius:14px; overflow:hidden; border:1px solid var(--line);}
-
-    @media (max-width: 900px){
-      .preview-grid{grid-template-columns:1fr}
-      .preview-side{grid-template-rows: auto; grid-template-columns:1fr;}
-    }
-
-    /* Sections */
     .section{padding:46px 0}
     .section h2{margin:0 0 10px 0;font-size:28px;letter-spacing:-.3px}
     .section .lead{max-width:760px}
@@ -179,7 +161,6 @@
       padding:6px 10px;border-radius:999px;
       background: rgba(22,179,184,.06);
     }
-
     .list{margin:10px 0 0 0;padding:0 0 0 18px;color:var(--muted)}
     .list li{margin:7px 0}
 
@@ -204,9 +185,7 @@
 
     .note{font-size:12px;color:var(--muted);opacity:.9;line-height:1.5}
 
-    /* Anchor offset for sticky header */
     section{scroll-margin-top: 76px;}
-
     .footer{padding:28px 0 40px;border-top:1px solid var(--line);color:var(--muted)}
 
     /* Pricing: Most Popular ribbon */
@@ -259,7 +238,6 @@
       100%{ left:120%; }
     }
 
-    /* Responsive */
     @media (max-width: 900px){
       .grid{grid-template-columns:1fr}
       .cards3{grid-template-columns:1fr}
@@ -282,9 +260,9 @@
 
         <div class="menu">
           <a href="#tools">TOOLS</a>
-          <a href="#preview">PRODUCT PREVIEW</a>
           <a href="#roi">ROI CALCULATOR</a>
           <a href="#pricing">PRICING</a>
+          <a href="#services">SERVICES</a>
           <a href="#trial">3-DAY TRIAL</a>
           <a href="#contact">CONTACT</a>
           <a class="btn btn-primary" href="#contact">REQUEST A DEMO</a>
@@ -354,36 +332,6 @@
     </div>
   </header>
 
-  <!-- PRODUCT PREVIEW -->
-  <section id="preview" class="section">
-    <div class="container">
-      <h2 class="reveal">PRODUCT PREVIEW</h2>
-      <p class="lead reveal">A quick visual look at the automation experience and outputs (replace with your real screenshots anytime).</p>
-
-      <div class="preview-grid">
-        <div class="card preview-main reveal">
-          <img src="assets/images/preview-main.jpg" alt="MetaMech automation preview" onerror="this.style.display='none'" />
-          <div style="padding:14px;" class="note">
-            Tip: add your EXE UI screenshot here (assets/images/preview-main.jpg).
-          </div>
-        </div>
-
-        <div class="preview-side">
-          <div class="card shot reveal">
-            <img src="assets/images/preview-bom.jpg" alt="BOM export example" onerror="this.style.display='none'" />
-            <div style="padding:12px;" class="note">BOM export example (preview-bom.jpg)</div>
-          </div>
-          <div class="card shot reveal">
-            <img src="assets/images/preview-pdf.jpg" alt="PDF merge example" onerror="this.style.display='none'" />
-            <div style="padding:12px;" class="note">PDF merge output (preview-pdf.jpg)</div>
-          </div>
-        </div>
-      </div>
-
-      <p class="note reveal" style="margin-top:10px;">Add these files to your repo: <b>assets/images/preview-main.jpg</b>, <b>preview-bom.jpg</b>, <b>preview-pdf.jpg</b>.</p>
-    </div>
-  </section>
-
   <!-- TOOLS -->
   <section id="tools" class="section">
     <div class="container">
@@ -424,36 +372,6 @@
     </div>
   </section>
 
-  <!-- TRUSTED -->
-  <section id="trusted" class="section">
-    <div class="container">
-      <h2>TRUSTED BY ENGINEERS</h2>
-      <p class="lead">Built for real-world SolidWorks workflows where speed, standards, and consistency matter.</p>
-
-      <div class="cards3">
-        <div class="card">
-          <h3 style="margin:0 0 8px 0;">BUILT FOR LARGE ASSEMBLIES</h3>
-          <p>Designed to perform on complex TLAs and deep sub-assembly structures without breaking your workflow.</p>
-        </div>
-        <div class="card">
-          <h3 style="margin:0 0 8px 0;">CONSISTENT OUTPUTS</h3>
-          <p>Standardised BOM/PDF/STEP results so every engineer exports the same format, every time.</p>
-        </div>
-        <div class="card">
-          <h3 style="margin:0 0 8px 0;">ENGINEER-LED DELIVERY</h3>
-          <p>We work closely with your design team initially to understand real challenges and deliver custom-fit solutions.</p>
-        </div>
-      </div>
-
-      <div class="card" style="margin-top:12px;">
-        <p style="margin:0;color:var(--muted);">
-          “The automation paid for itself quickly — fewer manual steps, fewer mistakes, and faster releases.”
-        </p>
-        <p class="note" style="margin:8px 0 0 0;">— Typical feedback from engineering teams (examples)</p>
-      </div>
-    </div>
-  </section>
-
   <!-- ROI -->
   <section id="roi" class="section">
     <div class="container">
@@ -483,23 +401,23 @@
           </div>
 
           <div class="field">
-            <label>Select plan cost (auto-fills Tool Cost)</label>
+            <label>Select Plan</label>
             <select id="plan" class="select">
-              <option value="custom">Custom / Enter manually</option>
-              <option value="standard" data-price="999">Standard Pack — €999</option>
-              <option value="premium" data-price="1299">Premium Pack — €1,299</option>
-              <option value="plus" data-price="1599">Premium Plus — €1,599</option>
+              <option value="">-- Choose a plan --</option>
+              <option value="demo" data-price="0">Demo / Trial (3 days) – €0</option>
+              <option value="standard" data-price="999">Standard Pack – €999</option>
+              <option value="premium" data-price="1299">Premium Pack – €1,299</option>
+              <option value="plus" data-price="1599">Premium Plus – €1,599</option>
             </select>
           </div>
 
           <div class="field">
             <label>Tool cost (€)</label>
-            <input id="cost" type="number" value="0" min="0" />
+            <input id="cost" type="number" value="999" min="0" />
           </div>
 
-          <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
+          <div class="hero-cta" style="margin-top:12px">
             <a class="btn btn-primary" href="#checkout" id="roiContinue">CONTINUE TO CHECKOUT</a>
-            <a class="btn" href="#pricing">VIEW PACKAGES</a>
           </div>
 
           <div style="margin-top:12px" class="note">
@@ -528,186 +446,174 @@
   <section id="pricing" class="section">
     <div class="container">
       <h2>PRICING</h2>
-      <p class="lead">Simple one-time licenses with immediate ROI. Launch discount applied.</p>
+      <p class="lead">Pick a package. Selecting any package will auto-fill ROI + Checkout.</p>
 
-      <div class="cards3">
+      <div class="cards3" style="grid-template-columns:repeat(4,1fr);">
+        <!-- DEMO -->
+        <div class="card">
+          <span class="pill">DEMO / TRIAL</span>
+          <h3 style="margin:10px 0 4px 0;">€0</h3>
+          <p class="note">No card details required • 3-day expiry</p>
+          <ul class="list">
+            <li>Try the workflow on a sample project</li>
+            <li>BOM automation preview (limited)</li>
+            <li>PDF export preview (limited)</li>
+            <li>Shows logs + output style</li>
+            <li>Upgrade anytime to full license</li>
+          </ul>
+          <div class="hero-cta" style="margin-top:12px">
+            <button class="btn btn-green plan-btn" data-plan="demo">SELECT DEMO</button>
+          </div>
+        </div>
+
+        <!-- STANDARD -->
         <div class="card">
           <span class="pill">STANDARD PACK</span>
           <h3 style="margin:10px 0 4px 0;">€999</h3>
           <p class="note"><del>€1,110</del> &nbsp; 10% launch discount</p>
           <ul class="list">
-            <li><b>Human-error free BOM automation</b> — reliable outputs every time</li>
-            <li><b>Large assembly support</b> — export BOMs in seconds, regardless of size</li>
-            <li><b>Standardised BOM format</b> — same structure across all engineers</li>
-            <li><b>Custom BOM template setup</b> — aligned to company standards</li>
-            <li><b>PDF export & merge</b> — clean, indented TLA hierarchy</li>
+            <li><b>BOM automation</b> (all levels)</li>
+            <li><b>Custom BOM template</b> setup</li>
+            <li><b>PDF export + merge</b> (hierarchy)</li>
+            <li>Standardised outputs</li>
           </ul>
+          <div class="hero-cta" style="margin-top:12px">
+            <button class="btn btn-primary plan-btn" data-plan="standard">SELECT STANDARD</button>
+          </div>
         </div>
 
+        <!-- PREMIUM -->
         <div class="card popular">
           <div class="ribbon" aria-label="Most Popular"><span>MOST POPULAR</span></div>
           <span class="pill">PREMIUM PACK</span>
           <h3 style="margin:10px 0 4px 0;">€1,299</h3>
           <p class="note"><del>€1,440</del> &nbsp; 10% launch discount</p>
           <ul class="list">
-            <li><b>All Standard Pack features</b></li>
-            <li><b>STEP file export automation</b></li>
-            <li>Export TLA, sub-assemblies, and unique parts</li>
-            <li>Flexible export options (parts / assemblies / both)</li>
-            <li>Manufacturing & supplier-ready outputs</li>
+            <li><b>All Standard features</b></li>
+            <li><b>STEP export</b> automation</li>
+            <li>Options: parts / assemblies / both</li>
+            <li>Supplier-ready exports</li>
           </ul>
+          <div class="hero-cta" style="margin-top:12px">
+            <button class="btn btn-primary plan-btn" data-plan="premium">SELECT PREMIUM</button>
+          </div>
         </div>
 
+        <!-- PREMIUM PLUS -->
         <div class="card">
           <span class="pill">PREMIUM PLUS</span>
           <h3 style="margin:10px 0 4px 0;">€1,599</h3>
           <p class="note"><del>€1,775</del> &nbsp; 10% launch discount</p>
           <ul class="list">
-            <li><b>All Premium Pack features</b></li>
-            <li><b>Drawing template bulk update</b> — save days of manual work</li>
-            <li><b>Automatic numbering clean-up</b> — professional file structures</li>
-            <li><b>Single-click custom property update</b></li>
-            <li><b>Close workflow collaboration</b> — tailored to your team</li>
+            <li><b>All Premium features</b></li>
+            <li>Drawing template update/change</li>
+            <li>Renumbering + clean-up</li>
+            <li>1-click custom property update</li>
           </ul>
+          <div class="hero-cta" style="margin-top:12px">
+            <button class="btn btn-primary plan-btn" data-plan="plus">SELECT PREMIUM PLUS</button>
+          </div>
         </div>
       </div>
 
-      <p class="note" style="margin-top:14px;">
-        Most teams recover the full license cost within the first few weeks of use.
-      </p>
+      <div class="card" style="margin-top:14px;">
+        <h3 style="margin:0 0 10px 0;">PACKAGE COMPARISON</h3>
+        <div style="overflow:auto;">
+          <table style="width:100%;border-collapse:collapse;min-width:820px;">
+            <thead>
+              <tr>
+                <th style="text-align:left;padding:10px;border-bottom:1px solid var(--line);">Feature</th>
+                <th style="text-align:left;padding:10px;border-bottom:1px solid var(--line);">Demo/Trial</th>
+                <th style="text-align:left;padding:10px;border-bottom:1px solid var(--line);">Standard</th>
+                <th style="text-align:left;padding:10px;border-bottom:1px solid var(--line);">Premium</th>
+                <th style="text-align:left;padding:10px;border-bottom:1px solid var(--line);">Premium Plus</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding:10px;border-bottom:1px solid var(--line);">3-day access</td>
+                <td style="padding:10px;border-bottom:1px solid var(--line);">✅</td>
+                <td style="padding:10px;border-bottom:1px solid var(--line);">—</td>
+                <td style="padding:10px;border-bottom:1px solid var(--line);">—</td>
+                <td style="padding:10px;border-bottom:1px solid var(--line);">—</td>
+              </tr>
+              <tr>
+                <td style="padding:10px;border-bottom:1px solid var(--line);">BOM automation</td>
+                <td style="padding:10px;border-bottom:1px solid var(--line);">Limited</td>
+                <td style="padding:10px;border-bottom:1px solid var(--line);">✅</td>
+                <td style="padding:10px;border-bottom:1px solid var(--line);">✅</td>
+                <td style="padding:10px;border-bottom:1px solid var(--line);">✅</td>
+              </tr>
+              <tr>
+                <td style="padding:10px;border-bottom:1px solid var(--line);">PDF export / merge + index</td>
+                <td style="padding:10px;border-bottom:1px solid var(--line);">Limited</td>
+                <td style="padding:10px;border-bottom:1px solid var(--line);">✅</td>
+                <td style="padding:10px;border-bottom:1px solid var(--line);">✅</td>
+                <td style="padding:10px;border-bottom:1px solid var(--line);">✅</td>
+              </tr>
+              <tr>
+                <td style="padding:10px;border-bottom:1px solid var(--line);">STEP export</td>
+                <td style="padding:10px;border-bottom:1px solid var(--line);">—</td>
+                <td style="padding:10px;border-bottom:1px solid var(--line);">—</td>
+                <td style="padding:10px;border-bottom:1px solid var(--line);">✅</td>
+                <td style="padding:10px;border-bottom:1px solid var(--line);">✅</td>
+              </tr>
+              <tr>
+                <td style="padding:10px;border-bottom:1px solid var(--line);">Template update/change</td>
+                <td style="padding:10px;border-bottom:1px solid var(--line);">—</td>
+                <td style="padding:10px;border-bottom:1px solid var(--line);">—</td>
+                <td style="padding:10px;border-bottom:1px solid var(--line);">—</td>
+                <td style="padding:10px;border-bottom:1px solid var(--line);">✅</td>
+              </tr>
+              <tr>
+                <td style="padding:10px;border-bottom:1px solid var(--line);">Renumbering + clean-up</td>
+                <td style="padding:10px;border-bottom:1px solid var(--line);">—</td>
+                <td style="padding:10px;border-bottom:1px solid var(--line);">—</td>
+                <td style="padding:10px;border-bottom:1px solid var(--line);">—</td>
+                <td style="padding:10px;border-bottom:1px solid var(--line);">✅</td>
+              </tr>
+              <tr>
+                <td style="padding:10px;border-bottom:1px solid var(--line);"><b>Price</b></td>
+                <td style="padding:10px;border-bottom:1px solid var(--line);"><b>€0</b></td>
+                <td style="padding:10px;border-bottom:1px solid var(--line);"><b>€999</b></td>
+                <td style="padding:10px;border-bottom:1px solid var(--line);"><b>€1,299</b></td>
+                <td style="padding:10px;border-bottom:1px solid var(--line);"><b>€1,599</b></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note" style="margin:10px 0 0 0;">
+          Demo is for evaluation only. Full licenses unlock complete automation, unlimited use, and support.
+        </p>
+      </div>
     </div>
   </section>
 
-  <!-- CHECKOUT (Form + Payment Step) -->
+  <!-- CHECKOUT -->
   <section id="checkout" class="section">
     <div class="container">
       <h2>CHECKOUT</h2>
-      <p class="lead">Step 1: confirm your details. Step 2: proceed to secure payment.</p>
+      <p class="lead">Select a package and proceed. Demo/Trial is €0 and requires no card details.</p>
 
       <div class="two">
         <div class="card">
-          <h3 style="margin:0 0 8px 0;">YOUR DETAILS</h3>
-
-          <div class="field">
-            <label>Selected plan</label>
-            <input id="coPlan" type="text" value="" placeholder="Select a plan from ROI / Pricing" readonly />
-          </div>
-
-          <div class="field">
-            <label>Price (€)</label>
-            <input id="coPrice" type="number" value="0" min="0" readonly />
-          </div>
-
-          <div class="field">
-            <label>Your name</label>
-            <input id="coName" type="text" placeholder="Full name" />
-          </div>
-
-          <div class="field">
-            <label>Company</label>
-            <input id="coCompany" type="text" placeholder="Company name" />
-          </div>
-
-          <div class="field">
-            <label>Email</label>
-            <input id="coEmail" type="email" placeholder="you@company.com" />
-          </div>
-
-          <div class="field">
-            <label>SolidWorks version</label>
-            <input id="coSW" type="text" placeholder="e.g., SolidWorks 2024" />
-          </div>
-
-          <div class="field">
-            <label>Notes (optional)</label>
-            <input id="coNotes" type="text" placeholder="Any standards, templates, or requirements" />
-          </div>
-
-          <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
-            <button class="btn btn-primary" id="coProceed" type="button">PROCEED TO PAYMENT</button>
-            <button class="btn" id="coInvoice" type="button">REQUEST INVOICE (EMAIL)</button>
-          </div>
-
-          <div class="note" id="coMsg" style="margin-top:10px;">
-            Tip: connect Stripe Payment Links later. Until then, “Request Invoice” opens a pre-filled email.
-          </div>
-        </div>
-
-        <div class="card">
-          <h3 style="margin:0 0 8px 0;">PAYMENT</h3>
-          <p class="note">Paste your real secure payment links in the code (Stripe Payment Links recommended).</p>
-
-          <div class="result" style="display:flex;justify-content:space-between;gap:10px;align-items:center;">
-            <div>
-              <b>Plan:</b> <span id="payPlan">—</span><br />
-              <b>Total:</b> €<span id="payTotal">0</span>
-            </div>
-            <span class="pill">Secure checkout</span>
-          </div>
-
-          <div style="height:12px"></div>
-
-          <a class="btn btn-green" id="payNow" href="#" rel="nofollow">PAY NOW</a>
+          <h3>YOUR SELECTION</h3>
+          <div class="result"><b>Selected Plan:</b> <span id="selPlan">Standard Pack</span></div>
           <div style="height:10px"></div>
-          <a class="btn" id="payAlt" href="#" rel="nofollow">PAY WITH ALTERNATIVE LINK</a>
-
-          <div style="margin-top:12px" class="note">
-            If links are not connected yet, use <b>REQUEST INVOICE</b> and we will email a secure payment link.
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section id="faq" class="section">
-    <div class="container">
-      <h2>FAQ</h2>
-      <p class="lead">Quick answers about licensing, updates, and SolidWorks compatibility.</p>
-
-      <div class="two">
-        <div class="card">
-          <details open>
-            <summary style="cursor:pointer; font-weight:700;">How does licensing work?</summary>
-            <p class="note" style="margin-top:10px;">
-              One-time license per company/team. Activation is linked to your environment and can be moved if you change machines.
-            </p>
-          </details>
-          <hr style="border:none;border-top:1px solid var(--line);margin:12px 0;" />
-
-          <details>
-            <summary style="cursor:pointer; font-weight:700;">Is this compatible with my SolidWorks version?</summary>
-            <p class="note" style="margin-top:10px;">Designed for SolidWorks 2022–2025 workflows. If you have an older version, we can advise the best approach.</p>
-          </details>
-          <hr style="border:none;border-top:1px solid var(--line);margin:12px 0;" />
-
-          <details>
-            <summary style="cursor:pointer; font-weight:700;">What is included in the setup?</summary>
-            <p class="note" style="margin-top:10px;">Initial alignment with your folder structure, naming rules, templates, and required BOM/PDF formats.</p>
-          </details>
+          <div class="result"><b>Price:</b> €<span id="selPrice">999</span></div>
+          <div style="height:10px"></div>
+          <div class="note" id="checkoutNote">You’ll receive an email with invoice or secure payment link.</div>
         </div>
 
         <div class="card">
-          <details open>
-            <summary style="cursor:pointer; font-weight:700;">Do you provide updates?</summary>
-            <p class="note" style="margin-top:10px;">Yes. Minor improvements and bug fixes are provided as we refine features and compatibility.</p>
-          </details>
-          <hr style="border:none;border-top:1px solid var(--line);margin:12px 0;" />
+          <h3>NEXT STEP</h3>
+          <p class="note">For licenses, request a payment link. For Demo/Trial, download directly.</p>
 
-          <details>
-            <summary style="cursor:pointer; font-weight:700;">Can you customise outputs for our standards?</summary>
-            <p class="note" style="margin-top:10px;">Absolutely. We can tailor custom properties, templates, naming rules, and sheet formats so your outputs look premium and consistent.</p>
-          </details>
-          <hr style="border:none;border-top:1px solid var(--line);margin:12px 0;" />
-
-          <details>
-            <summary style="cursor:pointer; font-weight:700;">How does the 3-day trial work?</summary>
-            <p class="note" style="margin-top:10px;">Trial starts on first run and expires after 72 hours. It’s ideal for validating workflow fit before purchase.</p>
-          </details>
+          <a class="btn btn-green" id="payBtn" href="javascript:void(0)">REQUEST PAYMENT</a>
+          <div style="height:10px"></div>
+          <a class="btn btn-primary" href="#trial">GO TO TRIAL DOWNLOAD</a>
         </div>
       </div>
-
-      <p class="note" style="margin-top:14px;">Still have questions? Email us at <a href="mailto:hi@metamechsolutions.com" style="text-decoration:underline;">hi@metamechsolutions.com</a>.</p>
     </div>
   </section>
 
@@ -738,14 +644,12 @@
   <section id="trial" class="section">
     <div class="container">
       <h2>DOWNLOAD 3-DAY TRIAL</h2>
-      <p class="lead">
-        Try the automation on a sample workflow. The trial expires automatically after 3 days.
-      </p>
+      <p class="lead">Try the automation on a sample workflow. The trial expires automatically after 3 days.</p>
 
       <div class="two">
         <div class="card">
           <h3 style="margin:0 0 8px 0;">TRIAL DOWNLOAD</h3>
-          <p>Click to download the trial EXE (Windows). You can optionally enter your email to receive trial details.</p>
+          <p>Click to download the trial EXE (Windows). No card details required.</p>
 
           <a class="btn btn-green" id="downloadBtn" href="downloads/MetaMechTrial.exe" download>
             ⬇ DOWNLOAD 3-DAY TRIAL
@@ -759,7 +663,7 @@
           </div>
 
           <div style="height:10px"></div>
-          <button class="btn btn-primary" id="trialEmailBtn" type="button">SEND ME TRIAL DETAILS</button>
+          <button class="btn btn-primary" id="trialEmailBtn">SEND ME TRIAL DETAILS</button>
 
           <div style="margin-top:10px" class="note" id="trialMsg">
             Enter your email and click <b>SEND ME TRIAL DETAILS</b> — it will open your email app with a pre-filled message.
@@ -767,15 +671,16 @@
         </div>
 
         <div class="card">
-          <h3 style="margin:0 0 8px 0;">HOW THE TRIAL WORKS</h3>
+          <h3 style="margin:0 0 8px 0;">WHAT’S INCLUDED IN DEMO/TRIAL</h3>
           <ul class="list">
-            <li>Install & run the EXE</li>
-            <li>Trial period begins on first run</li>
-            <li>Expires after 72 hours (3 days)</li>
-            <li>Contact us to activate full license</li>
+            <li>UI + workflow preview</li>
+            <li>Limited BOM export demonstration</li>
+            <li>Limited PDF export demonstration</li>
+            <li>Logs + output style validation</li>
+            <li>72-hour automatic expiry</li>
           </ul>
           <div style="margin-top:12px" class="note">
-            Want stronger protection? We can upgrade to online key activation (recommended for a “big brand” product).
+            Need a full test against a real TLA? Email us and we can guide the best trial setup.
           </div>
         </div>
       </div>
@@ -791,7 +696,7 @@
       <div class="two">
         <div class="card">
           <h3 style="margin:0 0 8px 0;">REQUEST A DEMO</h3>
-          <p class="note">Since GitHub Pages is static, this uses an email link (or you can connect Formspree / Google Form).</p>
+          <p class="note">GitHub Pages is static — this opens email directly.</p>
           <a class="btn btn-primary" href="mailto:hi@metamechsolutions.com?subject=MetaMech%20Demo%20Request&body=Hi%20MetaMech%20Solution%2C%0A%0ACompany%3A%0AWorkflow%20to%20automate%3A%0ASolidWorks%20version%3A%0A%0AThanks%2C">
             ✉ EMAIL US
           </a>
@@ -820,15 +725,10 @@
   </div>
 
   <script>
-    // Auto add reveal class to key elements
+    // ---- Reveal animations ----
     (function(){
       const targets = document.querySelectorAll('h2, .lead, .card, .kpi, .pill, .result');
       targets.forEach(el => el.classList.add('reveal'));
-    })();
-
-    // Scroll reveal observer
-    (function(){
-      const items = document.querySelectorAll('.reveal');
       const io = new IntersectionObserver((entries) => {
         entries.forEach(e => {
           if(e.isIntersecting){
@@ -837,196 +737,137 @@
           }
         });
       }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
-      items.forEach(el => io.observe(el));
+      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
     })();
 
-    // ---------- ROI calculator (robust) ----------
+    // ---- Helpers ----
     function fmt(n){
       if(!isFinite(n)) return "0";
       return Math.round(n).toLocaleString('en-IE');
     }
 
+    // ---- ROI calc ----
     function calcROI(){
-      const engEl = document.getElementById('eng');
-      const hrsEl = document.getElementById('hrs');
-      const rateEl = document.getElementById('rate');
-      const weeksEl = document.getElementById('weeks');
-      const costEl = document.getElementById('cost');
+      const eng = parseFloat(document.getElementById('eng').value) || 0;
+      const hrs = parseFloat(document.getElementById('hrs').value) || 0;
+      const rate = parseFloat(document.getElementById('rate').value) || 0;
+      const weeks = parseFloat(document.getElementById('weeks').value) || 0;
+      const cost = parseFloat(document.getElementById('cost').value) || 0;
 
-      if(!engEl || !hrsEl || !rateEl || !weeksEl || !costEl) return;
-
-      const eng = parseFloat(engEl.value);
-      const hrs = parseFloat(hrsEl.value);
-      const rate = parseFloat(rateEl.value);
-      const weeks = parseFloat(weeksEl.value);
-      const cost = parseFloat(costEl.value);
-
-      const weekly = (isFinite(eng)?eng:0) * (isFinite(hrs)?hrs:0) * (isFinite(rate)?rate:0);
+      const weekly = eng * hrs * rate;
       const monthly = weekly * 4.33;
-      const annual = weekly * (isFinite(weeks)?weeks:0);
+      const annual = weekly * weeks;
 
-      const wkOut = document.getElementById('wk');
-      const moOut = document.getElementById('mo');
-      const yrOut = document.getElementById('yr');
-      const beOut = document.getElementById('be');
+      document.getElementById('wk').textContent = fmt(weekly);
+      document.getElementById('mo').textContent = fmt(monthly);
+      document.getElementById('yr').textContent = fmt(annual);
 
-      if(wkOut) wkOut.textContent = fmt(weekly);
-      if(moOut) moOut.textContent = fmt(monthly);
-      if(yrOut) yrOut.textContent = fmt(annual);
-
-      if(beOut){
-        if(isFinite(cost) && cost > 0 && weekly > 0){
-          const weeksToBE = cost / weekly;
-          const daysToBE = weeksToBE * 7;
-          beOut.textContent = (daysToBE < 7) ? `${Math.ceil(daysToBE)} days` : `${weeksToBE.toFixed(1)} weeks`;
-        } else {
-          beOut.textContent = "—";
-        }
+      const be = document.getElementById('be');
+      if(cost > 0 && weekly > 0){
+        const weeksToBE = cost / weekly;
+        const daysToBE = weeksToBE * 7;
+        be.textContent = (daysToBE < 7) ? `${Math.ceil(daysToBE)} days` : `${weeksToBE.toFixed(1)} weeks`;
+      } else {
+        be.textContent = "—";
       }
     }
 
-    function bindROI(){
-      ['eng','hrs','rate','weeks','cost'].forEach(id => {
-        const el = document.getElementById(id);
-        if(!el) return;
-        el.addEventListener('input', calcROI);
-        el.addEventListener('change', calcROI);
-      });
-      calcROI();
-      setTimeout(calcROI, 50);
-    }
-    bindROI();
+    ['eng','hrs','rate','weeks','cost'].forEach(id => {
+      const el = document.getElementById(id);
+      el.addEventListener('input', calcROI);
+      el.addEventListener('change', calcROI);
+    });
 
-    // ---------- Checkout + Payment wiring ----------
-    // Paste your REAL secure payment links later (Stripe Payment Links recommended)
-    const PAY_LINKS = {
-      standard: '#',
-      premium:  '#',
-      plus:     '#'
+    // ---- Plans ----
+    const PLAN_MAP = {
+      demo:     { name: 'Demo / Trial (3 days)', price: 0 },
+      standard: { name: 'Standard Pack', price: 999 },
+      premium:  { name: 'Premium Pack', price: 1299 },
+      plus:     { name: 'Premium Plus', price: 1599 }
     };
 
-    function setCheckoutPlan(key, price){
-      const planNameMap = { standard:'Standard Pack', premium:'Premium Pack', plus:'Premium Plus' };
-      const name = planNameMap[key] || 'Custom Selection';
+    let selectedPlanKey = 'standard';
 
-      const coPlan = document.getElementById('coPlan');
-      const coPrice = document.getElementById('coPrice');
-      const payPlan = document.getElementById('payPlan');
-      const payTotal = document.getElementById('payTotal');
-      const payNow = document.getElementById('payNow');
-      const payAlt = document.getElementById('payAlt');
+    function applySelection(key){
+      const plan = PLAN_MAP[key];
+      if(!plan) return;
+      selectedPlanKey = key;
 
-      if(coPlan) coPlan.value = name;
-      if(coPrice) coPrice.value = isFinite(price) ? price : 0;
-      if(payPlan) payPlan.textContent = name;
-      if(payTotal) payTotal.textContent = fmt(isFinite(price) ? price : 0);
-
-      const link = PAY_LINKS[key] || '#';
-      if(payNow) payNow.href = link;
-      if(payAlt) payAlt.href = link;
-    }
-
-    // ROI plan selector -> auto-fill tool cost + prime checkout
-    (function(){
+      // ROI dropdown + tool cost
       const planSel = document.getElementById('plan');
       const costEl = document.getElementById('cost');
-      const cont = document.getElementById('roiContinue');
+      planSel.value = key;
+      costEl.value = plan.price;
 
-      function applyFromROI(){
-        const key = planSel ? planSel.value : 'custom';
-        let price = parseFloat(costEl ? costEl.value : '0');
-        if(!isFinite(price)) price = 0;
+      // Checkout text
+      document.getElementById('selPlan').textContent = plan.name;
+      document.getElementById('selPrice').textContent = plan.price.toLocaleString('en-IE');
 
-        if(key === 'standard' || key === 'premium' || key === 'plus'){
-          setCheckoutPlan(key, price);
-        } else {
-          setCheckoutPlan('standard', price);
-          const coPlan = document.getElementById('coPlan');
-          if(coPlan) coPlan.value = 'Custom Selection';
-        }
+      // Checkout behavior
+      const payBtn = document.getElementById('payBtn');
+      const note = document.getElementById('checkoutNote');
+      if(key === 'demo'){
+        payBtn.textContent = 'NO PAYMENT REQUIRED (DEMO)';
+        payBtn.setAttribute('data-disabled','1');
+        note.textContent = 'Demo/Trial is €0 — download the trial from the Trial section. No card details required.';
+      } else {
+        payBtn.textContent = 'REQUEST PAYMENT';
+        payBtn.removeAttribute('data-disabled');
+        note.textContent = 'You’ll receive an email with invoice or secure payment link.';
       }
 
-      if(planSel && costEl){
-        planSel.addEventListener('change', () => {
-          const opt = planSel.options[planSel.selectedIndex];
-          const p = parseFloat(opt?.getAttribute('data-price') || '0');
-          const key = planSel.value;
+      // Visual feedback on pricing buttons
+      document.querySelectorAll('.plan-btn').forEach(btn => {
+        const k = btn.getAttribute('data-plan');
+        if(!btn.dataset.original) btn.dataset.original = btn.textContent;
+        btn.textContent = (k === key) ? 'SELECTED ✓' : btn.dataset.original;
+      });
 
-          if(isFinite(p) && key !== 'custom') costEl.value = p;
-          applyFromROI();
-          calcROI();
-        });
+      calcROI();
+    }
+
+    // Pricing buttons
+    document.querySelectorAll('.plan-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        applySelection(btn.getAttribute('data-plan'));
+        window.location.hash = '#checkout';
+      });
+    });
+
+    // ROI dropdown
+    document.getElementById('plan').addEventListener('change', (e) => {
+      const key = e.target.value;
+      if(PLAN_MAP[key]) applySelection(key);
+    });
+
+    // ROI Continue
+    document.getElementById('roiContinue').addEventListener('click', () => {
+      const key = document.getElementById('plan').value || selectedPlanKey;
+      if(PLAN_MAP[key]) applySelection(key);
+    });
+
+    // Payment request (email) OR demo -> trial
+    document.getElementById('payBtn').addEventListener('click', () => {
+      const payBtn = document.getElementById('payBtn');
+      if(payBtn.getAttribute('data-disabled') === '1'){
+        window.location.hash = '#trial';
+        return;
       }
 
-      if(cont){
-        cont.addEventListener('click', () => applyFromROI());
-      }
+      const plan = PLAN_MAP[selectedPlanKey] || PLAN_MAP.standard;
+      const subject = encodeURIComponent('MetaMech License Purchase');
+      const body = encodeURIComponent(
+        `Hi MetaMech Solution,\n\n` +
+        `I would like to purchase the following plan:\n\n` +
+        `Plan: ${plan.name}\n` +
+        `Price: €${plan.price.toLocaleString('en-IE')}\n\n` +
+        `Please send invoice or secure payment link.\n\nThanks`
+      );
+      window.location.href = `mailto:hi@metamechsolutions.com?subject=${subject}&body=${body}`;
+    });
 
-      // prime checkout once
-      setTimeout(applyFromROI, 50);
-    })();
-
-    // Checkout buttons: Proceed / Invoice email
-    (function(){
-      const proceed = document.getElementById('coProceed');
-      const invoice = document.getElementById('coInvoice');
-      const msg = document.getElementById('coMsg');
-
-      function collectCheckout(){
-        return {
-          plan: (document.getElementById('coPlan')?.value || '').trim(),
-          price: (document.getElementById('coPrice')?.value || '0').trim(),
-          name: (document.getElementById('coName')?.value || '').trim(),
-          company: (document.getElementById('coCompany')?.value || '').trim(),
-          email: (document.getElementById('coEmail')?.value || '').trim(),
-          sw: (document.getElementById('coSW')?.value || '').trim(),
-          notes: (document.getElementById('coNotes')?.value || '').trim()
-        };
-      }
-
-      function openInvoiceEmail(){
-        const d = collectCheckout();
-        const subject = encodeURIComponent(`MetaMech Purchase Request — ${d.plan || 'License'}`);
-        const body = encodeURIComponent(
-          `Hi MetaMech Solution,\n\n` +
-          `I would like to purchase: ${d.plan}\n` +
-          `Price: €${d.price}\n\n` +
-          `Name: ${d.name}\n` +
-          `Company: ${d.company}\n` +
-          `Email: ${d.email}\n` +
-          `SolidWorks: ${d.sw}\n` +
-          `Notes: ${d.notes}\n\n` +
-          `Please send the secure payment link / invoice.\n\nThanks`
-        );
-        window.location.href = `mailto:hi@metamechsolutions.com?subject=${subject}&body=${body}`;
-      }
-
-      if(invoice){
-        invoice.addEventListener('click', () => {
-          openInvoiceEmail();
-          if(msg) msg.textContent = 'Your email client has been opened with a pre-filled invoice request.';
-        });
-      }
-
-      if(proceed){
-        proceed.addEventListener('click', () => {
-          const payNow = document.getElementById('payNow');
-          if(payNow && payNow.getAttribute('href') === '#'){
-            openInvoiceEmail();
-            if(msg) msg.textContent = 'Payment link not connected yet. We opened an email to request the secure payment link.';
-          } else {
-            payNow?.click();
-          }
-        });
-      }
-    })();
-
-    // Footer year
-    document.getElementById('yrNow').textContent = new Date().getFullYear();
-
-    // Trial email handling (GitHub Pages safe)
-    document.getElementById('trialEmailBtn').addEventListener('click', function(){
+    // Trial email
+    document.getElementById('trialEmailBtn').addEventListener('click', () => {
       const email = (document.getElementById('trialEmail').value || "").trim();
       const msg = document.getElementById('trialMsg');
 
@@ -1039,15 +880,17 @@
       const body = encodeURIComponent(
         `Hi MetaMech Solution,\n\n` +
         `I would like to request the 3-day trial.\n\n` +
-        `My email: ${email}\n\n` +
-        `Thanks`
+        `My email: ${email}\n\nThanks`
       );
 
       window.location.href = `mailto:hi@metamechsolutions.com?subject=${subject}&body=${body}`;
       msg.textContent = "Your email client has been opened to send the trial request.";
     });
 
-    // Slim header + auto-hide on scroll down, show on scroll up
+    // Footer year
+    document.getElementById('yrNow').textContent = new Date().getFullYear();
+
+    // Hide header on scroll down
     (function(){
       const nav = document.querySelector('.nav');
       let lastY = window.scrollY;
@@ -1059,11 +902,8 @@
         const delta = Math.abs(y - lastY);
 
         if(delta > 10){
-          if(down && y > 120){
-            nav.classList.add('nav--hidden');
-          } else {
-            nav.classList.remove('nav--hidden');
-          }
+          if(down && y > 120) nav.classList.add('nav--hidden');
+          else nav.classList.remove('nav--hidden');
           lastY = y;
         }
         ticking = false;
@@ -1076,6 +916,9 @@
         }
       });
     })();
+
+    // Default
+    applySelection('standard');
   </script>
 </body>
 </html>
