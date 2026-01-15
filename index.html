@@ -141,6 +141,34 @@
     .kpi strong{font-size:18px;display:block}
     .kpi span{color:var(--muted);font-size:13px}
 
+    /* Subtle animated background glow */
+    @keyframes floatGlow{
+      0%,100%{ transform: translate3d(0,0,0) scale(1); opacity:.55; }
+      50%{ transform: translate3d(0,-10px,0) scale(1.03); opacity:.75; }
+    }
+
+    /* Scroll-reveal animations */
+    .reveal{opacity:0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease;}
+    .reveal.reveal--in{opacity:1; transform: translateY(0);}
+
+    /* Premium micro-interactions */
+    .card{transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;}
+    .card:hover{transform: translateY(-3px); border-color: rgba(22,179,184,.22);}
+    .btn{transition: transform .18s ease, filter .18s ease;}
+    .btn:hover{transform: translateY(-1px); filter:brightness(1.03)}
+
+    /* Image / preview styling */
+    .preview-grid{display:grid; grid-template-columns: 1.2fr .8fr; gap:12px; margin-top:14px;}
+    .preview-main, .preview-side{border-radius: var(--radius); border:1px solid var(--line); background: rgba(255,255,255,.02); overflow:hidden;}
+    .preview-main img, .preview-side img{width:100%; height:100%; object-fit:cover; display:block;}
+    .preview-side{display:grid; grid-template-rows: 1fr 1fr; gap:12px; padding:12px;}
+    .preview-side .shot{border-radius:14px; overflow:hidden; border:1px solid var(--line);}
+
+    @media (max-width: 900px){
+      .preview-grid{grid-template-columns:1fr}
+      .preview-side{grid-template-rows: auto; grid-template-columns:1fr;}
+    }
+
     /* Sections */
     .section{padding:46px 0}
     .section h2{margin:0 0 10px 0;font-size:28px;letter-spacing:-.3px}
@@ -271,7 +299,7 @@
   </div>
 
   <!-- HERO -->
-  <header class="hero">
+  <header class="hero" style="animation: floatGlow 7.5s ease-in-out infinite;">
     <div class="container">
       <div class="grid">
         <div class="card">
@@ -329,6 +357,36 @@
     </div>
   </header>
 
+  <!-- PRODUCT PREVIEW (Screenshots / Photos) -->
+  <section id="preview" class="section">
+    <div class="container">
+      <h2 class="reveal">PRODUCT PREVIEW</h2>
+      <p class="lead reveal">A quick visual look at the automation experience and outputs (replace with your real screenshots anytime).</p>
+
+      <div class="preview-grid">
+        <div class="card preview-main reveal">
+          <img src="assets/images/preview-main.jpg" alt="MetaMech automation preview" onerror="this.style.display='none'" />
+          <div style="padding:14px;" class="note">
+            Tip: add your EXE UI screenshot here (assets/images/preview-main.jpg).
+          </div>
+        </div>
+
+        <div class="preview-side">
+          <div class="card shot reveal">
+            <img src="assets/images/preview-bom.jpg" alt="BOM export example" onerror="this.style.display='none'" />
+            <div style="padding:12px;" class="note">BOM export example (preview-bom.jpg)</div>
+          </div>
+          <div class="card shot reveal">
+            <img src="assets/images/preview-pdf.jpg" alt="PDF merge example" onerror="this.style.display='none'" />
+            <div style="padding:12px;" class="note">PDF merge output (preview-pdf.jpg)</div>
+          </div>
+        </div>
+      </div>
+
+      <p class="note reveal" style="margin-top:10px;">Add these files to your repo: <b>assets/images/preview-main.jpg</b>, <b>preview-bom.jpg</b>, <b>preview-pdf.jpg</b>.</p>
+    </div>
+  </section>
+
   <!-- TOOLS -->
   <section id="tools" class="section">
     <div class="container">
@@ -339,6 +397,7 @@
       </p>
 
       <div class="cards3">
+        <!-- Note: cards are revealed on scroll -->
         <div class="card">
           <h3 style="margin:0 0 8px 0;">BOM AUTOMATION</h3>
           <p>Master BOM + sheets by TYPE, missing property highlighting, consistent formatting.</p>
@@ -408,7 +467,7 @@
       <div class="two">
         <div class="card">
           <div class="field">
-            <label>Engineers using the traditional method (old style) </label>
+            <label>Engineers using the tool</label>
             <input id="eng" type="number" value="2" min="1" />
           </div>
 
@@ -673,6 +732,28 @@
   </div>
 
   <script>
+    // Auto add reveal class to key elements
+    (function(){
+      const targets = document.querySelectorAll('h2, .lead, .card, .kpi, .pill, .result');
+      targets.forEach(el => el.classList.add('reveal'));
+    })();
+
+    // Scroll reveal observer
+    (function(){
+      const items = document.querySelectorAll('.reveal');
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if(e.isIntersecting){
+            e.target.classList.add('reveal--in');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+      items.forEach(el => io.observe(el));
+    })();
+
+
     // ROI calculator
     function fmt(n){ return Math.round(n).toLocaleString('en-IE'); }
 
@@ -722,9 +803,15 @@
 
       const subject = encodeURIComponent("MetaMech 3-Day Trial Request");
       const body = encodeURIComponent(
-        "Hi MetaMech Solution,\n\n" +
-        "I would like to request the 3-day trial.\n\n" +
-        "My email: " + email + "\n\n" +
+        "Hi MetaMech Solution,
+
+" +
+        "I would like to request the 3-day trial.
+
+" +
+        "My email: " + email + "
+
+" +
         "Thanks" 
       );
 
@@ -766,4 +853,3 @@
   </script>
 </body>
 </html>
-
