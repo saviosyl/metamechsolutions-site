@@ -8,17 +8,16 @@
 
   <style>
     :root{
-      /* BRAND-LED PREMIUM PALETTE (brighter + higher contrast) */
-      --bg:#0b1222;            /* deep navy (slightly brighter) */
-      --panel:#101c33;         /* cards/nav base (brighter) */
-      --panel2:#0d1730;        /* secondary panels */
-      --text:#fbfdff;          /* crisp light text */
-      --muted:#d3dcf3;         /* brighter secondary text */
+      --bg:#0b1222;
+      --panel:#101c33;
+      --panel2:#0d1730;
+      --text:#fbfdff;
+      --muted:#d3dcf3;
       --line:rgba(255,255,255,.14);
 
-      /* accents */
-      --accent:#16b3b8;        /* teal (brand primary) */
-      --accent2:#f0b429;       /* amber (brand secondary) */
+      /* logo aligned accents */
+      --accent:#16b3b8;
+      --accent2:#f0b429;
 
       --shadow:0 24px 60px rgba(0,0,0,.40);
       --radius:18px;
@@ -26,7 +25,6 @@
 
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
-
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", Helvetica;
@@ -50,25 +48,15 @@
       transition: transform .25s ease, background .25s ease;
     }
     .nav.nav--hidden{transform: translateY(-110%);}
-
     .nav-inner{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:8px 0;
-      gap:12px;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:8px 0;gap:12px;
     }
-
-    /* Logo-only brand (NO highlight box) */
     .brand{display:flex;align-items:center;}
     .logo-img{
-      width:110px;
-      height:auto;
-      display:block;
-      object-fit:contain;
+      width:110px;height:auto;display:block;object-fit:contain;
       filter: drop-shadow(0 4px 10px rgba(0,0,0,.35));
     }
-
     .menu{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:flex-end}
     .menu a{
       padding:10px 12px;border-radius:12px;
@@ -86,11 +74,6 @@
       background: rgba(22,179,184,.18);
       box-shadow: 0 6px 20px rgba(22,179,184,.25);
     }
-    .menu a:hover{
-      border-color:rgba(22,179,184,.35);
-      color:var(--text);
-      background:rgba(22,179,184,.08);
-    }
 
     .btn{
       display:inline-flex;align-items:center;justify-content:center;gap:10px;
@@ -100,20 +83,23 @@
       color:var(--text);
       cursor:pointer;
       white-space:nowrap;
+      transition: transform .18s ease, filter .18s ease;
     }
+    .btn:hover{transform: translateY(-1px); filter:brightness(1.03)}
     .btn-primary{
       background: linear-gradient(135deg, rgba(22,179,184,.98), rgba(22,179,184,.62));
       border-color: rgba(22,179,184,.55);
       box-shadow: 0 18px 42px rgba(22,179,184,.18);
     }
-    .btn-primary:hover{filter:brightness(1.05)}
     .btn-green{
       background: linear-gradient(135deg, rgba(240,180,41,.98), rgba(240,180,41,.60));
       border-color: rgba(240,180,41,.55);
       box-shadow: 0 18px 42px rgba(240,180,41,.16);
     }
+    .btn:disabled, .btn[aria-disabled="true"]{
+      opacity:.55; pointer-events:none;
+    }
 
-    /* Mobile CTA */
     .mobile-cta{display:none}
 
     /* HERO */
@@ -132,12 +118,12 @@
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       padding:18px;
+      transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
     }
+    .card:hover{transform: translateY(-3px); border-color: rgba(22,179,184,.22);}
 
-    /* ===== HERO EMPHASIS (logo-aligned) ===== */
+    /* HERO EMPHASIS */
     .card.hero-primary{overflow:hidden;padding-left:22px;}
-
-    /* Soft animated accent line */
     .card.hero-primary::before{
       content:"";
       position:absolute;left:0;top:0;bottom:0;
@@ -166,7 +152,6 @@
       100%{top:110%; opacity:0}
     }
 
-    /* Gradient emphasis for one keyword */
     .accent-word{
       background: linear-gradient(135deg, var(--accent), var(--accent2));
       -webkit-background-clip:text;
@@ -174,22 +159,13 @@
       color:transparent;
     }
 
-    /* Lift hero text contrast */
-    .hero-primary h1{color:#ffffff}
-    .hero-primary p{color:#f4f7ff}
-    .hero-primary .kpi strong{color:#ffffff}
-    .hero-primary .kpi span{color:#f0f4ff}
-
     h1{
       font-size:46px;line-height:1.06;margin:0 0 14px 0;
       letter-spacing:-.9px;
-      color:#ffffff; /* FULL BRIGHT WHITE */
-      text-shadow:
-        0 2px 0 rgba(0,0,0,.25),
-        0 14px 36px rgba(0,0,0,.55);
+      color:#ffffff;
+      text-shadow: 0 2px 0 rgba(0,0,0,.25), 0 14px 36px rgba(0,0,0,.55);
     }
-
-    p{margin:0 0 12px 0;color:#eef3ff;line-height:1.7}
+    p{margin:0 0 12px 0;color:#f4f7ff;line-height:1.72}
 
     .hero-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
 
@@ -200,39 +176,13 @@
       padding:12px;
       background: rgba(255,255,255,.02);
     }
-    .kpi strong{font-size:18px;display:block}
-    .kpi span{color:#eef3ff;font-size:13px}
+    .kpi strong{font-size:18px;display:block;color:#fff}
+    .kpi span{color:#f0f4ff;font-size:13px}
 
-    /* Subtle animated background glow */
-    @keyframes floatGlow{
-      0%,100%{ transform: translate3d(0,0,0) scale(1); opacity:.55; }
-      50%{ transform: translate3d(0,-10px,0) scale(1.03); opacity:.75; }
-    }
-
-    /* Scroll-reveal animations */
+    /* Scroll-reveal */
     .reveal{opacity:0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease;}
     .reveal.reveal--in{opacity:1; transform: translateY(0);}
-
-    /* IMPORTANT: Hero should NEVER look dim (skip reveal fade at top) */
     header.hero .reveal{opacity:1 !important; transform:none !important;}
-
-    /* Premium micro-interactions */
-    .card{transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;}
-    .card:hover{transform: translateY(-3px); border-color: rgba(22,179,184,.22);}
-    .btn{transition: transform .18s ease, filter .18s ease;}
-    .btn:hover{transform: translateY(-1px); filter:brightness(1.03)}
-
-    /* Image / preview styling */
-    .preview-grid{display:grid; grid-template-columns: 1.2fr .8fr; gap:12px; margin-top:14px;}
-    .preview-main, .preview-side{border-radius: var(--radius); border:1px solid var(--line); background: rgba(255,255,255,.02); overflow:hidden;}
-    .preview-main img, .preview-side img{width:100%; height:100%; object-fit:cover; display:block;}
-    .preview-side{display:grid; grid-template-rows: 1fr 1fr; gap:12px; padding:12px;}
-    .preview-side .shot{border-radius:14px; overflow:hidden; border:1px solid var(--line);}
-
-    @media (max-width: 900px){
-      .preview-grid{grid-template-columns:1fr}
-      .preview-side{grid-template-rows: auto; grid-template-columns:1fr;}
-    }
 
     /* Sections */
     .section{padding:46px 0}
@@ -240,21 +190,19 @@
     .section .lead{max-width:760px}
 
     .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+    .two{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
 
     .pill{
       display:inline-flex;align-items:center;gap:8px;
       font-size:12px;
-      color:#ffffff; /* brighter text */
-      border:1px solid rgba(22,179,184,.45);
+      color:#ffffff;
+      border:1px solid rgba(22,179,184,.55);
       padding:6px 10px;border-radius:999px;
-      background: linear-gradient(135deg, rgba(22,179,184,.28), rgba(22,179,184,.12));
-      box-shadow: 0 6px 18px rgba(22,179,184,.25);
+      background: linear-gradient(135deg, rgba(22,179,184,.38), rgba(22,179,184,.18));
+      box-shadow: 0 8px 22px rgba(22,179,184,.35);
     }
-
     .list{margin:10px 0 0 0;padding:0 0 0 18px;color:#eef3ff}
     .list li{margin:7px 0}
-
-    .two{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
 
     .field{display:flex;flex-direction:column;gap:6px}
     .field label{color:var(--muted);font-size:13px}
@@ -265,9 +213,7 @@
       outline:none;
     }
     .select{
-      padding:12px 12px;
-      border-radius:12px;
-      border:1px solid var(--line);
+      padding:12px 12px;border-radius:12px;border:1px solid var(--line);
       background: rgba(255,255,255,.03);
       color:var(--text);
       outline:none;
@@ -280,64 +226,42 @@
       padding:12px;
       background: rgba(255,255,255,.02);
     }
+    .note{font-size:12px;color:var(--muted);opacity:.95;line-height:1.5}
 
-    .note{font-size:12px;color:var(--muted);opacity:.9;line-height:1.5}
-
-    /* Anchor offset for sticky header */
     section{scroll-margin-top: 76px;}
 
     .footer{padding:28px 0 40px;border-top:1px solid var(--line);color:var(--muted)}
-    /* Pricing: Most Popular ribbon */
+
+    /* Most Popular ribbon */
     .popular{
       outline:2px solid rgba(22,179,184,.35);
       box-shadow: 0 28px 70px rgba(0,0,0,.55);
     }
     .ribbon{
-      position:absolute;
-      top:14px;
-      right:-46px;
-      transform: rotate(12deg);
-      width:160px;
-      text-align:center;
-      pointer-events:none;
+      position:absolute; top:14px; right:-46px;
+      transform: rotate(12deg); width:160px; text-align:center; pointer-events:none;
     }
     .ribbon span{
-      display:block;
-      padding:8px 10px;
-      font-size:12px;
-      letter-spacing:.9px;
-      font-weight:800;
+      display:block;padding:8px 10px;font-size:12px;letter-spacing:.9px;font-weight:800;
       color:#07111a;
       background: linear-gradient(135deg, rgba(240,180,41,.98), rgba(22,179,184,.95));
       border:1px solid rgba(255,255,255,.18);
       border-radius:12px;
       box-shadow: 0 14px 30px rgba(0,0,0,.35);
-      position:relative;
-      overflow:hidden;
+      position:relative; overflow:hidden;
       animation: ribbonFloat 2.6s ease-in-out infinite;
     }
     .ribbon span::after{
       content:"";
-      position:absolute;
-      top:-40%;
-      left:-60%;
-      width:60%;
-      height:180%;
+      position:absolute; top:-40%; left:-60%;
+      width:60%; height:180%;
       background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent);
       transform: rotate(22deg);
       animation: ribbonShine 2.8s ease-in-out infinite;
     }
-    @keyframes ribbonFloat{
-      0%,100%{ transform: translateY(0); }
-      50%{ transform: translateY(-3px); }
-    }
-    @keyframes ribbonShine{
-      0%{ left:-70%; }
-      55%{ left:120%; }
-      100%{ left:120%; }
-    }
+    @keyframes ribbonFloat{0%,100%{ transform: translateY(0);}50%{ transform: translateY(-3px);} }
+    @keyframes ribbonShine{0%{ left:-70%;}55%{ left:120%;}100%{ left:120%;} }
 
-    /* Responsive */
     @media (max-width: 900px){
       .grid{grid-template-columns:1fr}
       .cards3{grid-template-columns:1fr}
@@ -354,7 +278,6 @@
   <div class="nav">
     <div class="container">
       <div class="nav-inner">
-        <!-- LOGO ONLY (110px). Update filename if needed -->
         <div class="brand">
           <img src="assets/logo/metamech-logo.png" alt="MetaMech Solution Logo" class="logo-img" />
         </div>
@@ -376,7 +299,7 @@
   </div>
 
   <!-- HERO -->
-  <header class="hero" style="animation: floatGlow 7.5s ease-in-out infinite;">
+  <header class="hero">
     <div class="container">
       <div class="grid">
         <div class="card hero-primary">
@@ -394,18 +317,9 @@
           </div>
 
           <div class="kpis">
-            <div class="kpi">
-              <strong>1-CLICK OUTPUTS</strong>
-              <span>BOM, PDF merge, STEP, DXF exports</span>
-            </div>
-            <div class="kpi">
-              <strong>WORKFLOW FIT</strong>
-              <span>Customised to your standards & folders</span>
-            </div>
-            <div class="kpi">
-              <strong>ROI FOCUSED</strong>
-              <span>Save hours every week per engineer</span>
-            </div>
+            <div class="kpi"><strong>1-CLICK OUTPUTS</strong><span>BOM, PDF merge, STEP, DXF exports</span></div>
+            <div class="kpi"><strong>WORKFLOW FIT</strong><span>Customised to your standards & folders</span></div>
+            <div class="kpi"><strong>ROI FOCUSED</strong><span>Save hours every week per engineer</span></div>
           </div>
         </div>
 
@@ -435,36 +349,6 @@
     </div>
   </header>
 
-  <!-- PRODUCT PREVIEW (Screenshots / Photos) -->
-  <section id="preview" class="section">
-    <div class="container">
-      <h2 class="reveal">PRODUCT PREVIEW</h2>
-      <p class="lead reveal">A quick visual look at the automation experience and outputs (replace with your real screenshots anytime).</p>
-
-      <div class="preview-grid">
-        <div class="card preview-main reveal">
-          <img src="assets/images/preview-main.jpg" alt="MetaMech automation preview" onerror="this.style.display='none'" />
-          <div style="padding:14px;" class="note">
-            Tip: add your EXE UI screenshot here (assets/images/preview-main.jpg).
-          </div>
-        </div>
-
-        <div class="preview-side">
-          <div class="card shot reveal">
-            <img src="assets/images/preview-bom.jpg" alt="BOM export example" onerror="this.style.display='none'" />
-            <div style="padding:12px;" class="note">BOM export example (preview-bom.jpg)</div>
-          </div>
-          <div class="card shot reveal">
-            <img src="assets/images/preview-pdf.jpg" alt="PDF merge example" onerror="this.style.display='none'" />
-            <div style="padding:12px;" class="note">PDF merge output (preview-pdf.jpg)</div>
-          </div>
-        </div>
-      </div>
-
-      <p class="note reveal" style="margin-top:10px;">Add these files to your repo: <b>assets/images/preview-main.jpg</b>, <b>preview-bom.jpg</b>, <b>preview-pdf.jpg</b>.</p>
-    </div>
-  </section>
-
   <!-- TOOLS -->
   <section id="tools" class="section">
     <div class="container">
@@ -475,7 +359,6 @@
       </p>
 
       <div class="cards3">
-        <!-- Note: cards are revealed on scroll -->
         <div class="card">
           <h3 style="margin:0 0 8px 0;">BOM AUTOMATION</h3>
           <p>Master BOM + sheets by TYPE, missing property highlighting, consistent formatting.</p>
@@ -507,36 +390,6 @@
   </section>
 
   <!-- ROI -->
-  <!-- TRUSTED -->
-  <section id="trusted" class="section">
-    <div class="container">
-      <h2>TRUSTED BY ENGINEERS</h2>
-      <p class="lead">Built for real-world SolidWorks workflows where speed, standards, and consistency matter.</p>
-
-      <div class="cards3">
-        <div class="card">
-          <h3 style="margin:0 0 8px 0;">BUILT FOR LARGE ASSEMBLIES</h3>
-          <p>Designed to perform on complex TLAs and deep sub-assembly structures without breaking your workflow.</p>
-        </div>
-        <div class="card">
-          <h3 style="margin:0 0 8px 0;">CONSISTENT OUTPUTS</h3>
-          <p>Standardised BOM/PDF/STEP results so every engineer exports the same format, every time.</p>
-        </div>
-        <div class="card">
-          <h3 style="margin:0 0 8px 0;">ENGINEER-LED DELIVERY</h3>
-          <p>We work closely with your design team initially to understand real challenges and deliver custom-fit solutions.</p>
-        </div>
-      </div>
-
-      <div class="card" style="margin-top:12px;">
-        <p style="margin:0;color:var(--muted);">
-          “The automation paid for itself quickly — fewer manual steps, fewer mistakes, and faster releases.”
-        </p>
-        <p class="note" style="margin:8px 0 0 0;">— Typical feedback from engineering teams (examples)</p>
-      </div>
-    </div>
-  </section>
-
   <section id="roi" class="section">
     <div class="container">
       <h2>ROI CALCULATOR</h2>
@@ -544,25 +397,10 @@
 
       <div class="two">
         <div class="card">
-          <div class="field">
-            <label>Engineers using the tool</label>
-            <input id="eng" type="number" value="2" min="1" />
-          </div>
-
-          <div class="field">
-            <label>Hours saved per week (per engineer)</label>
-            <input id="hrs" type="number" value="2" step="0.5" min="0" />
-          </div>
-
-          <div class="field">
-            <label>Hourly cost (€)</label>
-            <input id="rate" type="number" value="45" min="0" />
-          </div>
-
-          <div class="field">
-            <label>Weeks per year</label>
-            <input id="weeks" type="number" value="48" min="1" />
-          </div>
+          <div class="field"><label>Engineers using the tool</label><input id="eng" type="number" value="2" min="1" /></div>
+          <div class="field"><label>Hours saved per week (per engineer)</label><input id="hrs" type="number" value="2" step="0.5" min="0" /></div>
+          <div class="field"><label>Hourly cost (€)</label><input id="rate" type="number" value="45" min="0" /></div>
+          <div class="field"><label>Weeks per year</label><input id="weeks" type="number" value="48" min="1" /></div>
 
           <div class="field">
             <label>Select Plan</label>
@@ -575,13 +413,10 @@
             </select>
           </div>
 
-          <div class="field">
-            <label>Tool cost (€)</label>
-            <input id="cost" type="number" value="0" min="0" />
-          </div>
+          <div class="field"><label>Tool cost (€)</label><input id="cost" type="number" value="0" min="0" /></div>
 
           <div class="hero-cta" style="margin-top:12px">
-            <a class="btn btn-primary" href="#checkout" id="roiContinue">CONTINUE TO PURCHASE</a>
+            <a class="btn btn-primary" href="#checkout" id="roiContinue">CONTINUE TO CHECKOUT</a>
           </div>
 
           <div style="margin-top:12px" class="note">
@@ -597,10 +432,7 @@
           <div class="result"><b>Annual Savings:</b> €<span id="yr">0</span></div>
           <div style="height:10px"></div>
           <div class="result"><b>Break-even:</b> <span id="be">—</span></div>
-
-          <div style="margin-top:12px" class="note">
-            Break-even is calculated only if you enter a Tool Cost.
-          </div>
+          <div style="margin-top:12px" class="note">Break-even is calculated only if you enter a Tool Cost.</div>
         </div>
       </div>
     </div>
@@ -613,7 +445,6 @@
       <p class="lead">Simple one-time licenses with immediate ROI. Launch discount applied.</p>
 
       <div class="cards3">
-        <!-- DEMO / TRIAL -->
         <div class="card">
           <span class="pill">DEMO / TRIAL</span>
           <h3 style="margin:10px 0 4px 0;">€0</h3>
@@ -629,7 +460,6 @@
           </div>
         </div>
 
-        <!-- STANDARD -->
         <div class="card">
           <span class="pill">STANDARD PACK</span>
           <h3 style="margin:10px 0 4px 0;">€999</h3>
@@ -644,7 +474,6 @@
           </div>
         </div>
 
-        <!-- PREMIUM -->
         <div class="card popular">
           <div class="ribbon"><span>MOST POPULAR</span></div>
           <span class="pill">PREMIUM PACK</span>
@@ -660,7 +489,6 @@
           </div>
         </div>
 
-        <!-- PREMIUM PLUS -->
         <div class="card">
           <span class="pill">PREMIUM PLUS</span>
           <h3 style="margin:10px 0 4px 0;">€1,599</h3>
@@ -684,22 +512,52 @@
   <section id="checkout" class="section">
     <div class="container">
       <h2>CHECKOUT</h2>
-      <p class="lead">Select a plan, then proceed to payment. Trial is €0 and requires no card details.</p>
+      <p class="lead">Step 1: Fill your details. Step 2: Proceed to payment (or trial download).</p>
 
       <div class="two">
+        <!-- LEFT: Selection + Form -->
         <div class="card">
-          <h3>YOUR SELECTION</h3>
-          <p class="note">Plan and price sync automatically from Pricing buttons or the ROI calculator.</p>
+          <h3>STEP 1 — YOUR SELECTION</h3>
           <div class="result"><b>Selected Plan:</b> <span id="selPlan">Standard Pack</span></div>
           <div style="height:10px"></div>
           <div class="result"><b>Price:</b> €<span id="selPrice">999</span></div>
-          <div style="height:10px"></div>
-          <div class="note" id="checkoutNote">Ready to pay? Choose a secure checkout option on the right.</div>
+
+          <div style="height:14px"></div>
+          <h3 style="margin:0 0 8px 0;">STEP 1 — YOUR DETAILS (REQUIRED)</h3>
+          <p class="note" style="margin-top:0">We use this to track trial downloads and license purchases. (Saved locally in your browser.)</p>
+
+          <form id="leadForm">
+            <div class="two" style="margin-top:10px">
+              <div class="field"><label>Company name *</label><input id="leadCompany" required placeholder="e.g., ABC Engineering Ltd" /></div>
+              <div class="field"><label>Full name *</label><input id="leadName" required placeholder="Your name" /></div>
+            </div>
+
+            <div class="two" style="margin-top:10px">
+              <div class="field"><label>Work email *</label><input id="leadEmail" type="email" required placeholder="you@company.com" /></div>
+              <div class="field"><label>Position / Role *</label><input id="leadRole" required placeholder="Mechanical Design Engineer" /></div>
+            </div>
+
+            <div class="two" style="margin-top:10px">
+              <div class="field"><label>Phone (optional)</label><input id="leadPhone" placeholder="+353 ..." /></div>
+              <div class="field"><label>Country *</label><input id="leadCountry" required placeholder="Ireland" /></div>
+            </div>
+
+            <div class="field" style="margin-top:10px">
+              <label>Company address (optional)</label>
+              <input id="leadAddress" placeholder="Street, City, Eircode" />
+            </div>
+
+            <div style="height:10px"></div>
+            <button class="btn btn-primary" type="submit">SAVE DETAILS</button>
+            <div style="height:10px"></div>
+            <div class="note" id="leadStatus">Status: details not saved yet.</div>
+          </form>
         </div>
 
+        <!-- RIGHT: Payment (unlocked after details) -->
         <div class="card">
-          <h3>PAYMENT</h3>
-          <p class="note">GitHub Pages is static, so payment is done via external secure checkout links (Stripe recommended).</p>
+          <h3>STEP 2 — PAYMENT / NEXT ACTION</h3>
+          <p class="note">Paid plans use external secure checkout links (Stripe recommended). Trial requires no card.</p>
 
           <div class="result" style="display:flex;justify-content:space-between;gap:10px;align-items:center;">
             <div>
@@ -718,83 +576,8 @@
           <a class="btn btn-primary" id="reqInvoice" href="#" rel="nofollow">REQUEST INVOICE (EMAIL)</a>
 
           <div style="margin-top:12px" class="note" id="payNote">
-            Paste your real Stripe Payment Links in the script (STRIPE_LINKS). Trial skips payment.
+            Paste your real Stripe Payment Links in the script (STRIPE_LINKS). Trial goes to the Trial section.
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SERVICES -->
-    <!-- FAQ -->
-  <section id="faq" class="section">
-    <div class="container">
-      <h2>FAQ</h2>
-      <p class="lead">Quick answers about licensing, updates, and SolidWorks compatibility.</p>
-
-      <div class="two">
-        <div class="card">
-          <details open>
-            <summary style="cursor:pointer; font-weight:700;">How does licensing work?</summary>
-            <p class="note" style="margin-top:10px;">
-              One-time license per company/team. Activation is linked to your environment and can be moved if you change machines.
-            </p>
-          </details>
-          <hr style="border:none;border-top:1px solid var(--line);margin:12px 0;" />
-
-          <details>
-            <summary style="cursor:pointer; font-weight:700;">Is this compatible with my SolidWorks version?</summary>
-            <p class="note" style="margin-top:10px;">Designed for SolidWorks 2022–2025 workflows. If you have an older version, we can advise the best approach.</p>
-          </details>
-          <hr style="border:none;border-top:1px solid var(--line);margin:12px 0;" />
-
-          <details>
-            <summary style="cursor:pointer; font-weight:700;">What is included in the setup?</summary>
-            <p class="note" style="margin-top:10px;">Initial alignment with your folder structure, naming rules, templates, and required BOM/PDF formats.</p>
-          </details>
-        </div>
-
-        <div class="card">
-          <details open>
-            <summary style="cursor:pointer; font-weight:700;">Do you provide updates?</summary>
-            <p class="note" style="margin-top:10px;">Yes. Minor improvements and bug fixes are provided as we refine features and compatibility.</p>
-          </details>
-          <hr style="border:none;border-top:1px solid var(--line);margin:12px 0;" />
-
-          <details>
-            <summary style="cursor:pointer; font-weight:700;">Can you customise outputs for our standards?</summary>
-            <p class="note" style="margin-top:10px;">Absolutely. We can tailor custom properties, templates, naming rules, and sheet formats so your outputs look premium and consistent.</p>
-          </details>
-          <hr style="border:none;border-top:1px solid var(--line);margin:12px 0;" />
-
-          <details>
-            <summary style="cursor:pointer; font-weight:700;">How does the 3-day trial work?</summary>
-            <p class="note" style="margin-top:10px;">Trial starts on first run and expires after 72 hours. It’s ideal for validating workflow fit before purchase.</p>
-          </details>
-        </div>
-      </div>
-
-      <p class="note" style="margin-top:14px;">Still have questions? Email us at <a href="mailto:hi@metamechsolutions.com" style="text-decoration:underline;">hi@metamechsolutions.com</a>.</p>
-    </div>
-  </section>
-
-  <section id="services" class="section">
-    <div class="container">
-      <h2>SERVICES</h2>
-      <p class="lead">Engineering support plus automation — one partner for both build and delivery.</p>
-
-      <div class="cards3">
-        <div class="card">
-          <h3 style="margin:0 0 8px 0;">CUSTOM AUTOMATION</h3>
-          <p>We build tools around your folder structure, naming rules, templates, and approval process.</p>
-        </div>
-        <div class="card">
-          <h3 style="margin:0 0 8px 0;">MECHANICAL DESIGN</h3>
-          <p>3D modelling, assemblies, sheet metal design, drafting, and manufacturing packs.</p>
-        </div>
-        <div class="card">
-          <h3 style="margin:0 0 8px 0;">STANDARD LIBRARIES</h3>
-          <p>Item profiles, standard parts, property standards, and reusable engineering content.</p>
         </div>
       </div>
     </div>
@@ -804,32 +587,43 @@
   <section id="trial" class="section">
     <div class="container">
       <h2>DOWNLOAD 3-DAY TRIAL</h2>
-      <p class="lead">
-        Try the automation on a sample workflow. The trial expires automatically after 3 days.
-      </p>
+      <p class="lead">Trial is €0, no card required — but details are required to unlock the download.</p>
 
       <div class="two">
         <div class="card">
           <h3 style="margin:0 0 8px 0;">TRIAL DOWNLOAD</h3>
-          <p>Click to download the trial EXE (Windows). You can optionally enter your email to receive trial details.</p>
+          <p>Enter details then unlock the trial EXE download.</p>
 
-          <!-- Update this file path to where you host the EXE inside your repo -->
-          <a class="btn btn-green" id="downloadBtn" href="downloads/MetaMechTrial.exe" download>
-            ⬇ DOWNLOAD 3-DAY TRIAL
-          </a>
+          <form id="trialForm">
+            <div class="two" style="margin-top:10px">
+              <div class="field"><label>Company name *</label><input id="trialCompany" required placeholder="e.g., ABC Engineering Ltd" /></div>
+              <div class="field"><label>Full name *</label><input id="trialName" required placeholder="Your name" /></div>
+            </div>
+
+            <div class="two" style="margin-top:10px">
+              <div class="field"><label>Work email *</label><input id="trialEmail" type="email" required placeholder="you@company.com" /></div>
+              <div class="field"><label>Position / Role *</label><input id="trialRole" required placeholder="Mechanical Design Engineer" /></div>
+            </div>
+
+            <div class="field" style="margin-top:10px">
+              <label>Country *</label>
+              <input id="trialCountry" required placeholder="Ireland" />
+            </div>
+
+            <div style="height:10px"></div>
+            <button class="btn btn-primary" type="submit">UNLOCK TRIAL DOWNLOAD</button>
+            <div style="height:10px"></div>
+            <div class="note" id="trialMsg">Status: enter details to enable download.</div>
+          </form>
 
           <div style="height:12px"></div>
 
-          <div class="field">
-            <label>Email (optional)</label>
-            <input id="trialEmail" type="email" placeholder="you@company.com" />
-          </div>
+          <a class="btn btn-green" id="downloadBtn" href="#" download aria-disabled="true" style="opacity:.55;pointer-events:none;">
+            ⬇ DOWNLOAD 3-DAY TRIAL
+          </a>
 
-          <div style="height:10px"></div>
-          <button class="btn btn-primary" id="trialEmailBtn">SEND ME TRIAL DETAILS</button>
-
-          <div style="margin-top:10px" class="note" id="trialMsg">
-            Enter your email and click <b>SEND ME TRIAL DETAILS</b> — it will open your email app with a pre-filled message.
+          <div style="margin-top:10px" class="note">
+            When unlocked, the download link points to <b>downloads/MetaMechTrial.exe</b> in your repo.
           </div>
         </div>
 
@@ -849,6 +643,20 @@
     </div>
   </section>
 
+  <!-- SERVICES -->
+  <section id="services" class="section">
+    <div class="container">
+      <h2>SERVICES</h2>
+      <p class="lead">Engineering support plus automation — one partner for both build and delivery.</p>
+
+      <div class="cards3">
+        <div class="card"><h3 style="margin:0 0 8px 0;">CUSTOM AUTOMATION</h3><p>We build tools around your folder structure, naming rules, templates, and approval process.</p></div>
+        <div class="card"><h3 style="margin:0 0 8px 0;">MECHANICAL DESIGN</h3><p>3D modelling, assemblies, sheet metal design, drafting, and manufacturing packs.</p></div>
+        <div class="card"><h3 style="margin:0 0 8px 0;">STANDARD LIBRARIES</h3><p>Item profiles, standard parts, property standards, and reusable engineering content.</p></div>
+      </div>
+    </div>
+  </section>
+
   <!-- CONTACT -->
   <section id="contact" class="section">
     <div class="container">
@@ -858,7 +666,7 @@
       <div class="two">
         <div class="card">
           <h3 style="margin:0 0 8px 0;">REQUEST A DEMO</h3>
-          <p class="note">Since GitHub Pages is static, this uses an email link (or you can connect Formspree / Google Form).</p>
+          <p class="note">GitHub Pages is static, so this uses an email link (or connect Formspree / Google Form).</p>
           <a class="btn btn-primary" href="mailto:hi@metamechsolutions.com?subject=MetaMech%20Demo%20Request&body=Hi%20MetaMech%20Solution%2C%0A%0ACompany%3A%0AWorkflow%20to%20automate%3A%0ASolidWorks%20version%3A%0A%0AThanks%2C">
             ✉ EMAIL US
           </a>
@@ -887,17 +695,16 @@
   </div>
 
   <script>
-    // Auto add reveal class to key elements
+    // Reveal: add class (skip hero)
     (function(){
-      // Add reveal to sections (but NEVER fade the hero)
       const targets = document.querySelectorAll('h2, .lead, .card, .kpi, .pill, .result');
       targets.forEach(el => {
-        if(el.closest('header.hero')) return; // keep hero crisp
+        if(el.closest('header.hero')) return;
         el.classList.add('reveal');
       });
     })();
 
-    // Scroll reveal observer
+    // Reveal observer
     (function(){
       const items = document.querySelectorAll('.reveal');
       const io = new IntersectionObserver((entries) => {
@@ -911,22 +718,18 @@
       items.forEach(el => io.observe(el));
     })();
 
-    // Footer year
+    // Year
     const yr = document.getElementById('yrNow');
     if(yr) yr.textContent = new Date().getFullYear();
 
     // ==============================
-    // PAYMENT LINKS (EDIT THESE)
+    // PAYMENT LINKS (PASTE REAL LINKS)
     // ==============================
-    // Create Stripe Payment Links and paste them here.
-    // Example: https://buy.stripe.com/xxxx
     const STRIPE_LINKS = {
       standard: '#',
       premium: '#',
       plus: '#'
     };
-
-    // Optional alternative checkout links (PayPal/Gumroad/etc.)
     const ALT_LINKS = {
       standard: '#',
       premium: '#',
@@ -934,13 +737,12 @@
     };
 
     // ==============================
-    // ROI CALCULATOR (robust)
+    // ROI
     // ==============================
     function fmt(n){
       if(!isFinite(n)) return '0';
       return Math.round(n).toLocaleString('en-IE');
     }
-
     function calcROI(){
       const eng = parseFloat((document.getElementById('eng')||{}).value) || 0;
       const hrs = parseFloat((document.getElementById('hrs')||{}).value) || 0;
@@ -952,35 +754,26 @@
       const monthly = weekly * 4.33;
       const annual = weekly * weeks;
 
-      const wkOut = document.getElementById('wk');
-      const moOut = document.getElementById('mo');
-      const yrOut = document.getElementById('yr');
+      (document.getElementById('wk')||{}).textContent = fmt(weekly);
+      (document.getElementById('mo')||{}).textContent = fmt(monthly);
+      (document.getElementById('yr')||{}).textContent = fmt(annual);
+
       const beOut = document.getElementById('be');
-
-      if(wkOut) wkOut.textContent = fmt(weekly);
-      if(moOut) moOut.textContent = fmt(monthly);
-      if(yrOut) yrOut.textContent = fmt(annual);
-
       if(beOut){
         if(cost > 0 && weekly > 0){
           const weeksToBE = cost / weekly;
           const daysToBE = weeksToBE * 7;
           beOut.textContent = (daysToBE < 7) ? `${Math.ceil(daysToBE)} days` : `${weeksToBE.toFixed(1)} weeks`;
-        } else {
-          beOut.textContent = '—';
-        }
+        } else beOut.textContent = '—';
       }
     }
-
     ['eng','hrs','rate','weeks','cost'].forEach(id => {
       const el = document.getElementById(id);
-      if(!el) return;
-      el.addEventListener('input', calcROI);
-      el.addEventListener('change', calcROI);
+      if(el){ el.addEventListener('input', calcROI); el.addEventListener('change', calcROI); }
     });
 
     // ==============================
-    // PLAN SELECTION + CHECKOUT
+    // Plans
     // ==============================
     const PLAN_MAP = {
       trial:    { key:'trial',    name:'Demo / Trial (3 days)', price:0 },
@@ -988,13 +781,111 @@
       premium:  { key:'premium',  name:'Premium Pack',  price:1299 },
       plus:     { key:'plus',     name:'Premium Plus',  price:1599 }
     };
-
     let selected = 'standard';
+
+    // ==============================
+    // Lead capture (local storage)
+    // ==============================
+    function saveLead(obj){ try{ localStorage.setItem('mm_lead', JSON.stringify(obj)); }catch(e){} }
+    function loadLead(){ try{ return JSON.parse(localStorage.getItem('mm_lead')||'null'); }catch(e){ return null; } }
+    function leadIsComplete(lead){
+      if(!lead) return false;
+      return !!(lead.company && lead.name && lead.email && lead.role && lead.country);
+    }
+    function applyLeadToCheckout(lead){
+      if(!lead) return;
+      const map = {
+        leadCompany: lead.company, leadName: lead.name, leadEmail: lead.email,
+        leadRole: lead.role, leadPhone: lead.phone, leadCountry: lead.country, leadAddress: lead.address
+      };
+      Object.keys(map).forEach(id => {
+        const el = document.getElementById(id);
+        if(el && map[id]) el.value = map[id];
+      });
+      const status = document.getElementById('leadStatus');
+      if(status){
+        status.textContent = leadIsComplete(lead)
+          ? `Status: details saved for ${lead.company} (${lead.email}).`
+          : 'Status: details not saved yet.';
+      }
+    }
+
+    // Checkout form
+    const leadForm = document.getElementById('leadForm');
+    if(leadForm){
+      leadForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const lead = {
+          company: (document.getElementById('leadCompany')||{}).value?.trim() || '',
+          name: (document.getElementById('leadName')||{}).value?.trim() || '',
+          email: (document.getElementById('leadEmail')||{}).value?.trim() || '',
+          role: (document.getElementById('leadRole')||{}).value?.trim() || '',
+          phone: (document.getElementById('leadPhone')||{}).value?.trim() || '',
+          country: (document.getElementById('leadCountry')||{}).value?.trim() || '',
+          address: (document.getElementById('leadAddress')||{}).value?.trim() || '',
+          source: 'checkout',
+          plan: selected,
+          ts: new Date().toISOString()
+        };
+
+        const status = document.getElementById('leadStatus');
+        if(!leadIsComplete(lead)){
+          if(status) status.textContent = 'Status: please fill all required fields (*) before continuing.';
+          return;
+        }
+
+        saveLead(lead);
+        applyLeadToCheckout(lead);
+
+        // mirror to trial form (nice UX)
+        const tmap = {
+          trialCompany: lead.company, trialName: lead.name, trialEmail: lead.email, trialRole: lead.role, trialCountry: lead.country
+        };
+        Object.keys(tmap).forEach(id => {
+          const el = document.getElementById(id);
+          if(el && tmap[id]) el.value = tmap[id];
+        });
+      });
+    }
+
+    // Trial unlock
+    const trialForm = document.getElementById('trialForm');
+    if(trialForm){
+      trialForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const lead = {
+          company: (document.getElementById('trialCompany')||{}).value?.trim() || '',
+          name: (document.getElementById('trialName')||{}).value?.trim() || '',
+          email: (document.getElementById('trialEmail')||{}).value?.trim() || '',
+          role: (document.getElementById('trialRole')||{}).value?.trim() || '',
+          country: (document.getElementById('trialCountry')||{}).value?.trim() || '',
+          source: 'trial',
+          plan: 'trial',
+          ts: new Date().toISOString()
+        };
+
+        const msg = document.getElementById('trialMsg');
+        if(!leadIsComplete(lead)){
+          if(msg) msg.textContent = 'Status: please fill all required fields (*) to enable download.';
+          return;
+        }
+
+        saveLead(lead);
+        if(msg) msg.textContent = `Status: unlocked. Download enabled for ${lead.company}.`;
+
+        const d = document.getElementById('downloadBtn');
+        if(d){
+          d.href = 'downloads/MetaMechTrial.exe';
+          d.style.opacity = '1';
+          d.style.pointerEvents = 'auto';
+          d.setAttribute('aria-disabled','false');
+        }
+      });
+    }
 
     function setPayLinks(key){
       const payNow = document.getElementById('payNow');
       const payAlt = document.getElementById('payAlt');
-
       if(payNow) payNow.href = STRIPE_LINKS[key] || '#';
       if(payAlt) payAlt.href = ALT_LINKS[key] || '#';
     }
@@ -1002,31 +893,23 @@
     function updateCheckoutUI(){
       const plan = PLAN_MAP[selected] || PLAN_MAP.standard;
 
-      const selPlan = document.getElementById('selPlan');
-      const selPrice = document.getElementById('selPrice');
-      const payPlan = document.getElementById('payPlan');
-      const payTotal = document.getElementById('payTotal');
-      const checkoutNote = document.getElementById('checkoutNote');
+      (document.getElementById('selPlan')||{}).textContent = plan.name;
+      (document.getElementById('selPrice')||{}).textContent = plan.price.toLocaleString('en-IE');
+      (document.getElementById('payPlan')||{}).textContent = plan.name;
+      (document.getElementById('payTotal')||{}).textContent = plan.price.toLocaleString('en-IE');
+
       const payNote = document.getElementById('payNote');
       const payNow = document.getElementById('payNow');
       const payAlt = document.getElementById('payAlt');
 
-      if(selPlan) selPlan.textContent = plan.name;
-      if(selPrice) selPrice.textContent = plan.price.toLocaleString('en-IE');
-      if(payPlan) payPlan.textContent = plan.name;
-      if(payTotal) payTotal.textContent = plan.price.toLocaleString('en-IE');
-
-      // If trial, disable payment
       if(plan.key === 'trial'){
-        if(checkoutNote) checkoutNote.textContent = 'Trial selected: €0 — no card details required. Download from the Trial section.';
-        if(payNote) payNote.textContent = 'Trial is €0. Use the Trial download section. Payment is not required.';
-        if(payNow){ payNow.textContent = 'NO PAYMENT REQUIRED (TRIAL)'; payNow.href = '#trial'; }
-        if(payAlt){ payAlt.style.display = 'none'; }
+        if(payNote) payNote.textContent = 'Trial is €0. Fill your details, then unlock download in the Trial section.';
+        if(payNow){ payNow.textContent = 'CONTINUE TO TRIAL DOWNLOAD'; payNow.href = '#trial'; }
+        if(payAlt) payAlt.style.display = 'none';
       } else {
-        if(checkoutNote) checkoutNote.textContent = 'Ready to pay? Choose a secure checkout option on the right.';
-        if(payNote) payNote.textContent = 'Paste your real Stripe Payment Links in the script (STRIPE_LINKS).';
-        if(payNow){ payNow.textContent = 'PAY NOW (STRIPE)'; }
-        if(payAlt){ payAlt.style.display = 'inline-flex'; }
+        if(payNote) payNote.textContent = 'Fill your details (Step 1), then PAY NOW opens secure checkout in a new tab.';
+        if(payNow){ payNow.textContent = 'PAY NOW (STRIPE)'; payNow.href = '#'; }
+        if(payAlt) payAlt.style.display = 'inline-flex';
         setPayLinks(plan.key);
       }
     }
@@ -1035,7 +918,6 @@
       if(!PLAN_MAP[key]) return;
       selected = key;
 
-      // Sync ROI dropdown + tool cost
       const planSel = document.getElementById('plan');
       const costEl = document.getElementById('cost');
       if(planSel) planSel.value = key;
@@ -1044,15 +926,13 @@
       calcROI();
       updateCheckoutUI();
 
-      // Button selected state
       document.querySelectorAll('.select-plan').forEach(btn => {
         if(!btn.dataset.original) btn.dataset.original = btn.textContent;
-        const k = btn.dataset.plan;
-        btn.textContent = (k === key) ? 'SELECTED ✓' : btn.dataset.original;
+        btn.textContent = (btn.dataset.plan === key) ? 'SELECTED ✓' : btn.dataset.original;
       });
     }
 
-    // Pricing buttons
+    // Pricing select buttons
     document.querySelectorAll('.select-plan').forEach(btn => {
       btn.addEventListener('click', () => {
         applySelection(btn.dataset.plan);
@@ -1064,8 +944,7 @@
     const roiPlan = document.getElementById('plan');
     if(roiPlan){
       roiPlan.addEventListener('change', () => {
-        const key = roiPlan.value;
-        if(PLAN_MAP[key]) applySelection(key);
+        if(PLAN_MAP[roiPlan.value]) applySelection(roiPlan.value);
       });
     }
 
@@ -1078,63 +957,85 @@
       });
     }
 
-    // Request invoice button (mailto)
+    // PAY NOW: require lead then open payment
+    const payNowBtn = document.getElementById('payNow');
+    if(payNowBtn){
+      payNowBtn.addEventListener('click', (e) => {
+        const plan = PLAN_MAP[selected] || PLAN_MAP.standard;
+        if(plan.key === 'trial') return;
+
+        e.preventDefault();
+
+        const lead = loadLead();
+        if(!leadIsComplete(lead)){
+          location.hash = '#checkout';
+          const st = document.getElementById('leadStatus');
+          if(st) st.textContent = 'Status: please SAVE DETAILS (*) before proceeding to payment.';
+          const first = document.getElementById('leadCompany');
+          if(first) first.focus();
+          return;
+        }
+
+        const url = STRIPE_LINKS[plan.key] || '#';
+        if(!url || url === '#'){
+          alert('Stripe link is not configured yet. Paste your Stripe Payment Link URL in STRIPE_LINKS.');
+          return;
+        }
+        window.open(url, '_blank', 'noopener');
+      });
+    }
+
+    // ALT pay: require lead then open
+    const payAltBtn = document.getElementById('payAlt');
+    if(payAltBtn){
+      payAltBtn.addEventListener('click', (e) => {
+        const plan = PLAN_MAP[selected] || PLAN_MAP.standard;
+        if(plan.key === 'trial') return;
+
+        e.preventDefault();
+
+        const lead = loadLead();
+        if(!leadIsComplete(lead)){
+          location.hash = '#checkout';
+          const st = document.getElementById('leadStatus');
+          if(st) st.textContent = 'Status: please SAVE DETAILS (*) before proceeding.';
+          const first = document.getElementById('leadCompany');
+          if(first) first.focus();
+          return;
+        }
+
+        const url = ALT_LINKS[plan.key] || '#';
+        if(!url || url === '#'){
+          alert('Alternative payment link is not configured yet.');
+          return;
+        }
+        window.open(url, '_blank', 'noopener');
+      });
+    }
+
+    // Request invoice
     const reqInvoice = document.getElementById('reqInvoice');
     if(reqInvoice){
       reqInvoice.addEventListener('click', (e) => {
         e.preventDefault();
         const plan = PLAN_MAP[selected] || PLAN_MAP.standard;
+        const lead = loadLead();
         const subject = encodeURIComponent('MetaMech License Purchase');
         const body = encodeURIComponent(
-          `Hi MetaMech Solution,
-
-` +
-          `I would like to purchase the following plan:
-
-` +
-          `Plan: ${plan.name}
-` +
-          `Price: €${plan.price.toLocaleString('en-IE')}
-
-` +
-          `Please send invoice or secure payment link.
-
-Thanks`
+          `Hi MetaMech Solution,\n\n` +
+          `I would like to purchase the following plan:\n\n` +
+          `Plan: ${plan.name}\n` +
+          `Price: €${plan.price.toLocaleString('en-IE')}\n\n` +
+          (leadIsComplete(lead)
+            ? `Buyer details:\nCompany: ${lead.company}\nName: ${lead.name}\nEmail: ${lead.email}\nRole: ${lead.role}\nCountry: ${lead.country}\n\n`
+            : '') +
+          `Please send invoice or secure payment link.\n\nThanks`
         );
         window.location.href = `mailto:hi@metamechsolutions.com?subject=${subject}&body=${body}`;
       });
     }
 
-    // Trial email handling (GitHub Pages safe)
-    const trialBtn = document.getElementById('trialEmailBtn');
-    if(trialBtn){
-      trialBtn.addEventListener('click', function(){
-        const email = (document.getElementById('trialEmail')||{}).value || '';
-        const msg = document.getElementById('trialMsg');
-
-        if(!email.trim()){
-          if(msg) msg.textContent = 'Please enter an email (optional) or just download the trial.';
-          return;
-        }
-
-        const subject = encodeURIComponent('MetaMech 3-Day Trial Request');
-        const body = encodeURIComponent(
-          `Hi MetaMech Solution,
-
-` +
-          `I would like to request the 3-day trial.
-
-` +
-          `My email: ${email.trim()}
-
-Thanks`
-        );
-        window.location.href = `mailto:hi@metamechsolutions.com?subject=${subject}&body=${body}`;
-        if(msg) msg.textContent = 'Your email client has been opened to send the trial request.';
-      });
-    }
-
-    // Slim header + auto-hide on scroll down, show on scroll up
+    // Nav auto-hide on scroll
     (function(){
       const nav = document.querySelector('.nav');
       if(!nav) return;
@@ -1164,6 +1065,8 @@ Thanks`
 
     // Init
     calcROI();
+    const existingLead = loadLead();
+    if(existingLead) applyLeadToCheckout(existingLead);
     applySelection('standard');
   </script>
 </body>
